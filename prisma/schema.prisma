@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ImplementationStatus {
+  NOT_PLANNED
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+}
+
+model Category {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  parent_id  Int?
+  parent     Category?  @relation("nestedCategories", fields: [parent_id], references: [id])
+  categories Category[] @relation("nestedCategories")
+  features   Feature[]
+
+  @@map("categories")
+}
+
+model Product {
+  id               Int              @id @default(autoincrement())
+  name             String           @unique
+  product_features ProductFeature[]
+
+  @@map("products")
+}
+
+model Feature {
+  id               Int              @id @default(autoincrement())
+  name             String           @unique
+  category_id      Int
+  categories       Category         @relation(fields: [category_id], references: [id])
+  product_features ProductFeature[]
+
+  @@map("features")
+}
+
+model ProductFeature {
+  id                     Int                  @id @default(autoincrement())
+  product_id             Int
+  feature_id             Int
+  implementation_status  ImplementationStatus
+  implementation_date    DateTime?
+  implementation_version String?
+  dependencies           ProductFeature[]     @relation("dependencies", fields: [id], references: [id])
+  dependants             ProductFeature[]     @relation("dependencies", fields: [id], references: [id])
+  note                   String?              @db.VarChar(1024)
+  products               Product              @relation(fields: [product_id], references: [id])
+  features               Feature              @relation(fields: [feature_id], references: [id])
+
+  @@map("product_features")
+}

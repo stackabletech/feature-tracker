@@ -1,0 +1,64 @@
+<script lang="ts">
+	import type { DBObject } from '$lib/types';
+	import { info, danger } from '$lib/util/alert';
+
+	import { createEventDispatcher } from 'svelte';
+	import Cell from './cells/Cell.svelte';
+
+	export let data: DBObject;
+	export let endpoint: String;
+
+	$: id = data.id;
+	const dispatch = createEventDispatcher();
+
+	const patchRow = async (data) => {
+		const res = await fetch(`${endpoint}/${id}.json`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		});
+
+		if (res.status === 200) {
+			const json = await res.json();
+			info('Patched row #' + id);
+			return json;
+		} else {
+			danger(`${res.status}: ${res.statusText}`);
+		}
+	};
+
+	const deleteRow = async () => {
+		const res = await fetch(`${endpoint}/${id}.json`, {
+			method: 'DELETE'
+		});
+
+		if (res.status === 200) {
+			dispatch('delete', { id });
+			console.log(data);
+			info(`Deleted row #${id}`);
+			return true;
+		} else {
+			danger(`${res.status}: ${res.statusText}`);
+		}
+	};
+
+	const keys = Object.keys(data);
+	let values = Object.values(data);
+
+	$: patchedObject = Object.fromEntries(keys.map((key, i) => [key, values[i]]));
+</script>
+
+<tr>
+	{#each values as value, i}
+		<Cell bind:value type={keys[i]} />
+	{/each}
+
+	<td>
+		<button class="btn btn-ghost focus:btn-outline" on:click={() => patchRow(patchedObject)}
+			>Save</button
+		>
+		<button class="btn btn-ghost focus:btn-outline" on:click={() => deleteRow()}>Delete</button>
+	</td>
+</tr>
