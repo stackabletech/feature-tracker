@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Guard from '$lib/components/Guard.svelte';
 	import Tabs from '$lib/components/tabs/Tabs.svelte';
 
 	const tabs = [
@@ -21,8 +22,10 @@
 	];
 </script>
 
-<div class="grow flex flex-col">
-	<Tabs {tabs} />
+<Guard>
+	<div class="grow flex flex-col">
+		<Tabs {tabs} />
 
-	<slot />
-</div>
+		<slot />
+	</div>
+</Guard>

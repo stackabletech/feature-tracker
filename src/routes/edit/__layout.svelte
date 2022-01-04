@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Guard from '$lib/components/Guard.svelte';
 	import Tabs from '$lib/components/tabs/Tabs.svelte';
 
 	const tabs = [
@@ -21,6 +22,7 @@
 	];
 </script>
 
-<Tabs {tabs} />
-
-<slot />
+<Guard>
+	<Tabs {tabs} />
+	<slot />
+</Guard>

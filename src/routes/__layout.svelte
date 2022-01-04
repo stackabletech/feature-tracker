@@ -32,6 +32,9 @@
 			<div class="flex-1">
 				<span class="text-lg font-bold">Stackable Feature Tracker</span>
 			</div>
+			<div class="flex-0 mx-2 float-right">
+				<a href="/signin" class="text-lg text-primary">Sign In</a>
+			</div>
 		</nav>
 		<slot />
 	</div>
