@@ -1,5 +1,9 @@
 import { prisma } from "$lib/prisma";
-import type { Category } from "@prisma/client";
+// import type { Category } from "@prisma/client";
+
+/*
+    Typing disabled because of this bug: https://github.com/prisma/prisma/issues/10404
+*/
 
 // GET /categories.json
 export const get = async ({}) => {
@@ -8,7 +12,7 @@ export const get = async ({}) => {
 };
 
 // POST /categories.json
-export const post = async ({ body: data }: { body: Category }) => {
+export const post = async ({ body: data }: { body: any }) => {
     const body = await prisma.category.create({ data });
     return { body }
 }
