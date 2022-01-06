@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
-	export const load = async ({ page, fetch }) => {
-		const response = await fetch(`/api/products/${page.params.id}.json`);
+	export const load = async ({ params, fetch }) => {
+		const response = await fetch(`/api/products/${params.id}.json`);
 		const product = await response.json();
 		return { props: { product } };
 	};
