@@ -1,5 +1,4 @@
 import { prisma } from "$lib/prisma";
-// import type { Category } from "@prisma/client";
 
 /*
     Typing disabled because of this bug: https://github.com/prisma/prisma/issues/10404

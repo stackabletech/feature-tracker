@@ -1,4 +1,4 @@
-import pkg, { PrismaClient } from "@prisma/client";
-import { dev } from '$app/env';
+import Prisma, * as PrismaAll from '@prisma/client'
 
-export const prisma: PrismaClient = dev ? new PrismaClient() : new pkg.PrismaClient();
+const pc = Prisma?.PrismaClient || PrismaAll.PrismaClient
+export const prisma = new pc()
