@@ -4,4 +4,4 @@
 	export let url;
 </script>
 
-<a class:tab-active={$page.path.includes(url)} class="tab tab-lifted" href={url}>{name}</a>
+<a class:tab-active={$page.url.pathname.includes(url)} class="tab tab-lifted" href={url}>{name}</a>
