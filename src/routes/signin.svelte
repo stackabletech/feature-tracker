@@ -1,28 +1,23 @@
+<script context="module">
+</script>
+
 <script lang="ts">
-	import { signed_in } from '$lib/stores';
-	import { Result } from 'postcss';
-	let input;
+	import { getStores } from '$app/stores';
+	import { serialize } from 'cookie';
 
-	const checkPWD = async () => {
-		const res = await fetch('/api/pwd', {
-			method: 'POST',
-			body: JSON.stringify({
-				pwd: input.value
-			})
-		});
+	let input: HTMLInputElement;
 
-		if (res.status === 200) {
-			const { result } = await res.json();
-			console.log(result);
-			$signed_in = result;
-		}
-	};
+	let { session } = getStores();
 </script>
 
 <main class="grow grid place-items-center">
-	{#if !$signed_in}
-		<input type="text" bind:this={input} on:change={checkPWD} placeholder="type here..." />
-	{:else}
-		<p>You are signed in</p>
-	{/if}
+	<input
+		class="border border-black border-solid p-3 rounded-xl"
+		type="text"
+		bind:this={input}
+		bind:value={$session.pwd}
+		on:change={() => {
+			document.cookie = serialize('pwd', input.value, { path: '/' });
+		}}
+	/>
 </main>
