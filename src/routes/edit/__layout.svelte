@@ -1,8 +1,19 @@
+<script context="module">
+	import { guard } from '$lib/util/guard';
+
+	export const load = async ({ fetch, session }) => {
+		return guard(fetch, session, {});
+	};
+</script>
+
 <script lang="ts">
-	import Guard from '$lib/components/Guard.svelte';
 	import Tabs from '$lib/components/tabs/Tabs.svelte';
 
 	const tabs = [
+		{
+			name: 'Unified',
+			url: '/edit/unified'
+		},
 		{
 			name: 'Categories',
 			url: '/edit/categories'
@@ -22,7 +33,7 @@
 	];
 </script>
 
-<Guard>
-	<Tabs {tabs} />
+<Tabs {tabs} />
+<div class="grow overflow-auto flex flex-col">
 	<slot />
-</Guard>
+</div>
