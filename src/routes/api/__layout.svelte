@@ -1,5 +1,12 @@
+<script context="module">
+	import { guard } from '$lib/util/guard';
+
+	export const load = async ({ fetch, session }) => {
+		return guard(fetch, session, {});
+	};
+</script>
+
 <script lang="ts">
-	import Guard from '$lib/components/Guard.svelte';
 	import Tabs from '$lib/components/tabs/Tabs.svelte';
 
 	const tabs = [
@@ -22,10 +29,8 @@
 	];
 </script>
 
-<Guard>
-	<div class="grow flex flex-col">
-		<Tabs {tabs} />
+<div class="grow flex flex-col">
+	<Tabs {tabs} />
 
-		<slot />
-	</div>
-</Guard>
+	<slot />
+</div>
