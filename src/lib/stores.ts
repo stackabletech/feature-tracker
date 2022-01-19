@@ -1,3 +1,6 @@
 import { writable } from "svelte/store";
 
-export const signed_in = writable(false);
+export const categories = writable();
+export const products = writable();
+export const features = writable();
+export const productFeatures = writable();
