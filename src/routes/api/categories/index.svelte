@@ -13,7 +13,7 @@
 	export let categories: Category[];
 </script>
 
-<Code filename="/api/products.json">
+<Code filename="/api/categories.json">
 	<pre>[</pre>
 	{#each categories as category}
 		<pre class="cursor-pointer" on:click={() => goto(`categories/${category.id}`)}>
