@@ -37,7 +37,7 @@
 	let newObject = {};
 </script>
 
-<table class="table w-full table-zebra">
+<table class="table table-zebra">
 	<thead>
 		<tr>
 			{#each keys as key}
