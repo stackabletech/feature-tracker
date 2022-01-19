@@ -1,3 +1,7 @@
+<script context="module">
+	export const prerender = false;
+</script>
+
 <script lang="ts">
 	import { signed_in } from '$lib/stores';
 </script>
