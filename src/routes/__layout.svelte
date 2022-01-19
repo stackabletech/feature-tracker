@@ -1,14 +1,15 @@
 <script>
 	import '/src/app.css';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
-	import { onMount } from 'svelte';
 
 	const toastOptions = {
 		pausable: true
 	};
 </script>
 
-<div class="drawer drawer-mobile min-h-screen min-w-screen h-full w-full">
+<div
+	class="drawer drawer-mobile min-h-screen min-w-screen h-full w-full max-h-full max-w-full overflow-hidden"
+>
 	<input type="checkbox" id="sidebar-drawer" class="drawer-toggle" />
 	<div class="drawer-content flex flex-col">
 		<nav class="w-full navbar sticky top-0 z-50 backdrop-blur">
@@ -36,7 +37,9 @@
 				<a href="/signin" class="text-lg text-primary">Sign In</a>
 			</div>
 		</nav>
-		<slot />
+		<div class="grow flex flex-col">
+			<slot />
+		</div>
 	</div>
 	<div class="drawer-side border-r">
 		<label for="sidebar-drawer" class="drawer-overlay" />
