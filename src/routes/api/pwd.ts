@@ -1,9 +1,9 @@
-import dotenv from 'dotenv'
-dotenv.config()
+import { parse } from "cookie"
+import { PASSWORD } from '$lib/env'
 
 // POST /pwd
-export const post = async ({ body: data }: { body }) => {
-    data = JSON.parse(data)
-    const result = (data.pwd === process.env.PASSWORD) ? true : false;
-    return { body: { result } }
+export const post = async ({ headers }) => {
+    const cookies = parse(headers.cookie || "")
+    if (cookies.pwd === PASSWORD) return { status: 200 } 
+    else return { status: 401 }
 }
