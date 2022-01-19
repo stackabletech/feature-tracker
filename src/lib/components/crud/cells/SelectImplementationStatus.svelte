@@ -1,7 +1,10 @@
 <script lang="ts">
 	import Select from './Select.svelte';
+	import type { ImplementationStatus } from '@prisma/client';
 
-	export let value;
+	export let value: ImplementationStatus;
+	export let colspan: number = 1;
+	export let rowspan: number = 1;
 
 	const options = [
 		{ value: 'NOT PLANNED', label: 'Not Planned' },
@@ -11,4 +14,4 @@
 	];
 </script>
 
-<Select bind:value {options} />
+<Select bind:value {options} {colspan} {rowspan} />

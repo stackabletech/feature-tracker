@@ -1,5 +1,7 @@
 <script lang="ts">
-	export let value;
+	export let value: string;
+	export let rowspan: number = 1;
+	export let colspan: number = 1;
 
 	let date = new Date(value || Date.now());
 	$: month = date.getMonth() + 1;
@@ -22,7 +24,7 @@
 	};
 </script>
 
-<td>
+<td {colspan} {rowspan}>
 	<button class="btn btn-ghost focus:btn-outline" on:click={() => updateValue(-1)}>-</button>
 	<input type="text" class="input" bind:value={inputValue} on:keydown={handleInput} />
 	<button class="btn btn-ghost focus:btn-outline" on:click={() => updateValue(1)}>+</button>

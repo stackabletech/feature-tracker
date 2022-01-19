@@ -6,24 +6,27 @@
 	import SelectProduct from './SelectProduct.svelte';
 	import SelectFeature from './SelectFeature.svelte';
 
-	export let value;
-	export let type;
+	export let value: any;
+	export let type: string;
+
+	export let colspan = 1;
+	export let rowspan = 1;
 </script>
 
 {#if type === 'id'}
 	<td class="text-gray-300">#{value}</td>
 {:else if type === 'category_id' || type === 'parent_id'}
-	<SelectCategory bind:value />
+	<SelectCategory bind:value {colspan} {rowspan} />
 {:else if type === 'product_id'}
-	<SelectProduct bind:value />
+	<SelectProduct bind:value {colspan} {rowspan} />
 {:else if type === 'feature_id'}
-	<SelectFeature bind:value />
+	<SelectFeature bind:value {colspan} {rowspan} />
 {:else if type === 'implementation_status'}
-	<SelectImplementationStatus bind:value />
+	<SelectImplementationStatus bind:value {colspan} {rowspan} />
 {:else if type === 'implementation_date'}
-	<Date bind:value />
+	<Date bind:value {colspan} {rowspan} />
 {:else if type === 'name' || type === 'implementation_version' || type === 'note'}
-	<Text bind:value />
+	<Text bind:value {colspan} {rowspan} />
 {:else}
 	<td class="text-gray-300">not implemented</td>
 {/if}

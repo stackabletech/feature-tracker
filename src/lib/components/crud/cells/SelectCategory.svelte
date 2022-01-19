@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Select from './Select.svelte';
 	export let value;
+	export let colspan: number = 1;
+	export let rowspan: number = 1;
 
 	async function getCategories() {
 		const res = await fetch('/api/categories/minimal.json');
@@ -15,7 +17,7 @@
 </script>
 
 {#await promise}
-	<td>{value}</td>
+	<td {colspan} {rowspan}>{value}</td>
 {:then options}
-	<Select bind:value {options} optional />
+	<Select bind:value {options} optional {colspan} {rowspan} />
 {/await}
