@@ -1,6 +1,45 @@
-<script>
+<script context="module" lang="ts">
+	export const load = async ({ fetch }) => {
+		const productResponse = await fetch('/api/products.json');
+		const categoryResponse = await fetch('/api/categories.json');
+		const featuresResponse = await fetch('/api/features.json');
+		const productFeaturesResponse = await fetch('/api/product_features.json');
+
+		const products = await productResponse.json();
+		const categories = await categoryResponse.json();
+		const features = await featuresResponse.json();
+		const productFeatures = await productFeaturesResponse.json();
+
+		return {
+			props: {
+				products,
+				categories,
+				features,
+				productFeatures
+			}
+		};
+	};
+</script>
+
+<script lang="ts">
 	import '/src/app.css';
+	import {
+		categories as categoryStore,
+		products as productStore,
+		features as featureStore,
+		productFeatures as productFeatureStore
+	} from '$lib/stores';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
+
+	export let products;
+	export let categories;
+	export let features;
+	export let productFeatures;
+
+	$productStore = products;
+	$categoryStore = categories;
+	$featureStore = features;
+	$productFeatureStore = productFeatures;
 
 	const toastOptions = {
 		pausable: true
