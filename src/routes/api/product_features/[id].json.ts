@@ -10,7 +10,8 @@ export const get = async ({ params }) => {
 }
 
 // PATCH /product_features/:id.json
-export const patch = async ({ params, body: data }) => {
+export const patch = async ({ params, request }) => {
+    const data = await request.json()
     const id = parseInt(params.id);
     const body = await prisma.productFeature.update({
         where: { id },

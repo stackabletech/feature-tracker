@@ -6,7 +6,8 @@ import { prisma } from "$lib/prisma";
 */
 
 // GET /products.json
-export const get = async ({}) => {
+export const get = async ({params, request, url}) => {
+    console.log(url.searchParams.get("foo"))
     const body = await prisma.product.findMany();
     return { body }
 };
