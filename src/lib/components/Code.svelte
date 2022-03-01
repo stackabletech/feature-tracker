@@ -6,7 +6,7 @@
 	{#if filename}
 		<pre>{filename}</pre>
 	{/if}
-	<div class="p-8 rounded-xl bg-gray-300 text-sm">
+	<div class="p-8 rounded-xl bg-base-300 text-sm">
 		<slot />
 	</div>
 </main>
