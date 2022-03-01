@@ -12,7 +12,6 @@
 	let updateValue = (d: number) => {
 		date = new Date(date.setMonth(date.getMonth() + d));
 		value = date.toISOString();
-		console.log(value);
 	};
 
 	let handleInput = (e: KeyboardEvent) => {
