@@ -50,8 +50,8 @@ model ProductFeature {
   implementation_status  ImplementationStatus
   implementation_date    DateTime?
   implementation_version String?
-  dependencies           ProductFeature[]     @relation("dependencies", fields: [id], references: [id])
-  dependants             ProductFeature[]     @relation("dependencies", fields: [id], references: [id])
+  dependencies           ProductFeature[]     @relation("dependencies", references: [id])
+  dependants             ProductFeature[]     @relation("dependencies", references: [id])
   note                   String?              @db.VarChar(1024)
   products               Product              @relation(fields: [product_id], references: [id])
   features               Feature              @relation(fields: [feature_id], references: [id])
