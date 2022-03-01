@@ -30,6 +30,7 @@
 		productFeatures as productFeatureStore
 	} from '$lib/stores';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
+	import { LockIcon, MenuIcon } from 'svelte-feather-icons';
 
 	export let products;
 	export let categories;
@@ -54,26 +55,16 @@
 		<nav class="w-full navbar sticky top-0 z-50 backdrop-blur">
 			<div class="flex-none lg:hidden">
 				<label for="sidebar-drawer" class="btn btn-square btn-ghost">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						class="inline-block w-6 h-6 stroke-current"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M4 6h16M4 12h16M4 18h16"
-						/>
-					</svg>
+					<MenuIcon size="24" />
 				</label>
 			</div>
 			<div class="flex-1">
 				<span class="text-lg font-bold">Stackable Feature Tracker</span>
 			</div>
 			<div class="flex-0 mx-2 float-right">
-				<a href="/signin" class="text-lg text-primary">Sign In</a>
+				<a href="/signin" role="button" class="btn btn-square btn-ghost">
+					<LockIcon size="24" />
+				</a>
 			</div>
 		</nav>
 		<div class="grow flex flex-col">
@@ -82,10 +73,12 @@
 	</div>
 	<div class="drawer-side border-r">
 		<label for="sidebar-drawer" class="drawer-overlay" />
-		<aside class="w-40 bg-white bg-opacity-50 backdrop-blur">
+		<aside class="w-40 bg-base bg-opacity-50 backdrop-blur">
 			<div class="navbar sticky top-0 place-content-center z-50 backdrop-blur">
 				<a href="/">
-					<img class="h-8 w-8" src="/img/icon-colour.png" alt="" />
+					<div class="bg-white rounded-md w-10 h-10 flex items-center justify-center">
+						<img class="h-8 w-8" src="/img/icon-colour.png" alt="" />
+					</div>
 				</a>
 			</div>
 			<ul class="menu">
