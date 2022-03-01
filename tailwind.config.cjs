@@ -9,8 +9,5 @@ module.exports = {
 			}
 		}
 	},
-	plugins: [require('daisyui')],
-	daisyui: {
-		themes: false
-	}
+	plugins: [require('daisyui')]
 };
