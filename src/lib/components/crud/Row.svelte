@@ -36,7 +36,6 @@
 
 		if (res.status === 200) {
 			dispatch('delete', { id });
-			console.log(data);
 			info(`Deleted row #${id}`);
 			return true;
 		} else {
