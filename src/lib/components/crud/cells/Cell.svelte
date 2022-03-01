@@ -14,7 +14,7 @@
 </script>
 
 {#if type === 'id'}
-	<td class="text-gray-300">#{value}</td>
+	<td class="text-base-300">#{value}</td>
 {:else if type === 'category_id' || type === 'parent_id'}
 	<SelectCategory bind:value {colspan} {rowspan} />
 {:else if type === 'product_id'}
@@ -28,5 +28,5 @@
 {:else if type === 'name' || type === 'implementation_version' || type === 'note'}
 	<Text bind:value {colspan} {rowspan} />
 {:else}
-	<td class="text-gray-300">not implemented</td>
+	<td class="text-base-300">not implemented</td>
 {/if}
