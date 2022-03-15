@@ -3,6 +3,6 @@
 	export let productFeature: ProductFeature;
 </script>
 
-<td>
+<td class="w-48">
 	{productFeature.implementation_status}
 </td>

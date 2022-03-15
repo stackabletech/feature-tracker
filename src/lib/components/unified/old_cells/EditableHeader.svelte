@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TextInput from './TextInput.svelte';
+	import TextInput from '../../ui/TextInput.svelte';
 	import {
 		XIcon,
 		MoreHorizontalIcon,
@@ -23,7 +23,7 @@
 	const cancel = (e: Event) => (editMode = false);
 </script>
 
-<th class="group" {scope}>
+<th class="group w-48" {scope}>
 	{#if editMode}
 		<TextInput {value} on:submit={submit} on:cancel={cancel} />
 	{:else if menuVisible}

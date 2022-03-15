@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { HierarchicalCategory } from '$lib/stores';
 
-	import CategoryCell from './CategoryCell.svelte';
+	import CategoryCell from '../old_cells/CategoryCell.svelte';
 	import { features, products, productFeatures } from '$lib/stores';
 	import { PlusCircleIcon } from 'svelte-feather-icons';
 	import EditableHeader from './EditableHeader.svelte';
@@ -10,6 +10,7 @@
 	export let category: HierarchicalCategory;
 	export let level: number = 0;
 
+	export let forcedOpen: boolean;
 	export let active: boolean = false;
 
 	$: categoryFeatures = $features.filter((f) => f.category_id === category.id);
@@ -18,7 +19,7 @@
 {#each categoryFeatures as feature, n}
 	<tr class="hover">
 		{#if n === 0}
-			<CategoryCell {category} bind:active {level} />
+			<CategoryCell {category} bind:active {forcedOpen} {level} />
 		{:else}
 			<th />
 		{/if}
@@ -47,7 +48,7 @@
 	</tr>
 {:else}
 	<tr class="hover">
-		<CategoryCell {category} bind:active {level} />
+		<CategoryCell {category} bind:active {forcedOpen} {level} />
 		<th class="text-center">
 			<div class="w-48">
 				<div class="tooltip" data-tip="add feature">
@@ -65,8 +66,8 @@
 	</tr>
 {/each}
 
-{#if active}
+{#if active || forcedOpen}
 	{#each category.children as child}
-		<svelte:self category={child} level={level + 1} />
+		<svelte:self category={child} {forcedOpen} level={level + 1} />
 	{/each}
 {/if}

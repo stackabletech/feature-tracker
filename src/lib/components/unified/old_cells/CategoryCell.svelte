@@ -12,7 +12,7 @@
 		XIcon
 	} from 'svelte-feather-icons';
 
-	import TextInput from './TextInput.svelte';
+	import TextInput from '../../ui/TextInput.svelte';
 
 	let editMode: boolean = false;
 	let menuVisible: boolean = false;
@@ -20,6 +20,7 @@
 	export let category: HierarchicalCategory;
 	export let level: number = 0;
 	export let active: boolean = false;
+	export let forcedOpen: boolean = false;
 
 	$: ml = 12 * level + 'px';
 	$: hasChildren = category.children.length > 0;
@@ -33,11 +34,11 @@
 	const toggle = () => (active = !active);
 </script>
 
-<th class="group" scope="row">
+<th class="group w-48" scope="row">
 	{#if editMode}
 		<TextInput on:submit={submit} on:cancel={cancel} value={category.name} />
 	{:else if menuVisible}
-		<div class="w-48 flex flex-row justify-between items-center">
+		<div class="flex flex-row justify-between items-center">
 			<MinusIcon size="16" class="opacity-20 m-2" />
 			<div>
 				<div class="tooltip" data-tip="add sibling">
@@ -66,10 +67,13 @@
 			</button>
 		</div>
 	{:else}
-		<div class="w-48 flex flex-row justify-between items-center" style:margin-left={ml}>
+		<div class="flex flex-row justify-between items-center" style:margin-left={ml}>
 			{#if hasChildren}
-				<button class="btn btn-ghost btn-sm btn-circle group-hover:opacity-100" on:click={toggle}>
-					<ChevronRightIcon size="16" class="transition-all {active ? 'rotate-90' : ''}" />
+				<button class="btn btn-ghost btn-sm btn-circle" disabled={forcedOpen} on:click={toggle}>
+					<ChevronRightIcon
+						size="16"
+						class="transition-all {active || forcedOpen ? 'rotate-90' : ''}"
+					/>
 				</button>
 			{:else}
 				<MinusIcon size="16" class="m-2 opacity-20" />
