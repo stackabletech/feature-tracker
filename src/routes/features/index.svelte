@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { products, categoryTree } from '$lib/stores';
-	import EditableHeader from '$lib/components/unified/data/EditableHeader.svelte';
+	import EditableHeader from '$lib/components/unified/old_cells/EditableHeader.svelte';
 	import FixedCategory from '$lib/components/unified/data/FixedCategory.svelte';
 	import { Maximize2Icon, Minimize2Icon } from 'svelte-feather-icons';
 </script>

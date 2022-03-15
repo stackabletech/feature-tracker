@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { HierarchicalCategory } from '$lib/stores';
 
-	import CategoryCell from './CategoryCell.svelte';
+	import CategoryCell from '../old_cells/CategoryCell.svelte';
 	import { features, products, productFeatures } from '$lib/stores';
 	import { ChevronRightIcon, MinusIcon, MoreHorizontalIcon } from 'svelte-feather-icons';
 
