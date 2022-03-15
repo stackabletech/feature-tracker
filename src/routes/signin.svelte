@@ -22,7 +22,7 @@
 		<div class="input-group">
 			<input
 				id="pass"
-				class="input input-bordered"
+				class="input input-bordered input-primary"
 				type="password"
 				placeholder="Type or paste password and press Enter."
 				bind:this={input}
