@@ -6,7 +6,7 @@
 	import Cell from './cells/Cell.svelte';
 
 	export let data: DBObject;
-	export let endpoint: String;
+	export let endpoint: string;
 
 	$: id = data.id;
 	const dispatch = createEventDispatcher();
