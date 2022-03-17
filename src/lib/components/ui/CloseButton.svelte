@@ -6,6 +6,6 @@
 	export { classes as class };
 </script>
 
-<Button on:click class="opacity-0 group-hover:opacity-100 {classes}">
+<Button on:click class={classes} tip="close">
 	<XIcon size="16" />
 </Button>

@@ -54,9 +54,7 @@
 			<CheckIcon size="16" />
 		</button>
 		<button
-			class="btn btn-square btn-outline text-error-content btn-sm"
-			class:btn-error={!disabled}
-			{disabled}
+			class="btn btn-square btn-outline btn-error text-error-content btn-sm"
 			on:click={cancel}
 		>
 			<XIcon size="16" />
