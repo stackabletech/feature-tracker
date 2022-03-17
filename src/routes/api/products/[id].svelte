@@ -7,7 +7,7 @@
 </script>
 
 <script lang="ts">
-	import type { Product } from '@prisma/client';
+	import type { Product } from '$lib/prisma';
 	import Code from '$lib/components/Code.svelte';
 	export let product: Product;
 </script>

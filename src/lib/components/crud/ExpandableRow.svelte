@@ -2,7 +2,7 @@
 	import Cell from './cells/Cell.svelte';
 	import ExpandableRow from './ExpandableRow.svelte';
 	import { getContext, onMount } from 'svelte';
-	import type { Category, Feature, Product, ProductFeature } from '@prisma/client';
+	import type { Category, Feature, Product, ProductFeature } from '$lib/prisma';
 	import { default as ProductFeatureCell } from './cells/ProductFeature.svelte';
 
 	let features: Feature[] = getContext('features');

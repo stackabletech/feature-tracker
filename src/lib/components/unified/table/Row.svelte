@@ -2,7 +2,7 @@
 	import { products, productFeatures } from '$lib/stores';
 
 	import type { HierarchicalCategory } from '$lib/stores';
-	import type { Product, Feature as FeatureType } from '@prisma/client';
+	import type { Product, Feature as FeatureType } from '$lib/prisma';
 
 	import Category from '../cells/Category.svelte';
 	import Feature from '../cells/Feature.svelte';

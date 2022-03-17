@@ -9,7 +9,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Code from '$lib/components/Code.svelte';
-	import type { Product } from '@prisma/client';
+	import type { Product } from '$lib/prisma';
 	export let products: Product[];
 </script>
 

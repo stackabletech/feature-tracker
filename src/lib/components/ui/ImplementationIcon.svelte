@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ImplementationStatus } from '@prisma/client';
+	import type { ImplementationStatus } from '$lib/prisma';
 	import { ActivityIcon, CalendarIcon, CheckCircleIcon, XCircleIcon } from 'svelte-feather-icons';
 	export let status: ImplementationStatus;
 </script>

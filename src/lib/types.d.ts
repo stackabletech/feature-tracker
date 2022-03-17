@@ -1,4 +1,4 @@
-import type { ImplementationStatus, Category, Product, Feature } from "@prisma/client";
+import type { ImplementationStatus, Category, Product, Feature } from "$lib/prisma";
 
 export interface Locals {
     userid: string;

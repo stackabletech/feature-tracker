@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import type { Product, Feature, ProductFeature } from '@prisma/client';
+	import type { Product, Feature, ProductFeature } from '$lib/prisma';
 	import Cell from './Cell.svelte';
 
 	let productFeatures: ProductFeature[] = getContext('productFeatures');

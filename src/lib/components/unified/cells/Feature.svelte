@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Feature, Category } from '@prisma/client';
+	import type { Feature, Category } from '$lib/prisma';
 
 	import { features } from '$lib/stores';
 

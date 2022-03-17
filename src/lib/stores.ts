@@ -1,4 +1,4 @@
-import type { Product, Category, Feature, ProductFeature } from "@prisma/client";
+import type { Product, Category, Feature, ProductFeature } from "$lib/prisma";
 import { writable, derived } from "svelte/store";
 
 // We initialise the stores with an empty array to type the $store values.

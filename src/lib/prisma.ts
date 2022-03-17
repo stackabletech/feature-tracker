@@ -1,15 +1,32 @@
-// Prisma (workaround until Prisma fully supports ESM)
-// This works in DEV
-// import * as Prisma from '@prisma/client'
+// According to docs. Does not work:
+
+// import { PrismaClient } from '@prisma/client'
+// declare global { var prisma: PrismaClient | undefined}
+// export const prisma = global.prisma || new PrismaClient()
+
+// ----------------------------------------------------------------------------
+
+import Prisma, * as PrismaAll from '@prisma/client'
+const pc = Prisma?.PrismaClient || PrismaAll?.PrismaClient
+export const prisma = new pc()
+
+// ----------------------------------------------------------------------------
+
 // import { dev } from '$app/env'
 
-// // This works in PROD
-// import { default as ProdPrisma } from '@prisma/client'
+// import Prisma from '@prisma/client'
+// import type { PrismaClient } from '@prisma/client'
+// export let prisma: PrismaClient
 
-// let { PrismaClient } = Prisma
+// if (dev) {
+//     prisma = new Prisma.PrismaClient();
+// } else {
+//     console.log('not dev')
+//     import('@prisma/client').then(( Prisma ) => {
+//         prisma = new Prisma.PrismaClient();
+//     });
+// }
 
-// if (!dev) PrismaClient = ProdPrisma.PrismaClient
-// export const prisma = new PrismaClient()
+import type { Category, Feature, Product, ProductFeature, ImplementationStatus } from '@prisma/client';
 
-import { PrismaClient } from '@prisma/client'
-export const prisma = new PrismaClient()
+export type { Category, Feature, Product, ProductFeature, ImplementationStatus };

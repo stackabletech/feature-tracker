@@ -9,7 +9,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Code from '$lib/components/Code.svelte';
-	import type { Feature } from '@prisma/client';
+	import type { Feature } from '$lib/prisma';
 	export let features: Feature[];
 </script>
 

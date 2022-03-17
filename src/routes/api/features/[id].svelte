@@ -8,7 +8,7 @@
 
 <script lang="ts">
 	import Code from '$lib/components/Code.svelte';
-	import type { Feature } from '@prisma/client';
+	import type { Feature } from '$lib/prisma';
 	export let feature: Feature;
 </script>
 

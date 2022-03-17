@@ -8,7 +8,7 @@
 
 	import ImplementationIcon from '$lib/components/ui/ImplementationIcon.svelte';
 	import ProductFeatureInput from '$lib/components/ui/ProductFeatureInput.svelte';
-	import type { Feature, Product, ProductFeature } from '@prisma/client';
+	import type { Feature, Product, ProductFeature } from '$lib/prisma';
 	import { MinusIcon } from 'svelte-feather-icons';
 	import Data from './Data.svelte';
 

@@ -7,7 +7,7 @@
 </script>
 
 <script lang="ts">
-	import type { Category } from '@prisma/client';
+	import type { Category } from '$lib/prisma';
 	import Code from '$lib/components/Code.svelte';
 	export let category: Category;
 </script>

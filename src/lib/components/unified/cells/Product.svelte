@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Product } from '@prisma/client';
+	import type { Product } from '$lib/prisma';
 	import { info, danger } from '$lib/util/alert';
 
 	import { products } from '$lib/stores';

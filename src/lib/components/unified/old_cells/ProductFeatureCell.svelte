@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ProductFeature } from '@prisma/client';
+	import type { ProductFeature } from '$lib/prisma';
 	export let productFeature: ProductFeature;
 </script>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Select from './Select.svelte';
-	import type { ImplementationStatus } from '@prisma/client';
+	import type { ImplementationStatus } from '$lib/prisma';
 
 	export let value: ImplementationStatus;
 	export let colspan: number = 1;

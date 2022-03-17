@@ -8,7 +8,7 @@
 
 <script lang="ts">
 	import Table from '$lib/components/crud/Table.svelte';
-	import type { Feature } from '@prisma/client';
+	import type { Feature } from '$lib/prisma';
 	export let features: Feature[];
 </script>
 

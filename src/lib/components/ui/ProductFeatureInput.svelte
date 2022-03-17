@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { CheckIcon, MinusIcon, PlusIcon, XIcon } from 'svelte-feather-icons';
 	import { createEventDispatcher } from 'svelte';
-	import { ImplementationStatus } from '@prisma/client';
 
 	let dispatch = createEventDispatcher();
 
@@ -49,10 +48,10 @@
 <div class="form-control max-w-full">
 	<label class="input-group input-group-sm max-w-full m-1">
 		<select class="select select-xs select-bordered" bind:value={status}>
-			<option value={ImplementationStatus.NOT_PLANNED}>Not Planned</option>
-			<option value={ImplementationStatus.PLANNED}>Planned</option>
-			<option value={ImplementationStatus.IN_PROGRESS}>In Progress</option>
-			<option value={ImplementationStatus.COMPLETED}>Completed</option>
+			<option value={'NOT_PLANNED'}>Not Planned</option>
+			<option value={'PLANNED'}>Planned</option>
+			<option value={'IN_PROGRESS'}>In Progress</option>
+			<option value={'COMPLETED'}>Completed</option>
 		</select>
 		<button class="btn btn-square btn-outline btn-xs" on:click={() => updateValue(-1)}>
 			<MinusIcon size="16" />

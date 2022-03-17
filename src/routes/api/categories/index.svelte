@@ -9,7 +9,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Code from '$lib/components/Code.svelte';
-	import type { Category } from '@prisma/client';
+	import type { Category } from '$lib/prisma';
 	export let categories: Category[];
 </script>
 
