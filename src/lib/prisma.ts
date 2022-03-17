@@ -1,4 +1,12 @@
-import Prisma, * as PrismaAll from '@prisma/client'
+// Prisma (workaround until Prisma fully supports ESM)
+// This works in DEV
+import * as Prisma from '@prisma/client'
+import { dev } from '$app/env'
 
-const pc = Prisma?.PrismaClient || PrismaAll.PrismaClient
-export const prisma = new pc()
+// This works in PROD
+import { default as ProdPrisma } from '@prisma/client'
+
+let { PrismaClient } = Prisma
+
+if (!dev) PrismaClient = ProdPrisma.PrismaClient
+export const prisma = new PrismaClient()
