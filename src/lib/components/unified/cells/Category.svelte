@@ -87,7 +87,7 @@
 	<TextCell bind:value={category.name} menu on:update={updateCategory}>
 		<span slot="indent" class="flex flex-row">
 			{#each Array(level) as _}
-				<GitCommitIcon size="14" class="text-base-300" />
+				<GitCommitIcon size="18" class="text-base-300 first:ml-0.5" />
 			{/each}
 		</span>
 		<ExpandButton slot="pre" bind:expanded {forcedOpen} />
@@ -99,9 +99,9 @@
 	</TextCell>
 {:else}
 	<TextCell bind:value={category.name} menu on:update={updateCategory}>
-		<span slot="indent" class="flex flex-row">
+		<span slot="indent" class="flex flex-row first:ml-0.5">
 			{#each Array(level) as _}
-				<GitCommitIcon size="14" class="text-base-300" />
+				<GitCommitIcon size="18" class="text-base-300" />
 			{/each}
 		</span>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
