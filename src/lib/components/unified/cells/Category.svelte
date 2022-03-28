@@ -10,10 +10,12 @@
 	import ExpandButton from '$lib/components/ui/ExpandButton.svelte';
 	import TextCell from './TextCell.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import { GitCommitIcon } from 'svelte-feather-icons';
 
 	export let category: HierarchicalCategory = undefined;
 	export let expanded: boolean = false;
 	export let forcedOpen: boolean = false;
+	export let level: number = 0;
 
 	const addCategory = async (e: CustomEvent) => {
 		const res = await fetch('/api/categories.json', {
@@ -83,6 +85,11 @@
 	</th>
 {:else if category.children.length}
 	<TextCell bind:value={category.name} menu on:update={updateCategory}>
+		<span slot="indent" class="flex flex-row">
+			{#each Array(level) as _}
+				<GitCommitIcon size="14" class="text-base-300" />
+			{/each}
+		</span>
 		<ExpandButton slot="pre" bind:expanded {forcedOpen} />
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<AddSiblingButton on:click={() => startAdding(parent_id)} />
@@ -92,6 +99,11 @@
 	</TextCell>
 {:else}
 	<TextCell bind:value={category.name} menu on:update={updateCategory}>
+		<span slot="indent" class="flex flex-row">
+			{#each Array(level) as _}
+				<GitCommitIcon size="14" class="text-base-300" />
+			{/each}
+		</span>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<AddSiblingButton on:click={() => startAdding(parent_id)} />
 			<AddChildButton on:click={() => startAdding(category.id)} />

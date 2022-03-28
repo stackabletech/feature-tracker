@@ -14,6 +14,7 @@
 
 <div class="flex flex-row justify-between items-center transition-all {editMode ? 'w-72' : 'w-48'}">
 	{#if showMenu}
+		<slot name="indent" />
 		<div class="w-8">
 			<slot name="pre" />
 		</div>
@@ -26,6 +27,7 @@
 			<slot name="edit" />
 		</div>
 	{:else}
+		<slot name="indent" />
 		<div class="w-8">
 			<slot name="pre" />
 		</div>
