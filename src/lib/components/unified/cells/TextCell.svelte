@@ -32,6 +32,7 @@
 </script>
 
 <svelte:component this={type} {menu} {editMode} {sticky}>
+	<slot name="indent" slot="indent" />
 	<slot name="pre" slot="pre" />
 	<svelte:fragment slot="edit">
 		<TextInput {value} on:submit={handleSubmit} on:cancel={handleCancel} />

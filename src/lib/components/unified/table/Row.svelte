@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { GitCommitIcon } from 'svelte-feather-icons';
 	import { products, productFeatures } from '$lib/stores';
 
 	import type { HierarchicalCategory } from '$lib/stores';
@@ -6,6 +7,7 @@
 
 	import Category from '../cells/Category.svelte';
 	import Feature from '../cells/Feature.svelte';
+	import Header from '../cells/Header.svelte';
 
 	import ProductFeature from '$lib/components/unified/cells/ProductFeature.svelte';
 
@@ -17,19 +19,23 @@
 	export let category: HierarchicalCategory;
 	export let feature: FeatureType = undefined;
 
-	$: border = `${level}rem solid hsl(var(--b2))`;
-
 	const getProductFeature = (p: Product, f: FeatureType) => {
 		return $productFeatures.find((pf) => pf.product_id == p?.id && pf.feature_id == f?.id);
 	};
 </script>
 
-<tr class="hover" style:--border={border}>
+<tr class="hover">
 	<!-- First Column: Category Header -->
 	{#if showCategory}
-		<Category {category} bind:expanded {forcedOpen} />
+		<Category {category} bind:expanded {forcedOpen} {level} />
 	{:else}
-		<th />
+		<Header>
+			<span slot="indent" class="flex flex-row">
+				{#each Array(level) as _}
+					<GitCommitIcon size="14" class="text-base-300" />
+				{/each}
+			</span>
+		</Header>
 	{/if}
 	<!-- Second Column: Feature Header -->
 	<Feature {feature} {category} />
@@ -38,9 +44,3 @@
 		<ProductFeature productFeature={getProductFeature(product, feature)} {product} {feature} />
 	{/each}
 </tr>
-
-<style>
-	:global(tr th:first-child) {
-		border-left: var(--border);
-	}
-</style>
