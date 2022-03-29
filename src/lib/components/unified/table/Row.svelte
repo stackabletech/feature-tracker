@@ -30,9 +30,9 @@
 		<Category {category} bind:expanded {forcedOpen} {level} />
 	{:else}
 		<Header>
-			<span slot="indent" class="flex flex-row">
+			<span slot="indent" class="flex flex-row first:ml-0.5">
 				{#each Array(level) as _}
-					<GitCommitIcon size="14" class="text-base-300" />
+					<GitCommitIcon size="18" class="text-base-300" />
 				{/each}
 			</span>
 		</Header>
