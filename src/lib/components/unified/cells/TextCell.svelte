@@ -7,6 +7,9 @@
 	import Header from '../cells/Header.svelte';
 	import Data from '../cells/Data.svelte';
 
+	let classes: string = '';
+	export { classes as class };
+
 	export let value: string = '';
 	export let menu: boolean = false;
 	export let sticky: boolean = false;
@@ -31,7 +34,7 @@
 	};
 </script>
 
-<svelte:component this={type} {menu} {editMode} {sticky}>
+<svelte:component this={type} {menu} {editMode} {sticky} class={classes}>
 	<slot name="indent" slot="indent" />
 	<slot name="pre" slot="pre" />
 	<svelte:fragment slot="edit">

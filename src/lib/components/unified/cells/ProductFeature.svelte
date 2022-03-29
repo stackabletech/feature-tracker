@@ -108,7 +108,7 @@
 		</div>
 	</th>
 {:else if productFeature}
-	<Data menu>
+	<Data menu centered>
 		<div class="flex flex-row gap-2 items-center cursor-cell" on:click={toggleEditMode}>
 			<ImplementationIcon status={productFeature.implementation_status} />
 			<date>{date}</date>
@@ -118,11 +118,11 @@
 		</div>
 	</Data>
 {:else if product && feature}
-	<Data>
+	<Data centered>
 		<AddButton on:click={startAdding} />
 	</Data>
 {:else}
-	<Data>
-		<MinusIcon size="16" class="text-base-300" />
+	<Data centered>
+		<MinusIcon size="16" class="mx-auto text-base-300" />
 	</Data>
 {/if}

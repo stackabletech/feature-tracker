@@ -6,13 +6,19 @@
 	let showMenu: boolean = false;
 
 	export let editMode: boolean = false;
+	export let centered: boolean = false;
 
 	let toggleMenu = () => {
 		showMenu = !showMenu;
 	};
 </script>
 
-<div class="flex flex-row justify-between items-center transition-all {editMode ? 'w-72' : 'w-48'}">
+<div
+	class="flex flex-row items-center transition-all 
+		{editMode ? 'w-72' : 'w-48'}
+		{centered ? 'justify-between' : 'justify-start'}
+		"
+>
 	{#if showMenu}
 		<slot name="indent" />
 		<div class="w-8">
@@ -31,7 +37,7 @@
 		<div class="w-8">
 			<slot name="pre" />
 		</div>
-		<div class="mx-2 truncate text-center">
+		<div class="mx-2 truncate grow {centered && 'text-center'}">
 			<slot />
 		</div>
 		<div class="w-8">

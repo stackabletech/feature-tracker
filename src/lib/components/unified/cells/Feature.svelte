@@ -77,14 +77,14 @@
 		</div>
 	</th>
 {:else if feature}
-	<TextCell sticky bind:value={feature.name} menu on:update={updateFeature}>
+	<TextCell sticky class="left-48" bind:value={feature.name} menu on:update={updateFeature}>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<AddSiblingButton on:click={startAdding} />
 			<DeleteButton on:click={deleteFeature} />
 		</div>
 	</TextCell>
 {:else}
-	<Header sticky>
+	<Header sticky centered class="left-48">
 		<AddButton on:click={startAdding} />
 	</Header>
 {/if}
