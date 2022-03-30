@@ -12,17 +12,20 @@
 		dispatch('cancel');
 	};
 
-	let value;
-	let status;
+	export let value = undefined;
+	export let status = undefined;
 
-	let date = new Date(value || Date.now());
+	let now = new Date(Date.now());
+	let date = value ? new Date(value) : new Date(now.getUTCFullYear(), now.getUTCMonth(), 1);
+	value = date.toISOString();
+
 	$: month = date.getMonth() + 1;
 	$: year = date.getFullYear();
 
 	$: inputValue = `${year}-${month}`;
 
 	let updateValue = (d: number) => {
-		date = new Date(date.setMonth(date.getMonth() + d));
+		date = new Date(date.setUTCMonth(date.getUTCMonth() + d));
 		value = date.toISOString();
 	};
 
