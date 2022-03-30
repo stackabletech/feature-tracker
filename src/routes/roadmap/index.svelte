@@ -23,7 +23,7 @@
 			<Header class="bg-base-300">Products</Header>
 			<!-- Date Headers -->
 			{#each dates as date}
-				<Header>
+				<Header centered>
 					{new Date(date).toLocaleDateString(undefined, {
 						month: 'short',
 						year: 'numeric'
