@@ -24,7 +24,9 @@
 		<div class="w-8">
 			<slot name="pre" />
 		</div>
-		<slot name="menu" />
+		<div class="grow">
+			<slot name="menu" />
+		</div>
 		<div class="w-8">
 			<CloseButton on:click={toggleMenu} />
 		</div>

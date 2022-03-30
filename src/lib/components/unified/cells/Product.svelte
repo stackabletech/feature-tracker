@@ -7,8 +7,12 @@
 	import AddSiblingButton from '$lib/components/ui/AddSiblingButton.svelte';
 	import DeleteButton from '$lib/components/ui/DeleteButton.svelte';
 	import TextCell from './TextCell.svelte';
-	import Header from './Header.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+
+	import type { Writable } from 'svelte/store';
+	import { getContext } from 'svelte';
+
+	let editable: Writable<boolean> = getContext('editable');
 
 	export let product: Product;
 
@@ -73,7 +77,7 @@
 		</div>
 	</th>
 {:else}
-	<TextCell bind:value={product.name} menu on:update={updateProduct}>
+	<TextCell bind:value={product.name} menu={$editable} on:update={updateProduct}>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<DeleteButton on:click={deleteProduct} />
 			<AddSiblingButton on:click={startAdding} horizontal />

@@ -58,7 +58,7 @@
 >
 	<input type="checkbox" id="sidebar-drawer" class="drawer-toggle" />
 	<div class="drawer-content flex flex-col">
-		<nav class="w-full navbar sticky top-0 z-50 backdrop-blur">
+		<nav class="w-full navbar sticky top-0 z-30 backdrop-blur">
 			<div class="flex-none lg:hidden">
 				<label for="sidebar-drawer" class="btn btn-square btn-ghost">
 					<MenuIcon size="24" />
@@ -84,7 +84,7 @@
 	<div class="drawer-side border-r-[--tab-border-color]">
 		<label for="sidebar-drawer" class="drawer-overlay backdrop-blur" />
 		<aside class="w-48 bg-base bg-opacity-50">
-			<div class="navbar sticky top-0 place-content-center z-50">
+			<div class="navbar sticky top-0 place-content-center z-30">
 				<a href="/">
 					<div class="bg-white rounded-md w-10 h-10 flex items-center justify-center">
 						<img class="h-8 w-8" src="/img/icon-colour.png" alt="" />
@@ -118,3 +118,9 @@
 <div class="toastwrapper">
 	<SvelteToast options={toastOptions} />
 </div>
+
+<style lang="postcss">
+	:global(.toastwrapper) {
+		@apply z-50;
+	}
+</style>

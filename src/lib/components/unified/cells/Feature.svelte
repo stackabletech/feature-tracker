@@ -13,6 +13,11 @@
 	import TextCell from './TextCell.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
+	import type { Writable } from 'svelte/store';
+	import { getContext } from 'svelte';
+
+	let editable: Writable<boolean> = getContext('editable');
+
 	export let feature: Feature = undefined;
 	export let category: Category = undefined;
 
@@ -77,7 +82,13 @@
 		</div>
 	</th>
 {:else if feature}
-	<TextCell sticky class="left-48" bind:value={feature.name} menu on:update={updateFeature}>
+	<TextCell
+		sticky
+		class="left-48"
+		bind:value={feature.name}
+		menu={$editable}
+		on:update={updateFeature}
+	>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<AddSiblingButton on:click={startAdding} />
 			<DeleteButton on:click={deleteFeature} />
@@ -85,6 +96,8 @@
 	</TextCell>
 {:else}
 	<Header sticky centered class="left-48">
-		<AddButton on:click={startAdding} />
+		{#if $editable}
+			<AddButton on:click={startAdding} />
+		{/if}
 	</Header>
 {/if}

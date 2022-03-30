@@ -17,6 +17,11 @@
 	export let forcedOpen: boolean = false;
 	export let level: number = 0;
 
+	import type { Writable } from 'svelte/store';
+	import { getContext } from 'svelte';
+
+	let editable: Writable<boolean> = getContext('editable');
+
 	const addCategory = async (e: CustomEvent) => {
 		const res = await fetch('/api/categories.json', {
 			method: 'POST',
@@ -84,7 +89,7 @@
 		</div>
 	</th>
 {:else if category.children.length}
-	<TextCell bind:value={category.name} menu on:update={updateCategory}>
+	<TextCell bind:value={category.name} menu={$editable} on:update={updateCategory}>
 		<span slot="indent" class="flex flex-row">
 			{#each Array(level) as _}
 				<GitCommitIcon size="18" class="text-base-300 first:ml-0.5" />
@@ -98,7 +103,7 @@
 		</div>
 	</TextCell>
 {:else}
-	<TextCell bind:value={category.name} menu on:update={updateCategory}>
+	<TextCell bind:value={category.name} menu={$editable} on:update={updateCategory}>
 		<span slot="indent" class="flex flex-row first:ml-0.5">
 			{#each Array(level) as _}
 				<GitCommitIcon size="18" class="text-base-300" />

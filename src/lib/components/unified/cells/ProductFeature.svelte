@@ -1,22 +1,29 @@
 <script lang="ts">
 	import AddButton from '$lib/components/ui/AddButton.svelte';
 	import DeleteButton from '$lib/components/ui/DeleteButton.svelte';
+	import InfoButton from '$lib/components/ui/InfoButton.svelte';
 
 	import { productFeatures, products } from '$lib/stores';
 
 	import { info, danger } from '$lib/util/alert';
 
+	import ProductFeatureModal from '$lib/components/ui/ProductFeatureModal.svelte';
 	import ImplementationIcon from '$lib/components/ui/ImplementationIcon.svelte';
 	import ProductFeatureInput from '$lib/components/ui/ProductFeatureInput.svelte';
 	import type { Feature, Product, ProductFeature } from '$lib/prisma';
 	import { MinusIcon } from 'svelte-feather-icons';
 	import Data from './Data.svelte';
 
+	import type { Writable } from 'svelte/store';
+	import { getContext } from 'svelte';
+
+	let editable: Writable<boolean> = getContext('editable');
+
 	export let product: Product = undefined;
 	export let feature: Feature = undefined;
 	export let productFeature: ProductFeature = undefined;
 
-	let addProductFeature = async (e: CustomEvent) => {
+	const addProductFeature = async (e: CustomEvent) => {
 		console.log('adding:', product.name, feature.name, e.detail);
 		const res = await fetch('/api/product_features.json', {
 			method: 'POST',
@@ -42,7 +49,7 @@
 		}
 	};
 
-	let deleteProductFeature = async () => {
+	const deleteProductFeature = async () => {
 		const res = await fetch(`/api/product_features/${productFeature.id}.json`, {
 			method: 'DELETE'
 		});
@@ -58,7 +65,7 @@
 		}
 	};
 
-	let updateProductFeature = async (e: CustomEvent) => {
+	const updateProductFeature = async (e: CustomEvent) => {
 		const res = await fetch(`/api/product_features/${productFeature.id}.json`, {
 			method: 'PATCH',
 			headers: {
@@ -92,7 +99,13 @@
 	const endAdding = () => (adding = false);
 
 	let editMode: boolean = false;
-	let toggleEditMode = () => (editMode = !editMode);
+	const toggleEditMode = () => (editMode = !editMode);
+
+	const handleClick = () => ($editable ? toggleEditMode() : showInfo());
+
+	let modal: boolean = false;
+	const showInfo = () => (modal = true);
+	const hideInfo = () => (modal = false);
 </script>
 
 {#if adding}
@@ -104,25 +117,40 @@
 {:else if editMode}
 	<th>
 		<div class="w-72">
-			<ProductFeatureInput on:submit={updateProductFeature} on:cancel={toggleEditMode} />
+			<ProductFeatureInput
+				on:submit={updateProductFeature}
+				on:cancel={toggleEditMode}
+				value={productFeature.implementation_date}
+				status={productFeature.implementation_status}
+			/>
 		</div>
 	</th>
 {:else if productFeature}
-	<Data menu centered>
-		<div class="flex flex-row gap-2 items-center cursor-cell" on:click={toggleEditMode}>
+	<Data menu={$editable} centered>
+		<div
+			class="flex flex-row gap-2 items-center {$editable ? 'cursor-cell' : 'cursor-pointer'}"
+			on:click={handleClick}
+		>
 			<ImplementationIcon status={productFeature.implementation_status} />
 			<date>{date}</date>
 		</div>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
+			<InfoButton on:click={showInfo} />
 			<DeleteButton on:click={deleteProductFeature} />
 		</div>
 	</Data>
 {:else if product && feature}
 	<Data centered>
-		<AddButton on:click={startAdding} />
+		{#if $editable}
+			<AddButton on:click={startAdding} />
+		{/if}
 	</Data>
 {:else}
 	<Data centered>
 		<MinusIcon size="16" class="mx-auto text-base-300" />
 	</Data>
+{/if}
+
+{#if modal}
+	<ProductFeatureModal {product} {feature} {productFeature} on:close={hideInfo} />
 {/if}

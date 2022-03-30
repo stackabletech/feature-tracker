@@ -1,26 +1,41 @@
 <script lang="ts">
-	import { products, categoryTree } from '$lib/stores';
-	import EditableHeader from '$lib/components/unified/old_cells/EditableHeader.svelte';
-	import FixedCategory from '$lib/components/unified/data/FixedCategory.svelte';
-	import { Maximize2Icon, Minimize2Icon } from 'svelte-feather-icons';
+	import ExpandButton from '$lib/components/ui/ExpandButton.svelte';
+	import Header from '$lib/components/unified/cells/Header.svelte';
+	import Product from '$lib/components/unified/cells/Product.svelte';
+	import ExpandableCategory from '$lib/components/unified/table/ExpandableCategory.svelte';
+	import Table from '$lib/components/unified/table/Table.svelte';
+
+	import { writable } from 'svelte/store';
+	import type { Writable } from 'svelte/store';
+	import { setContext } from 'svelte';
+
+	import { products, categoryTree, features } from '$lib/stores';
+
+	let expandAll: boolean = false;
+	let editable: Writable<boolean> = writable(false);
+
+	setContext('editable', editable);
 </script>
 
-<table class="table table-zebra table-compact">
-	<thead>
-		<tr>
-			<th />
-			<th />
+<div class="grow overflow-auto flex flex-col">
+	<Table>
+		<svelte:fragment slot="head">
+			<!-- Category Header -->
+			<Header class="bg-base-300">
+				<ExpandButton slot="pre" double bind:expanded={expandAll} />
+				Categories
+			</Header>
+			<!-- Feature Header -->
+			<Header sticky class="left-48 bg-base-300">Features</Header>
+			<!-- Product Values -->
 			{#each $products as product}
-				<th>
-					{product.name}
-				</th>
+				<Product {product} />
 			{/each}
-		</tr>
-	</thead>
-	<tbody>
-		{#each $categoryTree as category}
-			<FixedCategory {category} />
-		{/each}
-	</tbody>
-	<tfoot> . </tfoot>
-</table>
+		</svelte:fragment>
+		<svelte:fragment>
+			{#each $categoryTree as category}
+				<ExpandableCategory {category} forcedOpen={expandAll} />
+			{/each}
+		</svelte:fragment>
+	</Table>
+</div>

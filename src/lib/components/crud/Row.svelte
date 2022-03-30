@@ -46,7 +46,9 @@
 	const keys = Object.keys(data);
 	let values = Object.values(data);
 
-	$: patchedObject = Object.fromEntries(keys.map((key, i) => [key, values[i]]));
+	$: patchedObject = Object.fromEntries(
+		keys.map((key, i) => [key, values[i]]).filter(([_, v]) => v != (undefined || null || ''))
+	);
 </script>
 
 <tr>

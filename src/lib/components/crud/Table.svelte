@@ -6,7 +6,7 @@
 	import Cell from './cells/Cell.svelte';
 
 	export let data: DBObject[];
-	export let endpoint: String;
+	export let endpoint: string;
 
 	const addRow = async (newRow) => {
 		// remove empty keys from data before posting
@@ -33,7 +33,7 @@
 
 	const handleDelete = (e: CustomEvent) => (data = data.filter((obj) => obj.id != e.detail.id));
 
-	const keys = Object.keys(data[0]);
+	const keys = (data[0] && Object.keys(data[0])) || [];
 	let newObject = {};
 </script>
 
@@ -42,6 +42,8 @@
 		<tr>
 			{#each keys as key}
 				<th>{key}</th>
+			{:else}
+				<th>No Data</th>
 			{/each}
 			<th>Actions:</th>
 		</tr>
@@ -49,10 +51,17 @@
 	<tbody>
 		{#each data as item}
 			<Row data={item} {endpoint} on:delete={handleDelete} />
+		{:else}
+			<tr>
+				<td>No Data</td>
+				<td>No Actions</td>
+			</tr>
 		{/each}
 		<tr>
 			{#each keys as key}
 				<Cell bind:value={newObject[key]} type={key} />
+			{:else}
+				<td>No Data</td>
 			{/each}
 			<td>
 				<button class="btn btn-ghost" on:click={() => addRow(newObject)}>Add</button>
