@@ -17,23 +17,25 @@
 	setContext('editable', editable);
 </script>
 
-<Table>
-	<svelte:fragment slot="head">
-		<!-- Category Header -->
-		<Header class="bg-base-300">
-			<ExpandButton slot="pre" double bind:expanded={expandAll} />
-			Categories
-		</Header>
-		<!-- Feature Header -->
-		<Header sticky class="left-48 bg-base-300">Features</Header>
-		<!-- Product Values -->
-		{#each $products as product}
-			<Product {product} />
-		{/each}
-	</svelte:fragment>
-	<svelte:fragment>
-		{#each $categoryTree as category}
-			<ExpandableCategory {category} forcedOpen={expandAll} />
-		{/each}
-	</svelte:fragment>
-</Table>
+<div class="grow overflow-auto flex flex-col">
+	<Table>
+		<svelte:fragment slot="head">
+			<!-- Category Header -->
+			<Header class="bg-base-300">
+				<ExpandButton slot="pre" double bind:expanded={expandAll} />
+				Categories
+			</Header>
+			<!-- Feature Header -->
+			<Header sticky class="left-48 bg-base-300">Features</Header>
+			<!-- Product Values -->
+			{#each $products as product}
+				<Product {product} />
+			{/each}
+		</svelte:fragment>
+		<svelte:fragment>
+			{#each $categoryTree as category}
+				<ExpandableCategory {category} forcedOpen={expandAll} />
+			{/each}
+		</svelte:fragment>
+	</Table>
+</div>
