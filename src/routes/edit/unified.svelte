@@ -5,12 +5,14 @@
 	import ExpandableCategory from '$lib/components/unified/table/ExpandableCategory.svelte';
 	import Table from '$lib/components/unified/table/Table.svelte';
 
+	import { writable } from 'svelte/store';
+	import type { Writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 
 	import { products, categoryTree, features } from '$lib/stores';
 
 	let expandAll: boolean = false;
-	let editable: boolean = true;
+	let editable: Writable<boolean> = writable(true);
 
 	setContext('editable', editable);
 </script>
