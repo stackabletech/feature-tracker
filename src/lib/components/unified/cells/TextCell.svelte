@@ -2,6 +2,11 @@
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import { createEventDispatcher } from 'svelte';
 
+	import type { Writable } from 'svelte/store';
+	import { getContext } from 'svelte';
+
+	let editable: Writable<boolean> = getContext('editable');
+
 	let dispatch = createEventDispatcher();
 
 	import Header from '../cells/Header.svelte';
@@ -20,7 +25,7 @@
 	let editMode: boolean = false;
 
 	let toggleEditMode = () => {
-		editMode = !editMode;
+		editMode = $editable && !editMode;
 	};
 
 	let handleSubmit = (e: CustomEvent) => {
@@ -40,6 +45,6 @@
 	<svelte:fragment slot="edit">
 		<TextInput {value} on:submit={handleSubmit} on:cancel={handleCancel} />
 	</svelte:fragment>
-	<span on:click={toggleEditMode} class="cursor-cell">{value}</span>
+	<span on:click={toggleEditMode} class={$editable && 'cursor-cell'}>{value}</span>
 	<slot name="menu" slot="menu" />
 </svelte:component>
