@@ -12,6 +12,11 @@
 	import { MinusIcon } from 'svelte-feather-icons';
 	import Data from './Data.svelte';
 
+	import type { Writable } from 'svelte/store';
+	import { getContext } from 'svelte';
+
+	let editable: Writable<boolean> = getContext('editable');
+
 	export let product: Product = undefined;
 	export let feature: Feature = undefined;
 	export let productFeature: ProductFeature = undefined;
@@ -92,7 +97,7 @@
 	const endAdding = () => (adding = false);
 
 	let editMode: boolean = false;
-	let toggleEditMode = () => (editMode = !editMode);
+	let toggleEditMode = () => (editMode = $editable && !editMode);
 </script>
 
 {#if adding}
@@ -108,8 +113,11 @@
 		</div>
 	</th>
 {:else if productFeature}
-	<Data menu centered>
-		<div class="flex flex-row gap-2 items-center cursor-cell" on:click={toggleEditMode}>
+	<Data menu={$editable} centered>
+		<div
+			class="flex flex-row gap-2 items-center {$editable && 'cursor-cell'}"
+			on:click={toggleEditMode}
+		>
 			<ImplementationIcon status={productFeature.implementation_status} />
 			<date>{date}</date>
 		</div>
@@ -119,7 +127,9 @@
 	</Data>
 {:else if product && feature}
 	<Data centered>
-		<AddButton on:click={startAdding} />
+		{#if $editable}
+			<AddButton on:click={startAdding} />
+		{/if}
 	</Data>
 {:else}
 	<Data centered>
