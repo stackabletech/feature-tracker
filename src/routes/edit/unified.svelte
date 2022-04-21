@@ -27,12 +27,12 @@
 		<!-- Feature Header -->
 		<Header sticky class="left-48 bg-base-300">Features</Header>
 		<!-- Product Values -->
-		{#each $products as product}
+		{#each $products as product (product.id)}
 			<Product {product} />
 		{/each}
 	</svelte:fragment>
 	<svelte:fragment>
-		{#each $categoryTree as category}
+		{#each $categoryTree as category (category.id)}
 			<ExpandableCategory {category} forcedOpen={expandAll} />
 		{/each}
 	</svelte:fragment>
