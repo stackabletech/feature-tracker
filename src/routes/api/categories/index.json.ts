@@ -13,6 +13,7 @@ export const get = async ({}) => {
 // POST /categories.json
 export const post = async ({ request }) => {
     const data = await request.json()
+    data.parent_id = data.parent_id || null
     const body = await prisma.category.create({ data });
     return { body }
 }

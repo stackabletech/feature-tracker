@@ -13,6 +13,7 @@ export const get = async ({ params }) => {
 export const patch = async ({ params, request }) => {
     const data = await request.json()
     const id = parseInt(params.id);
+    data.category_id = data.category_id || null
     const body = await prisma.feature.update({
         where: { id },
         data

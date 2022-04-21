@@ -14,6 +14,7 @@ export const get = async ({}) => {
 // POST /features.json
 export const post = async ({ request }) => {
     const data = await request.json()
+    data.category_id = data.category_id || null
     const body = await prisma.feature.create({ data });
     return { body }
 }

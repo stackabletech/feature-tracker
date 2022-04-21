@@ -12,6 +12,7 @@ export const get = async ({ params }) => {
 // PATCH /categories/:id.json
 export const patch = async ({ params, request }) => {
     const data = await request.json()
+    data.parent_id = data.parent_id || null
     const id = parseInt(params.id);
     const body = await prisma.category.update({
         where: { id },
