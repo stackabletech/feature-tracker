@@ -15,6 +15,7 @@
 		<slot name="pre" slot="pre" />
 		<slot name="menu" slot="menu" />
 		<slot name="edit" slot="edit" />
+		<slot name="post" slot="post" />
 		<slot />
 	</Cell>
 </td>
