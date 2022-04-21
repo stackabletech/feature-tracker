@@ -1,15 +1,15 @@
-<script context="module" lang="ts">
+<!-- <script context="module" lang="ts">
 	export const load = async ({ fetch }) => {
 		const response = await fetch('/api/products.json');
 		const products = await response.json();
 		return { props: { products } };
 	};
-</script>
-
+</script> -->
 <script lang="ts">
+	import { products } from '$lib/stores';
 	import Table from '$lib/components/crud/Table.svelte';
 	import type { Product } from '$lib/prisma';
-	export let products: Product[];
+	// export let products: Product[];
 </script>
 
-<Table data={products} endpoint="/api/products" />
+<Table bind:data={$products} endpoint="/api/products" />
