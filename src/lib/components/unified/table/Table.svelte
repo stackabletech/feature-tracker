@@ -3,9 +3,7 @@
 
 <table class="table table-compact m-2">
 	<thead class="sticky top-0">
-		<tr>
-			<slot name="head" />
-		</tr>
+		<slot name="head" />
 	</thead>
 	<tbody>
 		<slot />
