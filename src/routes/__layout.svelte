@@ -120,4 +120,10 @@
 	:global(.toastwrapper) {
 		@apply z-50;
 	}
+
+	/* Fix for QuteBrowser not supporting where selector used by DaisyUI's table styling */
+	:global(.table-compact th),
+	:global(.table-compact td) {
+		@apply p-2;
+	}
 </style>
