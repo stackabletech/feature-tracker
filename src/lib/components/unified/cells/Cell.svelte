@@ -45,6 +45,8 @@
 		<div class="w-8">
 			{#if menu}
 				<MenuButton on:click={toggleMenu} />
+			{:else}
+				<slot name="post" />
 			{/if}
 		</div>
 	{/if}
