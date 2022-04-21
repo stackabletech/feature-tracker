@@ -18,6 +18,8 @@
 	export let product: Product;
 
 	const addProduct = async (e: CustomEvent) => {
+		showMenu = false;
+
 		const res = await fetch('/api/products.json', {
 			method: 'POST',
 			headers: {

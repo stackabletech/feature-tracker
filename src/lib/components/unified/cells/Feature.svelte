@@ -17,11 +17,14 @@
 	import { getContext } from 'svelte';
 
 	let editable: Writable<boolean> = getContext('editable');
+	let showMenu: boolean = false;
 
 	export let feature: Feature = undefined;
 	export let category: Category = undefined;
 
 	const addFeature = async (e: CustomEvent) => {
+		showMenu = false;
+
 		const res = await fetch('/api/features.json', {
 			method: 'POST',
 			headers: {
@@ -41,6 +44,8 @@
 	};
 
 	const deleteFeature = async () => {
+		showMenu = false;
+
 		const res = await fetch(`/api/features/${feature.id}.json`, {
 			method: 'DELETE'
 		});
@@ -86,6 +91,7 @@
 		sticky
 		class="left-48"
 		bind:value={feature.name}
+		bind:showMenu
 		menu={$editable}
 		on:update={updateFeature}
 	>
