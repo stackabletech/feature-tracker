@@ -14,6 +14,7 @@ export const get = async ({}) => {
 // POST /product_features.json
 export const post = async ({ request }) => {
     const data = await request.json()
+    console.log(data);
     const body = await prisma.productFeature.create({ data });
     return { body }
 }

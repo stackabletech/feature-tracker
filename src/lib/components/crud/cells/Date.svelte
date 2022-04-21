@@ -1,5 +1,6 @@
 <script lang="ts">
-	export let value: string;
+	export let value: string = new Date(Date.now()).toISOString();
+
 	export let rowspan: number = 1;
 	export let colspan: number = 1;
 

@@ -21,8 +21,11 @@
 	import { getContext } from 'svelte';
 
 	let editable: Writable<boolean> = getContext('editable');
+	let showMenu: boolean = false;
 
 	const addCategory = async (e: CustomEvent) => {
+		showMenu = false;
+
 		const res = await fetch('/api/categories.json', {
 			method: 'POST',
 			headers: {
@@ -42,6 +45,8 @@
 	};
 
 	const deleteCategory = async () => {
+		showMenu = false;
+
 		const res = await fetch(`/api/categories/${category.id}.json`, {
 			method: 'DELETE'
 		});
@@ -89,7 +94,7 @@
 		</div>
 	</th>
 {:else if category.children.length}
-	<TextCell bind:value={category.name} menu={$editable} on:update={updateCategory}>
+	<TextCell bind:value={category.name} menu={$editable} bind:showMenu on:update={updateCategory}>
 		<span slot="indent" class="flex flex-row">
 			{#each Array(level) as _}
 				<GitCommitIcon size="18" class="text-base-300 first:ml-0.5" />
@@ -103,7 +108,7 @@
 		</div>
 	</TextCell>
 {:else}
-	<TextCell bind:value={category.name} menu={$editable} on:update={updateCategory}>
+	<TextCell bind:value={category.name} menu={$editable} bind:showMenu on:update={updateCategory}>
 		<span slot="indent" class="flex flex-row first:ml-0.5">
 			{#each Array(level) as _}
 				<GitCommitIcon size="18" class="text-base-300" />
