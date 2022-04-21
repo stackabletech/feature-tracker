@@ -3,7 +3,7 @@
 	import MenuButton from '$lib/components/ui/MenuButton.svelte';
 
 	export let menu: boolean = false;
-	let showMenu: boolean = false;
+	export let showMenu: boolean = false;
 
 	export let editMode: boolean = false;
 	export let centered: boolean = false;

@@ -13,6 +13,7 @@
 	import { getContext } from 'svelte';
 
 	let editable: Writable<boolean> = getContext('editable');
+	let showMenu: boolean = false;
 
 	export let product: Product;
 
@@ -36,6 +37,8 @@
 	};
 
 	const deleteProduct = async () => {
+		showMenu = false;
+
 		const res = await fetch(`/api/products/${product.id}.json`, {
 			method: 'DELETE'
 		});
@@ -77,7 +80,7 @@
 		</div>
 	</th>
 {:else}
-	<TextCell bind:value={product.name} menu={$editable} on:update={updateProduct}>
+	<TextCell bind:value={product.name} menu={$editable} bind:showMenu on:update={updateProduct}>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<DeleteButton on:click={deleteProduct} />
 			<AddSiblingButton on:click={startAdding} horizontal />
