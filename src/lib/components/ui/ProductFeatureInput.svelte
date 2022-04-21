@@ -51,7 +51,7 @@
 <div class="form-control max-w-full">
 	<label class="input-group input-group-sm max-w-full m-1">
 		<select class="select select-xs select-bordered" bind:value={status}>
-			<option value={'NOT_PLANNED'}>Not Planned</option>
+			<option value={'NOT_PLANNED'} selected>Not Planned</option>
 			<option value={'PLANNED'}>Planned</option>
 			<option value={'IN_PROGRESS'}>In Progress</option>
 			<option value={'COMPLETED'}>Completed</option>

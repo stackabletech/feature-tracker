@@ -14,25 +14,25 @@
 		<InfoIcon size="18" class="mr-2 my-auto" />
 		<h3 class="font-bold my-auto">Implementation Details</h3>
 	</svelte:fragment>
-	<main class="flex flex-col">
+	<main class="flex flex-col gap-2">
 		<div class="flex flex-row justify-between">
 			<p>Product:</p>
-			<p>{product.name}</p>
+			<p class="font-bold">{product.name}</p>
 		</div>
 		<div class="flex flex-row justify-between">
 			<p>Feature:</p>
-			<p>{feature.name}</p>
+			<p class="font-bold">{feature.name}</p>
 		</div>
 		<div class="flex flex-row justify-between">
 			<p>Status:</p>
-			<p class="flex">
+			<p class="flex font-bold">
 				<ImplementationIcon status={productFeature.implementation_status} class="m-auto mr-1" />
 				{productFeature.implementation_status}
 			</p>
 		</div>
 		<div class="flex flex-row justify-between">
 			<p>Date:</p>
-			<p>
+			<p class="font-bold">
 				{new Date(productFeature?.implementation_date).toLocaleDateString(undefined, {
 					month: 'short',
 					year: 'numeric'
@@ -42,13 +42,13 @@
 		{#if productFeature.implementation_version}
 			<div class="flex flex-row justify-between">
 				<p>Version:</p>
-				<p>{productFeature.implementation_version}</p>
+				<p class="font-bold">{productFeature.implementation_version}</p>
 			</div>
 		{/if}
 		{#if productFeature.note}
 			<div class="flex flex-row justify-between">
 				<p>Note:</p>
-				<p>{productFeature.note}</p>
+				<p class="font-bold">{productFeature.note}</p>
 			</div>
 		{/if}
 	</main>

@@ -3,13 +3,14 @@
 
 	export let menu: boolean = false;
 	export let editMode: boolean = false;
+	export let showMenu: boolean = false;
 
 	export let sticky: boolean = false;
 	export let centered: boolean = false;
 </script>
 
 <td class="group {sticky && 'sticky z-10'}">
-	<Cell {menu} {editMode} {centered}>
+	<Cell {menu} {editMode} {centered} bind:showMenu>
 		<slot name="indent" slot="indent" />
 		<slot name="pre" slot="pre" />
 		<slot name="menu" slot="menu" />
