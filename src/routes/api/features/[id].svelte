@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	export const load = async ({ fetch }) => {
+	export const load = async ({ params, fetch }) => {
 		const response = await fetch(`/api/features/${params.id}.json`);
 		const feature = await response.json();
 		return { props: { feature } };
