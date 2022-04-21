@@ -30,6 +30,9 @@
 	const handleDelete = (e: CustomEvent) =>
 		(data = [...data.filter((obj) => obj.id != e.detail.id)]);
 
+	const handlePatch = (e: CustomEvent) =>
+		(data = [...data.map((obj) => (obj.id == e.detail.data.id ? e.detail.data : obj))]);
+
 	const keys = (data[0] && Object.keys(data[0])) || [];
 	let newObject = {};
 </script>
@@ -47,7 +50,7 @@
 	</thead>
 	<tbody>
 		{#each data as item (item.id)}
-			<Row data={item} {endpoint} on:delete={handleDelete} />
+			<Row bind:data={item} {endpoint} on:patch={handlePatch} on:delete={handleDelete} />
 		{:else}
 			<tr>
 				<td>No Data</td>

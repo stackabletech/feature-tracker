@@ -1,15 +1,15 @@
-<script context="module" lang="ts">
+<!-- <script context="module" lang="ts">
 	export const load = async ({ fetch }) => {
 		const response = await fetch('/api/categories.json');
 		const categories = await response.json();
 		return { props: { categories } };
 	};
-</script>
-
+</script> -->
 <script lang="ts">
+	import { categories } from '$lib/stores';
 	import Table from '$lib/components/crud/Table.svelte';
 	import type { Category } from '$lib/prisma';
-	export let categories: Category[];
+	// export let categories: Category[];
 </script>
 
-<Table data={categories} endpoint="/api/categories" />
+<Table bind:data={$categories} endpoint="/api/categories" />
