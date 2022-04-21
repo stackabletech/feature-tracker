@@ -9,11 +9,6 @@
 	export let endpoint: string;
 
 	const addRow = async (newRow) => {
-		// remove empty keys from data before posting
-		newRow = Object.fromEntries(
-			Object.entries(newRow).filter(([_, v]) => v != (undefined || null || ''))
-		);
-
 		const res = await fetch(`${endpoint}.json`, {
 			method: 'POST',
 			headers: {
@@ -27,11 +22,13 @@
 			data = [...data, json];
 			newObject = {};
 		} else {
+			console.log(res);
 			danger(`${res.status}: ${res.statusText}`);
 		}
 	};
 
-	const handleDelete = (e: CustomEvent) => (data = data.filter((obj) => obj.id != e.detail.id));
+	const handleDelete = (e: CustomEvent) =>
+		(data = [...data.filter((obj) => obj.id != e.detail.id)]);
 
 	const keys = (data[0] && Object.keys(data[0])) || [];
 	let newObject = {};
@@ -49,7 +46,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		{#each data as item}
+		{#each data as item (item.id)}
 			<Row data={item} {endpoint} on:delete={handleDelete} />
 		{:else}
 			<tr>
