@@ -23,6 +23,7 @@
 		if (res.status === 200) {
 			const json = await res.json();
 			info('Patched row #' + id);
+			dispatch('patch', { data });
 			return json;
 		} else {
 			danger(`${res.status}: ${res.statusText}`);
@@ -57,9 +58,9 @@
 	{/each}
 
 	<td>
-		<button class="btn btn-ghost focus:btn-outline" on:click={() => patchRow(patchedObject)}
-			>Save</button
-		>
+		<button class="btn btn-ghost focus:btn-outline" on:click={() => patchRow(patchedObject)}>
+			Save
+		</button>
 		<button class="btn btn-ghost focus:btn-outline" on:click={() => deleteRow()}>Delete</button>
 	</td>
 </tr>
