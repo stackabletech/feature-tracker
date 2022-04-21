@@ -1,4 +1,5 @@
 <script lang="ts">
+	import FilterableHeader from '$lib/components/unified/cells/FilterableHeader.svelte';
 	import Header from '$lib/components/unified/cells/Header.svelte';
 	import Product from '$lib/components/unified/cells/Product.svelte';
 	import Table from '$lib/components/unified/table/Table.svelte';
@@ -7,7 +8,7 @@
 	import type { Writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 
-	import { products, productFeatures } from '$lib/stores';
+	import { productFilter, filteredProducts, productFeatures } from '$lib/stores';
 	import RoadMapCell from '$lib/components/unified/cells/RoadMapCell.svelte';
 
 	const dates = [...new Set($productFeatures.map((pf) => pf.implementation_date).sort())];
@@ -20,7 +21,9 @@
 	<Table>
 		<svelte:fragment slot="head">
 			<!-- Product Header -->
-			<Header class="bg-base-300">Products</Header>
+			<FilterableHeader bind:filter={$productFilter} class="rounded-tl-lg">
+				Products
+			</FilterableHeader>
 			<!-- Date Headers -->
 			{#each dates as date}
 				<Header centered>
@@ -32,7 +35,7 @@
 			{/each}
 		</svelte:fragment>
 		<svelte:fragment>
-			{#each $products as product}
+			{#each $filteredProducts as product}
 				<tr>
 					<!-- Product Titles -->
 					<Product {product} />

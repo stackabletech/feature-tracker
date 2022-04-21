@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ExpandButton from '$lib/components/ui/ExpandButton.svelte';
-	import Header from '$lib/components/unified/cells/Header.svelte';
+	import FilterableHeader from '$lib/components/unified/cells/FilterableHeader.svelte';
 	import Product from '$lib/components/unified/cells/Product.svelte';
 	import ExpandableCategory from '$lib/components/unified/table/ExpandableCategory.svelte';
 	import Table from '$lib/components/unified/table/Table.svelte';
@@ -9,7 +9,13 @@
 	import type { Writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 
-	import { products, categoryTree, features } from '$lib/stores';
+	import {
+		filteredProducts,
+		categoryTree,
+		categoryFilter,
+		featureFilter,
+		productFilter
+	} from '$lib/stores';
 
 	let expandAll: boolean = false;
 	let editable: Writable<boolean> = writable(false);
@@ -17,25 +23,33 @@
 	setContext('editable', editable);
 </script>
 
-<div class="grow overflow-auto flex flex-col">
-	<Table>
-		<svelte:fragment slot="head">
-			<!-- Category Header -->
-			<Header class="bg-base-300">
+<Table>
+	<svelte:fragment slot="head">
+		<tr>
+			<th colspan="2" class="bg-transparent" />
+			<FilterableHeader bind:filter={$productFilter} class="rounded-tl-lg"
+				>Products</FilterableHeader
+			>
+			<th colspan={$filteredProducts.length - 1} class="bg-base-300" />
+		</tr>
+		<tr>
+			<FilterableHeader bind:filter={$categoryFilter}>
 				<ExpandButton slot="pre" double bind:expanded={expandAll} />
 				Categories
-			</Header>
+			</FilterableHeader>
+
 			<!-- Feature Header -->
-			<Header sticky class="left-48 bg-base-300">Features</Header>
+			<FilterableHeader bind:filter={$featureFilter}>Features</FilterableHeader>
+
 			<!-- Product Values -->
-			{#each $products as product}
+			{#each $filteredProducts as product (product.id)}
 				<Product {product} />
 			{/each}
-		</svelte:fragment>
-		<svelte:fragment>
-			{#each $categoryTree as category}
-				<ExpandableCategory {category} forcedOpen={expandAll} />
-			{/each}
-		</svelte:fragment>
-	</Table>
-</div>
+		</tr>
+	</svelte:fragment>
+	<svelte:fragment>
+		{#each $categoryTree as category (category.id)}
+			<ExpandableCategory {category} forcedOpen={expandAll} />
+		{/each}
+	</svelte:fragment>
+</Table>

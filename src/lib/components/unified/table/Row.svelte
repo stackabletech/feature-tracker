@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { GitCommitIcon } from 'svelte-feather-icons';
-	import { products, productFeatures } from '$lib/stores';
+	import { filteredProducts, productFeatures } from '$lib/stores';
 
 	import type { HierarchicalCategory } from '$lib/stores';
 	import type { Product, Feature as FeatureType } from '$lib/prisma';
@@ -40,7 +40,7 @@
 	<!-- Second Column: Feature Header -->
 	<Feature {feature} {category} />
 	<!-- Rest Columns: ProductFeature Cells -->
-	{#each $products as product}
+	{#each $filteredProducts as product}
 		<ProductFeature productFeature={getProductFeature(product, feature)} {product} {feature} />
 	{/each}
 </tr>
