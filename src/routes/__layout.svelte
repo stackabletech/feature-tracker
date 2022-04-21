@@ -99,10 +99,7 @@
 					<a href="/edit" class="btn btn-ghost m-2">Edit Data</a>
 				</li>
 				<li>
-					<a href="/features" class="btn btn-ghost m-2">Feature View</a>
-				</li>
-				<li>
-					<a href="/products" class="btn btn-ghost m-2">Product View</a>
+					<a href="/unified" class="btn btn-ghost m-2">Unified View</a>
 				</li>
 				<li>
 					<a href="/roadmap" class="btn btn-ghost m-2">Roadmap View</a>
