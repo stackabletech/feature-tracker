@@ -7,7 +7,7 @@
 	export let rowspan: number = 1;
 
 	const options = [
-		{ value: 'NOT PLANNED', label: 'Not Planned' },
+		{ value: 'NOT_PLANNED', label: 'Not Planned' },
 		{ value: 'PLANNED', label: 'Planned' },
 		{ value: 'IN_PROGRESS', label: 'In Progress' },
 		{ value: 'COMPLETED', label: 'Completed' }
