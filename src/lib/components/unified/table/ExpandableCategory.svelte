@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HierarchicalCategory } from '$lib/stores';
-	import { features } from '$lib/stores';
+	import { filteredFeatures } from '$lib/stores';
 
 	import Row from './Row.svelte';
 
@@ -9,7 +9,7 @@
 	export let forcedOpen: boolean;
 
 	export let category: HierarchicalCategory;
-	$: categoryFeatures = $features.filter((f) => f.category_id === category.id);
+	$: categoryFeatures = $filteredFeatures.filter((f) => f.category_id === category.id);
 
 	export const toggle = () => (expanded = !expanded);
 </script>
