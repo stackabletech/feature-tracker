@@ -10,8 +10,6 @@
 
 	export let category: HierarchicalCategory;
 	$: categoryFeatures = $filteredFeatures.filter((f) => f.category_id === category.id);
-
-	export const toggle = () => (expanded = !expanded);
 </script>
 
 {#each categoryFeatures as feature, n}
