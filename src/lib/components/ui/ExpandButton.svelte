@@ -11,12 +11,11 @@
 	const toggle = () => {
 		// This forces Safari to rerender the table when expanded, which it otherwise won't do 😠.
 		document.querySelector('table').classList.toggle('rerender');
-
 		expanded = !expanded;
 	};
 </script>
 
-<Button on:click={toggle} {tip}>
+<Button on:click={toggle} {tip} disabled={forcedOpen}>
 	<svelte:component
 		this={double ? ChevronsRightIcon : ChevronRightIcon}
 		size="16"

@@ -7,7 +7,6 @@
 
 	let features: Feature[] = getContext('features');
 	let products: Product[] = getContext('products');
-	let productFeatures: ProductFeature[] = getContext('productFeatures');
 
 	export let level = 0;
 	export let category;
