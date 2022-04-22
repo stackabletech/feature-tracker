@@ -14,8 +14,7 @@
 </script>
 
 <div
-	class="flex flex-row items-center transition-all 
-		{editMode ? 'w-72' : 'w-48'}
+	class="flex flex-row items-center transition-all w-full
 		{centered ? 'justify-between' : 'justify-start'}
 		"
 >
@@ -31,7 +30,7 @@
 			<CloseButton on:click={toggleMenu} />
 		</div>
 	{:else if editMode}
-		<div class="mx-2 truncate text-center">
+		<div class="mx-2 text-center">
 			<slot name="edit" />
 		</div>
 	{:else}
