@@ -16,7 +16,7 @@
 </script>
 
 <th class="group {sticky && 'sticky z-10'} {classes}" {colspan} {rowspan}>
-	<Cell {menu} {editMode} {centered} bind:showMenu>
+	<Cell {menu} bind:editMode {centered} bind:showMenu>
 		<slot name="indent" slot="indent" />
 		<slot name="pre" slot="pre" />
 		<slot name="menu" slot="menu" />

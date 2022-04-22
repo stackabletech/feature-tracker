@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { clickOutside } from '$lib/actions/clickOutside';
+
 	import CloseButton from '$lib/components/ui/CloseButton.svelte';
 	import MenuButton from '$lib/components/ui/MenuButton.svelte';
 
@@ -10,6 +12,10 @@
 
 	let toggleMenu = () => {
 		showMenu = !showMenu;
+	};
+
+	let toggleEditMode = () => {
+		editMode = false;
 	};
 </script>
 
@@ -30,7 +36,7 @@
 			<CloseButton on:click={toggleMenu} />
 		</div>
 	{:else if editMode}
-		<div class="mx-2 text-center">
+		<div class="mx-2 text-center" use:clickOutside on:clickoutside={toggleEditMode}>
 			<slot name="edit" />
 		</div>
 	{:else}
