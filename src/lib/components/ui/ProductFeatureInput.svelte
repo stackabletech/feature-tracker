@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CheckIcon, MinusIcon, PlusIcon, XIcon } from 'svelte-feather-icons';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 
 	let dispatch = createEventDispatcher();
 
@@ -14,6 +14,7 @@
 
 	export let value = undefined;
 	export let status = undefined;
+	export let input: HTMLElement = undefined;
 
 	let now = new Date(Date.now());
 	let date = value ? new Date(value) : new Date(now.getUTCFullYear(), now.getUTCMonth(), 1);
@@ -29,24 +30,29 @@
 		value = date.toISOString();
 	};
 
-	let handle = (e: KeyboardEvent) => {
-		if (e.key == 'Tab') return;
-
+	let globalShortcuts = (e: KeyboardEvent) => {
 		if (e.key === 'Enter') {
 			submit();
 			return;
 		}
 
-		if (e.key == 'Escape') {
+		if (e.key === 'Escape') {
 			cancel();
-			return;
 		}
+	};
+
+	let handle = (e: KeyboardEvent) => {
+		if (e.key == 'Tab') return;
 
 		e.preventDefault();
 		(e.key == 'ArrowUp' || e.key == 'ArrowRight') && updateValue(1);
 		(e.key == 'ArrowDown' || e.key == 'ArrowLeft') && updateValue(-1);
 	};
+
+	onMount(() => input.focus());
 </script>
+
+<svelte:window on:keydown={globalShortcuts} />
 
 <div class="form-control max-w-full">
 	<label class="input-group input-group-sm max-w-full m-1">
@@ -63,6 +69,7 @@
 			type="text"
 			class="input input-bordered input-xs w-20 text-center"
 			placeholder="2022-01"
+			bind:this={input}
 			bind:value={inputValue}
 			on:keydown={handle}
 		/>

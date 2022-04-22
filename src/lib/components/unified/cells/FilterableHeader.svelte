@@ -31,7 +31,7 @@
 	let editMode: boolean = filter !== '';
 </script>
 
-<Header sticky class="{classes} left-48 bg-base-300 group" {editMode}>
+<Header sticky class="{classes} left-48 bg-base-300 group" bind:editMode>
 	<slot name="pre" slot="pre" />
 	<span on:click={edit}>
 		<slot />

@@ -27,9 +27,9 @@
 	<svelte:fragment slot="head">
 		<tr>
 			<th colspan="2" class="bg-transparent" />
-			<FilterableHeader bind:filter={$productFilter} class="rounded-tl-lg"
-				>Products</FilterableHeader
-			>
+			<FilterableHeader bind:filter={$productFilter} class="rounded-tl-lg left-96">
+				Products
+			</FilterableHeader>
 			<th colspan={$filteredProducts.length - 1} class="bg-base-300" />
 		</tr>
 		<tr>

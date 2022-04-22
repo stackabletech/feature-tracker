@@ -126,4 +126,9 @@
 	:global(.table-compact td) {
 		@apply p-2;
 	}
+	:global(table tbody th),
+	:global(table tbody td) {
+		--tw-bg-opacity: 1;
+		background-color: hsla(var(--b1) / var(--tw-bg-opacity, 1));
+	}
 </style>
