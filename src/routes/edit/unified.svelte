@@ -14,7 +14,10 @@
 		categoryTree,
 		categoryFilter,
 		featureFilter,
-		productFilter
+		productFilter,
+		showUnusedCategories,
+		showUnusedFeatures,
+		showUnusedProducts
 	} from '$lib/stores';
 
 	let expandAll: boolean = false;
@@ -53,3 +56,23 @@
 		{/each}
 	</svelte:fragment>
 </Table>
+
+<div class="card w-80 bg-base-100 shadow-xl border-2 mx-auto my-12">
+	<div class="card-body">
+		<h2 class="card-title">Display Settings:</h2>
+		<label class="label cursor-pointer">
+			<input type="checkbox" bind:checked={$showUnusedCategories} class="toggle" />
+			<span class="label-text"> Show empty categories </span>
+		</label>
+
+		<label class="label cursor-pointer">
+			<input type="checkbox" bind:checked={$showUnusedFeatures} class="toggle" />
+			<span class="label-text"> Show empty features </span>
+		</label>
+
+		<label class="label cursor-pointer">
+			<input type="checkbox" bind:checked={$showUnusedProducts} class="toggle" />
+			<span class="label-text"> Show empty products </span>
+		</label>
+	</div>
+</div>
