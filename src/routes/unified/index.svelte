@@ -4,6 +4,8 @@
 	import Product from '$lib/components/unified/cells/Product.svelte';
 	import ExpandableCategory from '$lib/components/unified/table/ExpandableCategory.svelte';
 	import Table from '$lib/components/unified/table/Table.svelte';
+	import DisplayButton from '$lib/components/ui/DisplayButton.svelte';
+	import DisplayModal from '$lib/components/ui/DisplayModal.svelte';
 
 	import { writable } from 'svelte/store';
 	import type { Writable } from 'svelte/store';
@@ -23,13 +25,19 @@
 	let expandAll: boolean = false;
 	let editable: Writable<boolean> = writable(false);
 
+	let settingsModal: boolean = false;
+	const showSettings = () => (settingsModal = true);
+	const hideSettings = () => (settingsModal = false);
+
 	setContext('editable', editable);
 </script>
 
 <Table>
 	<svelte:fragment slot="head">
 		<tr>
-			<th colspan="2" class="bg-transparent" />
+			<th colspan="2" class="bg-transparent">
+				<DisplayButton on:click={showSettings} />
+			</th>
 			<FilterableHeader bind:filter={$productFilter} class="rounded-tl-lg"
 				>Products</FilterableHeader
 			>
@@ -57,22 +65,6 @@
 	</svelte:fragment>
 </Table>
 
-<div class="card w-80 bg-base-100 shadow-xl border-2 mx-auto my-12">
-	<div class="card-body">
-		<h2 class="card-title">Display Settings:</h2>
-		<label class="label cursor-pointer">
-			<input type="checkbox" bind:checked={$showUnusedCategories} class="toggle" />
-			<span class="label-text"> Show empty categories </span>
-		</label>
-
-		<label class="label cursor-pointer">
-			<input type="checkbox" bind:checked={$showUnusedFeatures} class="toggle" />
-			<span class="label-text"> Show empty features </span>
-		</label>
-
-		<label class="label cursor-pointer">
-			<input type="checkbox" bind:checked={$showUnusedProducts} class="toggle" />
-			<span class="label-text"> Show empty products </span>
-		</label>
-	</div>
-</div>
+{#if settingsModal}
+	<DisplayModal on:close={hideSettings} />
+{/if}
