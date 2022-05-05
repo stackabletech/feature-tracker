@@ -25,6 +25,15 @@
 
 <style>
 	:global(.rerender) {
-		transform: translateZ(1px);
+		animation: repaint 1ms no-repeat;
+	}
+
+	@keyframes repaint {
+		from {
+			scale: 99.999%;
+		}
+		to {
+			scale: 100%;
+		}
 	}
 </style>
