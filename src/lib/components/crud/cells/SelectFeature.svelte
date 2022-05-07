@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Select from './Select.svelte';
-	export let value;
+	export let value: number | string;
 	export let colspan: number = 1;
 	export let rowspan: number = 1;
 
