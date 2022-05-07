@@ -44,8 +44,9 @@
 		});
 
 		if (res.ok) {
-			info(`Deleted dependent product feature #${id}`);
-			$productFeatures = [...$productFeatures.filter((pf) => pf.id !== id)];
+			const deletedProductFeature = await res.json();
+			info(`Deleted dependent product feature #${deletedProductFeature.id}`);
+			$productFeatures = [...$productFeatures.filter((pf) => pf.id !== deletedProductFeature.id)];
 		} else {
 			danger(`${res.status}: ${res.statusText}`);
 		}
