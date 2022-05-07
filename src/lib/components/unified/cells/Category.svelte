@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HierarchicalCategory } from '$lib/stores';
-	import { categories } from '$lib/stores';
+	import { categories, features, productFeatures } from '$lib/stores';
 
 	import { info, danger } from '$lib/util/alert';
 
@@ -44,8 +44,43 @@
 		}
 	};
 
-	const deleteCategory = async () => {
+	const deleteProductFeature = async (id: number) => {
+		const res = await fetch(`/api/product_features/${id}.json`, {
+			method: 'DELETE'
+		});
+
+		if (res.ok) {
+			info(`Deleted dependent product feature #${id}`);
+			$productFeatures = [...$productFeatures.filter((pf) => pf.id !== id)];
+		} else {
+			danger(`${res.status}: ${res.statusText}`);
+		}
+	};
+
+	const deleteFeature = async (id: number) => {
+		const dependentProductFeatures = $productFeatures.filter((pf) => pf.feature_id === id);
+		dependentProductFeatures.forEach(async (pf) => await deleteProductFeature(pf.id));
+
+		const res = await fetch(`/api/features/${id}.json`, {
+			method: 'DELETE'
+		});
+
+		if (res.ok) {
+			info(`Deleted dependent feature #${id}`);
+			$features = [...$features.filter((f) => f.id !== id)];
+		} else {
+			danger(`${res.status}: ${res.statusText}`);
+		}
+	};
+
+	const deleteCategory = async (category: HierarchicalCategory, dependent: boolean = false) => {
 		showMenu = false;
+
+		const dependentCategories = $categories.filter((c) => c.parent_id === category.id);
+		dependentCategories.forEach(async (c) => await deleteCategory(c, true));
+
+		const dependentFeatures = $features.filter((f) => f.category_id === category.id);
+		dependentFeatures.forEach(async (f) => await deleteFeature(f.id));
 
 		const res = await fetch(`/api/categories/${category.id}.json`, {
 			method: 'DELETE'
@@ -53,7 +88,7 @@
 
 		if (res.ok) {
 			$categories = [...$categories.filter((f) => f.id !== category.id)];
-			info(`Deleted feature #${category.id}: ${category.name}`);
+			info(`Deleted ${dependent ? 'dependent' : ''} category #${category.id}: ${category.name}`);
 		} else {
 			danger(`${res.status}: ${res.statusText}`);
 		}
@@ -104,7 +139,7 @@
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<AddSiblingButton on:click={() => startAdding(parent_id)} />
 			<AddChildButton on:click={() => startAdding(category.id)} />
-			<DeleteButton on:click={deleteCategory} />
+			<DeleteButton on:click={() => deleteCategory(category)} />
 		</div>
 	</TextCell>
 {:else}
@@ -117,7 +152,7 @@
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<AddSiblingButton on:click={() => startAdding(parent_id)} />
 			<AddChildButton on:click={() => startAdding(category.id)} />
-			<DeleteButton on:click={deleteCategory} />
+			<DeleteButton on:click={() => deleteCategory(category)} />
 		</div>
 	</TextCell>
 {/if}
