@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Feature, Category } from '$lib/prisma';
 
-	import { features } from '$lib/stores';
+	import { features, productFeatures } from '$lib/stores';
 
 	import { info, danger } from '$lib/util/alert';
 
@@ -43,8 +43,28 @@
 		}
 	};
 
+	const deleteProductFeature = async (id: number) => {
+		const res = await fetch(`/api/product_features/${id}.json`, {
+			method: 'DELETE'
+		});
+
+		if (res.ok) {
+			info(`Deleted dependent product feature #${id}`);
+			$productFeatures = [...$productFeatures.filter((pf) => pf.id !== id)];
+		} else {
+			danger(`${res.status}: ${res.statusText}`);
+		}
+	};
+
+	const deleteProductFeatures = async (id: number) => {
+		let dependents = $productFeatures.filter((pf) => pf.feature_id === id);
+		dependents.forEach(async (pf) => await deleteProductFeature(pf.id));
+	};
+
 	const deleteFeature = async () => {
 		showMenu = false;
+
+		await deleteProductFeatures(feature.id);
 
 		const res = await fetch(`/api/features/${feature.id}.json`, {
 			method: 'DELETE'
