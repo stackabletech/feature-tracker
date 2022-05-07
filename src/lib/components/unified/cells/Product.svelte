@@ -2,7 +2,7 @@
 	import type { Product } from '$lib/prisma';
 	import { info, danger } from '$lib/util/alert';
 
-	import { products } from '$lib/stores';
+	import { products, productFeatures } from '$lib/stores';
 
 	import AddSiblingButton from '$lib/components/ui/AddSiblingButton.svelte';
 	import DeleteButton from '$lib/components/ui/DeleteButton.svelte';
@@ -38,8 +38,28 @@
 		}
 	};
 
+	const deleteProductFeature = async (id: number) => {
+		const res = await fetch(`/api/product_features/${id}.json`, {
+			method: 'DELETE'
+		});
+
+		if (res.ok) {
+			info(`Deleted dependent product feature #${id}`);
+			$productFeatures = [...$productFeatures.filter((pf) => pf.id !== id)];
+		} else {
+			danger(`${res.status}: ${res.statusText}`);
+		}
+	};
+
+	const deleteProductFeatures = async (id: number) => {
+		let dependents = $productFeatures.filter((pf) => pf.product_id === id);
+		dependents.forEach(async (pf) => await deleteProductFeature(pf.id));
+	};
+
 	const deleteProduct = async () => {
 		showMenu = false;
+
+		await deleteProductFeatures(product.id);
 
 		const res = await fetch(`/api/products/${product.id}.json`, {
 			method: 'DELETE'
