@@ -76,11 +76,11 @@
 	const deleteCategory = async (category: HierarchicalCategory, dependent: boolean = false) => {
 		showMenu = false;
 
-		const dependentCategories = $categories.filter((c) => c.parent_id === category.id);
-		dependentCategories.forEach(async (c) => await deleteCategory(c, true));
-
 		const dependentFeatures = $features.filter((f) => f.category_id === category.id);
 		dependentFeatures.forEach(async (f) => await deleteFeature(f.id));
+
+		const dependentCategories = $categories.filter((c) => c.parent_id === category.id);
+		dependentCategories.forEach(async (c) => await deleteCategory(c, true));
 
 		const res = await fetch(`/api/categories/${category.id}.json`, {
 			method: 'DELETE'
