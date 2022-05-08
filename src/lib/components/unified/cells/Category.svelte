@@ -52,8 +52,10 @@
 		if (res.ok) {
 			info(`Deleted dependent product feature #${id}`);
 			$productFeatures = [...$productFeatures.filter((pf) => pf.id !== id)];
+			return true;
 		} else {
 			danger(`${res.status}: ${res.statusText}`);
+			return false;
 		}
 	};
 
@@ -68,8 +70,10 @@
 		if (res.ok) {
 			info(`Deleted dependent feature #${id}`);
 			$features = [...$features.filter((f) => f.id !== id)];
+			return true;
 		} else {
 			danger(`${res.status}: ${res.statusText}`);
+			return false;
 		}
 	};
 
@@ -89,8 +93,10 @@
 		if (res.ok) {
 			$categories = [...$categories.filter((f) => f.id !== category.id)];
 			info(`Deleted ${dependent ? 'dependent' : ''} category #${category.id}: ${category.name}`);
+			return true;
 		} else {
 			danger(`${res.status}: ${res.statusText}`);
+			return false;
 		}
 	};
 

@@ -51,14 +51,17 @@
 		if (res.ok) {
 			info(`Deleted dependent product feature #${id}`);
 			$productFeatures = [...$productFeatures.filter((pf) => pf.id !== id)];
+			return true;
 		} else {
 			danger(`${res.status}: ${res.statusText}`);
+			return false;
 		}
 	};
 
 	const deleteProductFeatures = async (id: number) => {
 		let dependents = $productFeatures.filter((pf) => pf.feature_id === id);
 		dependents.forEach(async (pf) => await deleteProductFeature(pf.id));
+		return true;
 	};
 
 	const deleteFeature = async () => {

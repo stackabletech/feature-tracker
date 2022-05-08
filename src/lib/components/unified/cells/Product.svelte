@@ -47,14 +47,17 @@
 			const deletedProductFeature = await res.json();
 			info(`Deleted dependent product feature #${deletedProductFeature.id}`);
 			$productFeatures = [...$productFeatures.filter((pf) => pf.id !== deletedProductFeature.id)];
+			return true;
 		} else {
 			danger(`${res.status}: ${res.statusText}`);
+			return false;
 		}
 	};
 
 	const deleteProductFeatures = async (id: number) => {
 		let dependents = $productFeatures.filter((pf) => pf.product_id === id);
 		dependents.forEach(async (pf) => await deleteProductFeature(pf.id));
+		return true;
 	};
 
 	const deleteProduct = async () => {
