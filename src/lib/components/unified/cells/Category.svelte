@@ -83,24 +83,26 @@
 	};
 
 	const deleteFeatures = async (id: number) => {
-		const dependentFeatures = $features.filter((f) => f.category_id === category.id);
+		const dependentFeatures = $features.filter((f) => f.category_id === id);
 		dependentFeatures.forEach(async (f) => await deleteFeature(f.id));
 		return true;
 	};
 
-	const deleteCategory = async (category: HierarchicalCategory, dependent: boolean = false) => {
-		showMenu = false;
+	const deleteCategory = async (cat: HierarchicalCategory, dependent: boolean = false) => {
+		if (!dependent) {
+			showMenu = false;
+		}
 
-		await deleteFeatures(category.id);
+		await deleteFeatures(cat.id);
 		await deleteDependantCategories(category);
 
-		const res = await fetch(`/api/categories/${category.id}.json`, {
+		const res = await fetch(`/api/categories/${cat.id}.json`, {
 			method: 'DELETE'
 		});
 
 		if (res.ok) {
-			$categories = [...$categories.filter((f) => f.id !== category.id)];
-			info(`Deleted ${dependent ? 'dependent' : ''} category #${category.id}: ${category.name}`);
+			$categories = [...$categories.filter((f) => f.id !== cat.id)];
+			info(`Deleted ${dependent ? 'dependent' : ''} category #${cat.id}: ${cat.name}`);
 			return true;
 		} else {
 			danger(`${res.status}: ${res.statusText}`);
@@ -108,8 +110,8 @@
 		}
 	};
 
-	const deleteDependantCategories = async (category: HierarchicalCategory) => {
-		const dependentCategories = $categories.filter((c) => c.parent_id === category.id);
+	const deleteDependantCategories = async (cat: HierarchicalCategory) => {
+		const dependentCategories = $categories.filter((c) => c.parent_id === cat.id);
 		dependentCategories.forEach(async (c) => await deleteCategory(c, true));
 		return true;
 	};
