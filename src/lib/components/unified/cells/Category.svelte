@@ -59,9 +59,14 @@
 		}
 	};
 
-	const deleteFeature = async (id: number) => {
+	const deleteProductFeatures = async (id: number) => {
 		const dependentProductFeatures = $productFeatures.filter((pf) => pf.feature_id === id);
 		dependentProductFeatures.forEach(async (pf) => await deleteProductFeature(pf.id));
+		return true;
+	};
+
+	const deleteFeature = async (id: number) => {
+		await deleteProductFeatures(id);
 
 		const res = await fetch(`/api/features/${id}.json`, {
 			method: 'DELETE'
@@ -77,14 +82,17 @@
 		}
 	};
 
+	const deleteFeatures = async (id: number) => {
+		const dependentFeatures = $features.filter((f) => f.category_id === category.id);
+		dependentFeatures.forEach(async (f) => await deleteFeature(f.id));
+		return true;
+	};
+
 	const deleteCategory = async (category: HierarchicalCategory, dependent: boolean = false) => {
 		showMenu = false;
 
-		const dependentFeatures = $features.filter((f) => f.category_id === category.id);
-		dependentFeatures.forEach(async (f) => await deleteFeature(f.id));
-
-		const dependentCategories = $categories.filter((c) => c.parent_id === category.id);
-		dependentCategories.forEach(async (c) => await deleteCategory(c, true));
+		await deleteFeatures(category.id);
+		await deleteDependantCategories(category);
 
 		const res = await fetch(`/api/categories/${category.id}.json`, {
 			method: 'DELETE'
@@ -98,6 +106,12 @@
 			danger(`${res.status}: ${res.statusText}`);
 			return false;
 		}
+	};
+
+	const deleteDependantCategories = async (category: HierarchicalCategory) => {
+		const dependentCategories = $categories.filter((c) => c.parent_id === category.id);
+		dependentCategories.forEach(async (c) => await deleteCategory(c, true));
+		return true;
 	};
 
 	const updateCategory = async (e: CustomEvent) => {
