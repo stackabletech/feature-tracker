@@ -94,7 +94,7 @@
 		}
 
 		await deleteFeatures(cat.id);
-		await deleteDependantCategories(category);
+		await deleteDependantCategories(cat);
 
 		const res = await fetch(`/api/categories/${cat.id}.json`, {
 			method: 'DELETE'
