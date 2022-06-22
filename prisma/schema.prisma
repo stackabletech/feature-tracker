@@ -16,7 +16,7 @@ enum ImplementationStatus {
 
 model Category {
   id         Int        @id @default(autoincrement())
-  name       String     @unique
+  name       String
   parent_id  Int?
   parent     Category?  @relation("nestedCategories", fields: [parent_id], references: [id])
   categories Category[] @relation("nestedCategories")
@@ -35,7 +35,7 @@ model Product {
 
 model Feature {
   id               Int              @id @default(autoincrement())
-  name             String           @unique
+  name             String
   category_id      Int
   categories       Category         @relation(fields: [category_id], references: [id])
   product_features ProductFeature[]
