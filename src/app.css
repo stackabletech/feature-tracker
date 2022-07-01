@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.rerender {
+    animation: repaint 1ms no-repeat;
+}
+
+@keyframes repaint {
+    from {
+        scale: 99.999%;
+    }
+    to {
+        scale: 100%;
+    }
+}
