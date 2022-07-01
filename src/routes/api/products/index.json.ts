@@ -7,13 +7,28 @@ import { prisma } from "$lib/prisma";
 
 // GET /products.json
 export const get = async ({params, request, url}) => {
-    const body = await prisma.product.findMany();
-    return { body }
+    try {
+        const body = await prisma.product.findMany();
+        return { body }
+    } catch ({ code, message }) {
+        return {
+            status: 500,
+            body: { code, message }
+        }
+    }
 };
 
 // POST /products.json
 export const post = async ({ request }) => {
     const data = await request.json()
-    const body = await prisma.product.create({ data });
-    return { body }
+
+    try {
+        const body = await prisma.product.create({ data });
+        return { body }
+    } catch ({ code, message }) {
+        return {
+            status: 500,
+            body: { code, message }
+        }
+    }
 }
