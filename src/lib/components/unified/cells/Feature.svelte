@@ -88,7 +88,7 @@
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ name: e.detail.value })
+			body: JSON.stringify({ name: e.detail.value, category_id: feature.category_id })
 		});
 
 		if (res.ok) {
