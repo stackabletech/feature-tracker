@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* This forces Safari to rerender the table when expanded, which it otherwise won't do 😠. Used in e.g. ExpandButton. */
+
 .rerender {
     animation: repaint 1ms no-repeat;
 }
@@ -13,4 +15,10 @@
     to {
         scale: 100%;
     }
+}
+
+/* Increase DaisyUI table borders */
+
+.table:where(:not(.table-zebra)) :where(thead, tbody, tfoot) :where(tr:not(:last-child) :where(th, td)) {
+    border-color: hsl(var(--bc) / 15%);
 }
