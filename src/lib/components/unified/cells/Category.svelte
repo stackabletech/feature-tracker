@@ -40,7 +40,8 @@
 			$categories = [...$categories, json];
 			endAdding();
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 
@@ -54,7 +55,8 @@
 			$productFeatures = [...$productFeatures.filter((pf) => pf.id !== id)];
 			return true;
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 			return false;
 		}
 	};
@@ -77,7 +79,8 @@
 			$features = [...$features.filter((f) => f.id !== id)];
 			return true;
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 			return false;
 		}
 	};
@@ -105,7 +108,8 @@
 			info(`Deleted ${dependent ? 'dependent' : ''} category #${cat.id}: ${cat.name}`);
 			return true;
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 			return false;
 		}
 	};
@@ -129,7 +133,8 @@
 			const json = await res.json();
 			info(`Updated feature #${category.id}: ${json.name}`);
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 

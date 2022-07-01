@@ -34,7 +34,8 @@
 			$products = [...$products, json];
 			endAdding();
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 
@@ -49,7 +50,8 @@
 			$productFeatures = [...$productFeatures.filter((pf) => pf.id !== deletedProductFeature.id)];
 			return true;
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 			return false;
 		}
 	};
@@ -73,7 +75,8 @@
 			$products = [...$products.filter((f) => f.id !== product.id)];
 			info(`Deleted product #${product.id}: ${product.name}`);
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 
@@ -90,7 +93,8 @@
 			const json = await res.json();
 			info(`Updated feature #${product.id}: ${json.name}`);
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 

@@ -46,7 +46,8 @@
 			$products = [...$products]; // forces rerendering of the table
 			endAdding();
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 
@@ -62,7 +63,8 @@
 				`Deleted product feature #${productFeature.id}: ${productFeature.product_id} ${productFeature.feature_id}`
 			);
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 
@@ -86,7 +88,8 @@
 			const json = await res.json();
 			info(`Updated product feature #${json.id}: ${json.product_id} ${json.feature_id}`);
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 
