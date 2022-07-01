@@ -112,13 +112,15 @@
 	</div>
 </div>
 
-<div class="toastwrapper">
-	<SvelteToast options={toastOptions} />
-</div>
+<SvelteToast options={toastOptions} />
 
 <style lang="postcss">
-	:global(.toastwrapper) {
+	:global(._toastContainer) {
 		@apply z-50;
+	}
+
+	:global(._toastContainer li) {
+		@apply bg-white rounded-box;
 	}
 
 	/* Fix for QuteBrowser not supporting where selector used by DaisyUI's table styling */
