@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { HierarchicalCategory } from '$lib/stores';
 	import { filteredFeatures, filteredProducts } from '$lib/stores';
+	import { getContext } from 'svelte';
 
 	import FeatureRow from './FeatureRow.svelte';
 	import Category from '../cells/Category.svelte';
@@ -11,6 +12,8 @@
 
 	export let category: HierarchicalCategory;
 	$: categoryFeatures = $filteredFeatures.filter((f) => f.category_id === category.id);
+
+	let editable: Writable<boolean> = getContext('editable');
 </script>
 
 <tr class="hover category">
@@ -24,7 +27,9 @@
 	{#each categoryFeatures as feature, n}
 		<FeatureRow {category} {feature} />
 	{:else}
-		<FeatureRow {category} />
+		{#if $editable}
+			<FeatureRow {category} />
+		{/if}
 	{/each}
 
 	{#each category.children as child}
