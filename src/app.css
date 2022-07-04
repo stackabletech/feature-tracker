@@ -22,3 +22,7 @@
 .table:where(:not(.table-zebra)) :where(thead, tbody, tfoot) :where(tr:not(:last-child) :where(th, td)) {
     border-color: hsl(var(--bc) / 15%);
 }
+
+tr.category th, tr.category td {
+    background-color: hsl(var(--b2));
+}
