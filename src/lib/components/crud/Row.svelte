@@ -26,7 +26,8 @@
 			dispatch('patch', { data });
 			return json;
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 
@@ -40,7 +41,8 @@
 			info(`Deleted row #${id}`);
 			return true;
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 

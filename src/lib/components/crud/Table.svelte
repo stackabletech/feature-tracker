@@ -22,8 +22,8 @@
 			data = [...data, json];
 			newObject = {};
 		} else {
-			console.log(res);
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 

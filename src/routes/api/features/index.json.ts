@@ -7,14 +7,29 @@ import { prisma } from "$lib/prisma";
 
 // GET /features.json
 export const get = async ({}) => {
-    const body = await prisma.feature.findMany();
-    return { body }
+    try {
+        const body = await prisma.feature.findMany();
+        return { body }
+    } catch ({ code, message }) {
+        return {
+            status: 500,
+            body: { code, message }
+        }
+    }
 };
 
 // POST /features.json
 export const post = async ({ request }) => {
     const data = await request.json()
     data.category_id = data.category_id || null
-    const body = await prisma.feature.create({ data });
-    return { body }
+    
+    try {
+        const body = await prisma.feature.create({ data });
+        return { body }
+    } catch ({ code, message }) {
+        return {
+            status: 500,
+            body: { code, message }
+        }
+    }
 }

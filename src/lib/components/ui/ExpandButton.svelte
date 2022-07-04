@@ -22,18 +22,3 @@
 		class="transition-all {(expanded || forcedOpen) && 'rotate-90'}"
 	/>
 </Button>
-
-<style>
-	:global(.rerender) {
-		animation: repaint 1ms no-repeat;
-	}
-
-	@keyframes repaint {
-		from {
-			scale: 99.999%;
-		}
-		to {
-			scale: 100%;
-		}
-	}
-</style>

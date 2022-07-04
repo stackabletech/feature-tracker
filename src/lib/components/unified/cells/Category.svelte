@@ -40,7 +40,8 @@
 			$categories = [...$categories, json];
 			endAdding();
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 
@@ -54,7 +55,8 @@
 			$productFeatures = [...$productFeatures.filter((pf) => pf.id !== id)];
 			return true;
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 			return false;
 		}
 	};
@@ -77,7 +79,8 @@
 			$features = [...$features.filter((f) => f.id !== id)];
 			return true;
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 			return false;
 		}
 	};
@@ -105,7 +108,8 @@
 			info(`Deleted ${dependent ? 'dependent' : ''} category #${cat.id}: ${cat.name}`);
 			return true;
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 			return false;
 		}
 	};
@@ -129,7 +133,8 @@
 			const json = await res.json();
 			info(`Updated feature #${category.id}: ${json.name}`);
 		} else {
-			danger(`${res.status}: ${res.statusText}`);
+			const { code, message } = await res.json();
+			danger(`${code}: ${message}`);
 		}
 	};
 
@@ -150,7 +155,7 @@
 			<TextInput on:submit={addCategory} on:cancel={endAdding} />
 		</div>
 	</th>
-{:else if category.children.length}
+{:else}
 	<TextCell bind:value={category.name} menu={$editable} bind:showMenu on:update={updateCategory}>
 		<span slot="indent" class="flex flex-row">
 			{#each Array(level) as _}
@@ -158,19 +163,6 @@
 			{/each}
 		</span>
 		<ExpandButton slot="pre" bind:expanded {forcedOpen} />
-		<div class="flex flex-row justify-center gap-1" slot="menu">
-			<AddSiblingButton on:click={() => startAdding(parent_id)} />
-			<AddChildButton on:click={() => startAdding(category.id)} />
-			<DeleteButton on:click={() => deleteCategory(category)} />
-		</div>
-	</TextCell>
-{:else}
-	<TextCell bind:value={category.name} menu={$editable} bind:showMenu on:update={updateCategory}>
-		<span slot="indent" class="flex flex-row first:ml-0.5">
-			{#each Array(level) as _}
-				<GitCommitIcon size="18" class="text-base-300" />
-			{/each}
-		</span>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<AddSiblingButton on:click={() => startAdding(parent_id)} />
 			<AddChildButton on:click={() => startAdding(category.id)} />
