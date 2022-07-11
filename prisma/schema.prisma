@@ -17,6 +17,7 @@ enum ImplementationStatus {
 model Category {
   id         Int        @id @default(autoincrement())
   name       String
+  note       String?    @db.VarChar(1024)
   parent_id  Int?
   parent     Category?  @relation("nestedCategories", fields: [parent_id], references: [id])
   categories Category[] @relation("nestedCategories")
@@ -28,6 +29,7 @@ model Category {
 model Product {
   id               Int              @id @default(autoincrement())
   name             String           @unique
+  note             String?          @db.VarChar(1024)
   product_features ProductFeature[]
 
   @@map("products")
@@ -36,6 +38,7 @@ model Product {
 model Feature {
   id               Int              @id @default(autoincrement())
   name             String
+  note             String?          @db.VarChar(1024)
   category_id      Int
   categories       Category         @relation(fields: [category_id], references: [id])
   product_features ProductFeature[]
@@ -50,8 +53,8 @@ model ProductFeature {
   implementation_status  ImplementationStatus
   implementation_date    DateTime?
   implementation_version String?
-  dependencies           ProductFeature[]     @relation("dependencies", references: [id])
-  dependants             ProductFeature[]     @relation("dependencies", references: [id])
+  dependencies           ProductFeature[]     @relation("dependencies")
+  dependants             ProductFeature[]     @relation("dependencies")
   note                   String?              @db.VarChar(1024)
   products               Product              @relation(fields: [product_id], references: [id])
   features               Feature              @relation(fields: [feature_id], references: [id])
