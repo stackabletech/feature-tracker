@@ -10,7 +10,6 @@
 
 	import { productFeatures } from '$lib/stores';
 	import type { Feature, Product, ProductFeature } from '@prisma/client';
-	import ProductFeature from '../crud/cells/ProductFeature.svelte';
 
 	const dispatch = createEventDispatcher();
 	let editable: Writable<boolean> = getContext('editable');
