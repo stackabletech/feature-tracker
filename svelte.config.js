@@ -5,13 +5,7 @@ import preprocess from 'svelte-preprocess';
 const config = {
 	preprocess: preprocess(),
 	kit: {
-		adapter: vercel(),
-		vite: {
-			ssr: {
-				// external: ['.prisma/client/index-browser', '.prisma/client/index']
-				// noExternal: ['@prisma/client']
-			}
-		}
+		adapter: vercel()
 	}
 };
 
