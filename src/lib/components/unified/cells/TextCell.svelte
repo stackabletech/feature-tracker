@@ -48,4 +48,5 @@
 	</svelte:fragment>
 	<span on:click={toggleEditMode} class={$editable && 'cursor-cell'}>{value}</span>
 	<slot name="menu" slot="menu" />
+	<slot name="note" slot="note" />
 </svelte:component>

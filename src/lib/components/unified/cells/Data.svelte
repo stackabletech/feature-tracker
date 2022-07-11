@@ -16,6 +16,7 @@
 		<slot name="menu" slot="menu" />
 		<slot name="edit" slot="edit" />
 		<slot name="post" slot="post" />
+		<slot name="note" slot="note" />
 		<slot />
 	</Cell>
 </td>

@@ -50,4 +50,5 @@
 		/>
 		<CloseButton class="btn-outline btn-sm" on:click={cancel} />
 	</div>
+	<slot name="note" slot="note" />
 </Header>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { clickOutside } from '$lib/actions/clickOutside';
+	import { fade } from 'svelte/transition';
 
 	import CloseButton from '$lib/components/ui/CloseButton.svelte';
 	import MenuButton from '$lib/components/ui/MenuButton.svelte';
@@ -17,12 +18,24 @@
 	let toggleEditMode = () => {
 		editMode = false;
 	};
+
+	let showNote = () => {
+		note = true;
+	};
+
+	let hideNote = () => {
+		note = false;
+	};
+
+	let note = false;
 </script>
 
 <div
-	class="flex flex-row items-center transition-all w-full min-w-[12rem]
+	class="flex flex-row relative items-center transition-all w-full min-w-[12rem]
 		{centered ? 'justify-between' : 'justify-start'}
 		"
+	on:pointerenter={showNote}
+	on:pointerleave={hideNote}
 >
 	{#if showMenu}
 		<div class="flex flex-row items-between w-full" use:clickOutside on:clickoutside={toggleMenu}>
@@ -42,6 +55,9 @@
 			<slot name="edit" />
 		</div>
 	{:else}
+		{#if note}
+			<slot name="note" />
+		{/if}
 		<slot name="indent" />
 		<div class="w-8">
 			<slot name="pre" />
