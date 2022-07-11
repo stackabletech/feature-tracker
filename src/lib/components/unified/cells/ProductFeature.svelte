@@ -3,6 +3,7 @@
 	import AddButton from '$lib/components/ui/AddButton.svelte';
 	import DeleteButton from '$lib/components/ui/DeleteButton.svelte';
 	import InfoButton from '$lib/components/ui/InfoButton.svelte';
+	import HoverNote from '$lib/components/ui/HoverNote.svelte';
 
 	import { productFeatures, products } from '$lib/stores';
 
@@ -142,6 +143,11 @@
 			<InfoButton on:click={showInfo} />
 			<DeleteButton on:click={deleteProductFeature} />
 		</div>
+		<svelte:fragment slot="note">
+			{#if productFeature.note}
+				<HoverNote note={productFeature.note} />
+			{/if}
+		</svelte:fragment>
 	</Data>
 {:else if product && feature}
 	<Data centered>

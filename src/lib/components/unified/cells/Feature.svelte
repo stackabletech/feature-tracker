@@ -15,6 +15,7 @@
 
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
+	import HoverNote from '$lib/components/ui/HoverNote.svelte';
 
 	let editable: Writable<boolean> = getContext('editable');
 	let showMenu: boolean = false;
@@ -127,6 +128,11 @@
 			<AddSiblingButton on:click={startAdding} />
 			<DeleteButton on:click={deleteFeature} />
 		</div>
+		<svelte:fragment slot="note">
+			{#if feature.note}
+				<HoverNote note={feature.note} />
+			{/if}
+		</svelte:fragment>
 	</TextCell>
 {:else}
 	<Header sticky centered class="left-48">
