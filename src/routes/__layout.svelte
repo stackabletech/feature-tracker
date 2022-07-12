@@ -51,6 +51,12 @@
 	onMount(() => {
 		themeChange(false);
 	});
+
+	let mouse = { x: 0, y: 0 };
+	const setMouseCoords = (e: PointerEvent) => {
+		mouse.x = e.clientX;
+		mouse.y = e.clientY;
+	};
 </script>
 
 <div
@@ -113,6 +119,9 @@
 </div>
 
 <SvelteToast options={toastOptions} />
+
+<div id="mouse" class="fixed w-64" style="left: {mouse.x - 64}px; top: {mouse.y + 16}px;" />
+<svelte:window on:pointermove={setMouseCoords} />
 
 <style lang="postcss">
 	:global(._toastContainer) {
