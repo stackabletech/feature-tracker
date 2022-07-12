@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Text from './Text.svelte';
+	import TextArea from './TextArea.svelte';
 	import Date from './Date.svelte';
 	import SelectImplementationStatus from './SelectImplementationStatus.svelte';
 	import SelectCategory from './SelectCategory.svelte';
@@ -25,8 +26,10 @@
 	<SelectImplementationStatus bind:value {colspan} {rowspan} />
 {:else if type === 'implementation_date'}
 	<Date bind:value {colspan} {rowspan} />
-{:else if type === 'name' || type === 'implementation_version' || type === 'note'}
+{:else if type === 'name' || type === 'implementation_version'}
 	<Text bind:value {colspan} {rowspan} />
+{:else if type.toLowerCase() === 'note'}
+	<TextArea bind:value {colspan} {rowspan} />
 {:else}
 	<td class="text-base-300">not implemented</td>
 {/if}
