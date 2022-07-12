@@ -8,14 +8,17 @@
 	import AddSiblingButton from '$lib/components/ui/AddSiblingButton.svelte';
 	import AddButton from '$lib/components/ui/AddButton.svelte';
 	import DeleteButton from '$lib/components/ui/DeleteButton.svelte';
+	import InfoButton from '$lib/components/ui/InfoButton.svelte';
 
 	import Header from './Header.svelte';
 	import TextCell from './TextCell.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 
+	import FeatureModal from '$lib/components/ui/FeatureModal.svelte';
+	import HoverNote from '$lib/components/ui/HoverNote.svelte';
+
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
-	import HoverNote from '$lib/components/ui/HoverNote.svelte';
 
 	let editable: Writable<boolean> = getContext('editable');
 	let showMenu: boolean = false;
@@ -107,6 +110,10 @@
 	let adding: boolean = false;
 	const startAdding = () => (adding = true);
 	const endAdding = () => (adding = false);
+
+	let modal: boolean = false;
+	const showInfo = () => (modal = true);
+	const hideInfo = () => (modal = false);
 </script>
 
 {#if adding}
@@ -125,6 +132,7 @@
 		on:update={updateFeature}
 	>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
+			<InfoButton on:click={showInfo} />
 			<AddSiblingButton on:click={startAdding} />
 			<DeleteButton on:click={deleteFeature} />
 		</div>
@@ -140,4 +148,8 @@
 			<AddButton on:click={startAdding} />
 		{/if}
 	</Header>
+{/if}
+
+{#if modal}
+	<FeatureModal {feature} on:close={hideInfo} />
 {/if}

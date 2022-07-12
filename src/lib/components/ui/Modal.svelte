@@ -12,7 +12,7 @@
 	transition:fade={{ duration: 200 }}
 	on:click={close}
 >
-	<div class="card bg-base-100 shadow-xl min-w-[24rem]" on:click|stopPropagation>
+	<div class="card bg-base-200 shadow-xl min-w-[24rem]" on:click|stopPropagation>
 		<div class="card-body">
 			<header class="flex mb-4">
 				<div class="flex grow align-middle">
