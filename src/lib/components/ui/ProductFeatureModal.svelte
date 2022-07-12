@@ -13,7 +13,7 @@
 
 	const dispatch = createEventDispatcher();
 	let editable: Writable<boolean> = getContext('editable');
-	let editMode: boolean = false;
+	let editMode: boolean = $editable;
 
 	export let product: Product;
 	export let feature: Feature;
