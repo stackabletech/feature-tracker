@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { marked } from 'marked';
 	import Modal from './Modal.svelte';
 	import Cell from '../crud/cells/Cell.svelte';
 	import { InfoIcon, EditIcon, XCircleIcon, SaveIcon } from 'svelte-feather-icons';
@@ -112,7 +113,9 @@
 			{#if productFeature.note}
 				<div class="flex flex-row justify-between">
 					<p>Note:</p>
-					<p class="font-bold">{productFeature.note}</p>
+					<div class="prose prose-h1:text-lg prose-h2:text-sm">
+						{@html marked.parse(productFeature.note)}
+					</div>
 				</div>
 			{/if}
 		{/if}
