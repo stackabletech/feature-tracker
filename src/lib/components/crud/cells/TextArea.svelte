@@ -12,14 +12,14 @@
 </script>
 
 <td on:click={showModal} {colspan} {rowspan}>
-	<EditIcon />
+	<EditIcon size="20" class="mx-auto" />
 </td>
 
 {#if modal}
 	<Modal on:close={hideModal}>
 		<h3 class="font-bold" slot="title">Edit text:</h3>
 		<div class="form-control">
-			<textarea class="textarea" placeholder="edit text" bind:value />
+			<textarea class="textarea w-full h-64" placeholder="edit text" bind:value />
 			<label class="label" for="">
 				<span class="label-text-alt">
 					You can close this modal after editing. Don't forget to save your changes.
