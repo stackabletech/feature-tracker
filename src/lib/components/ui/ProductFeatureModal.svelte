@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { marked } from 'marked';
 	import Modal from './Modal.svelte';
 	import Cell from '../crud/cells/Cell.svelte';
 	import { InfoIcon, EditIcon, XCircleIcon, SaveIcon } from 'svelte-feather-icons';
@@ -79,42 +80,55 @@
 				</tr>
 			</table>
 		{:else}
-			<div class="flex flex-row justify-between">
-				<p>Product:</p>
-				<p class="font-bold">{product.name}</p>
-			</div>
-			<div class="flex flex-row justify-between">
-				<p>Feature:</p>
-				<p class="font-bold">{feature.name}</p>
-			</div>
-			<div class="flex flex-row justify-between">
-				<p>Status:</p>
-				<p class="flex font-bold">
-					<ImplementationIcon status={productFeature.implementation_status} class="m-auto mr-1" />
-					{productFeature.implementation_status}
-				</p>
-			</div>
-			<div class="flex flex-row justify-between">
-				<p>Date:</p>
-				<p class="font-bold">
-					{new Date(productFeature?.implementation_date).toLocaleDateString(undefined, {
-						month: 'short',
-						year: 'numeric'
-					})}
-				</p>
-			</div>
-			{#if productFeature.implementation_version}
-				<div class="flex flex-row justify-between">
-					<p>Version:</p>
-					<p class="font-bold">{productFeature.implementation_version}</p>
-				</div>
-			{/if}
-			{#if productFeature.note}
-				<div class="flex flex-row justify-between">
-					<p>Note:</p>
-					<p class="font-bold">{productFeature.note}</p>
-				</div>
-			{/if}
+			<table class="inline-table table-compact no-hover">
+				<tr>
+					<td>Product:</td>
+					<td>{product.name}</td>
+				</tr>
+				<tr>
+					<td>Feature:</td>
+					<td>{feature.name}</td>
+				</tr>
+				<tr>
+					<td> Status: </td>
+					<td>
+						<div class="flex flex-row">
+							<ImplementationIcon class="mr-2" status={productFeature.implementation_status} />
+							{productFeature.implementation_status}
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>Date:</td>
+					<td>
+						{new Date(productFeature?.implementation_date).toLocaleDateString(undefined, {
+							month: 'short',
+							year: 'numeric'
+						})}
+					</td>
+				</tr>
+				{#if productFeature.implementation_version}
+					<tr>
+						<td>Version:</td>
+						<td>{productFeature.implementation_version}</td>
+					</tr>
+				{/if}
+				{#if productFeature.note}
+					<tr>
+						<td>Note:</td>
+						<td />
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div
+								class="prose whitespace-normal prose-h1:text-lg prose-h2:text-sm bg-base-100 p-2 rounded-md max-h-72 overflow-y-auto"
+							>
+								{@html marked.parse(productFeature.note)}
+							</div>
+						</td>
+					</tr>
+				{/if}
+			</table>
 		{/if}
 		{#if $editable}
 			<div class="flex flex-row justify-end mt-4">

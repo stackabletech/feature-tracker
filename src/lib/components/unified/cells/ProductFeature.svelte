@@ -13,7 +13,7 @@
 	import ImplementationIcon from '$lib/components/ui/ImplementationIcon.svelte';
 	import ProductFeatureInput from '$lib/components/ui/ProductFeatureInput.svelte';
 	import type { Feature, Product, ProductFeature } from '$lib/prisma';
-	import { MinusIcon } from 'svelte-feather-icons';
+	import { MinusIcon, InfoIcon } from 'svelte-feather-icons';
 	import Data from './Data.svelte';
 
 	import type { Writable } from 'svelte/store';
@@ -146,6 +146,11 @@
 		<svelte:fragment slot="note">
 			{#if productFeature.note}
 				<HoverNote note={productFeature.note} />
+			{/if}
+		</svelte:fragment>
+		<svelte:fragment slot="post">
+			{#if productFeature.note}
+				<InfoIcon size="16" class="text-base opacity-25 group-hover:opacity-100" />
 			{/if}
 		</svelte:fragment>
 	</Data>
