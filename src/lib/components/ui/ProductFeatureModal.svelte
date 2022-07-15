@@ -92,7 +92,7 @@
 				<tr>
 					<td> Status: </td>
 					<td>
-						<div class="flex flex-row">
+						<div class="flex flex-row justify-center">
 							<ImplementationIcon class="mr-2" status={productFeature.implementation_status} />
 							{productFeature.implementation_status}
 						</div>
