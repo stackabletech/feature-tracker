@@ -19,6 +19,7 @@
 
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
+	import { InfoIcon } from 'svelte-feather-icons';
 
 	let editable: Writable<boolean> = getContext('editable');
 	let showMenu: boolean = false;
@@ -125,7 +126,7 @@
 {:else if feature}
 	<TextCell
 		sticky
-		class="left-48"
+		class="left-48 group"
 		bind:value={feature.name}
 		bind:showMenu
 		menu={$editable}
@@ -139,6 +140,11 @@
 		<svelte:fragment slot="note">
 			{#if feature.note}
 				<HoverNote note={feature.note} />
+			{/if}
+		</svelte:fragment>
+		<svelte:fragment slot="post">
+			{#if feature.note}
+				<InfoIcon size="16" class="text-base opacity-25 group-hover:opacity-100" />
 			{/if}
 		</svelte:fragment>
 	</TextCell>
