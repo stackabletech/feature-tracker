@@ -133,11 +133,13 @@
 {:else if productFeature}
 	<Data menu={$editable} centered>
 		<div
-			class="flex flex-row gap-2 items-center {$editable ? 'cursor-cell' : 'cursor-pointer'}"
+			class="flex flex-row gap-2 items-center justify-center {$editable
+				? 'cursor-cell'
+				: 'cursor-pointer'}"
 			on:click={handleClick}
 		>
 			<ImplementationIcon status={productFeature.implementation_status} />
-			<date>{date}</date>
+			<!-- <date>{date}</date> -->
 		</div>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<InfoButton on:click={showInfo} />
@@ -158,6 +160,8 @@
 	<Data centered>
 		{#if $editable}
 			<AddButton on:click={startAdding} />
+		{:else}
+			<span class="mx-auto text-base-300 group-hover:text-white">N/A</span>
 		{/if}
 	</Data>
 {:else}
