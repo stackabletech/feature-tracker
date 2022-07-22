@@ -1,4 +1,5 @@
 # Stackable Feature Tracker.
+
 for [Stackable](https://github.com/stackabletech).
 
 Local build:
@@ -10,5 +11,6 @@ add .env file in project root
 npm run dev -- --open
 ```
 
-Hosted dev version available [here](https://feature-tracker.vercel.app)
+---
 
+Hosted dev version available [here](https://feature-tracker.vercel.app)
