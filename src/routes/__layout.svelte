@@ -110,9 +110,9 @@
 				<!-- <li>
 					<a href="/roadmap" class="btn btn-ghost m-2">Roadmap View</a>
 				</li> -->
-				<li>
+				<!-- <li>
 					<a href="/techtree" class="btn btn-ghost m-2">Tech Tree View</a>
-				</li>
+				</li> -->
 			</ul>
 		</aside>
 	</div>
