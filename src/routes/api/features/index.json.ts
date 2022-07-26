@@ -8,7 +8,9 @@ import { prisma } from "$lib/prisma";
 // GET /features.json
 export const GET = async ({}) => {
     try {
-        const body = await prisma.feature.findMany();
+        const body = await prisma.feature.findMany({
+            orderBy: { name: 'asc' }
+        });
         return { body }
     } catch ({ code, message }) {
         return {

@@ -7,7 +7,9 @@ import { prisma } from "$lib/prisma";
 // GET /categories.json
 export const GET = async ({}) => {
     try {
-        const body = await prisma.category.findMany();
+        const body = await prisma.category.findMany({
+            orderBy: { name: 'asc' }
+        });
         return { body }
     } catch ({ code, message }) {
         return {
