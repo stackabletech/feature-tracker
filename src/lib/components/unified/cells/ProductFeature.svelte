@@ -18,6 +18,7 @@
 
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
+	import { ImplementationStatus } from '@prisma/client';
 
 	let editable: Writable<boolean> = getContext('editable');
 
@@ -161,7 +162,13 @@
 		{#if $editable}
 			<AddButton on:click={startAdding} />
 		{:else}
-			<span class="mx-auto text-base-300 group-hover:text-white">N/A</span>
+			<div
+				class="flex flex-row gap-2 items-center justify-center 'cursor-pointer'"
+				on:click={showInfo}
+			>
+				<ImplementationIcon status={ImplementationStatus.NOT_AVAILABLE} />
+				<!-- <date>{date}</date> -->
+			</div>
 		{/if}
 	</Data>
 {:else}

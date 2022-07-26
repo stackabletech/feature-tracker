@@ -10,7 +10,7 @@
 	import { info, danger } from '$lib/util/alert';
 
 	import { productFeatures } from '$lib/stores';
-	import type { Feature, Product, ProductFeature } from '@prisma/client';
+	import { Feature, ImplementationStatus, Product, ProductFeature } from '@prisma/client';
 
 	const dispatch = createEventDispatcher();
 	let editable: Writable<boolean> = getContext('editable');
@@ -18,7 +18,7 @@
 
 	export let product: Product;
 	export let feature: Feature;
-	export let productFeature: ProductFeature;
+	export let productFeature: ProductFeature = undefined;
 
 	let toggleEditMode = () => (editMode = !editMode);
 
@@ -44,12 +44,20 @@
 			danger(`${res.status}: ${res.statusText}`);
 		}
 	};
+
+	$: title = productFeature
+		? productFeature.implementation_status === ImplementationStatus.NOT_AVAILABLE
+			? 'N/A'
+			: productFeature.id
+		: 'N/A';
 </script>
 
 <Modal on:close>
 	<svelte:fragment slot="title">
 		<InfoIcon size="18" class="mr-2 my-auto" />
-		<h3 class="font-bold my-auto">Details: Product Feature #{productFeature.id}</h3>
+		<h3 class="font-bold my-auto">
+			Details: Product Feature #{title}
+		</h3>
 	</svelte:fragment>
 	<main class="flex flex-col gap-2">
 		{#if editMode}
@@ -62,22 +70,27 @@
 					<td>Feature:</td>
 					<Cell type="feature_id" bind:value={productFeature.feature_id} />
 				</tr>
-				<tr>
-					<td>Status:</td>
-					<Cell type="implementation_status" bind:value={productFeature.implementation_status} />
-				</tr>
-				<tr>
-					<td>Date:</td>
-					<Cell type="implementation_date" bind:value={productFeature.implementation_date} />
-				</tr>
-				<tr>
-					<td>Version:</td>
-					<Cell type="implementation_version" bind:value={productFeature.implementation_version} />
-				</tr>
-				<tr>
-					<td>Note:</td>
-					<Cell type="note" bind:value={productFeature.note} />
-				</tr>
+				{#if productFeature}
+					<tr>
+						<td>Status:</td>
+						<Cell type="implementation_status" bind:value={productFeature.implementation_status} />
+					</tr>
+					<tr>
+						<td>Date:</td>
+						<Cell type="implementation_date" bind:value={productFeature.implementation_date} />
+					</tr>
+					<tr>
+						<td>Version:</td>
+						<Cell
+							type="implementation_version"
+							bind:value={productFeature.implementation_version}
+						/>
+					</tr>
+					<tr>
+						<td>Note:</td>
+						<Cell type="note" bind:value={productFeature.note} />
+					</tr>
+				{/if}
 			</table>
 		{:else}
 			<table class="inline-table table-compact no-hover">
@@ -89,41 +102,55 @@
 					<td>Feature:</td>
 					<td>{feature.name}</td>
 				</tr>
-				<tr>
-					<td> Status: </td>
-					<td>
-						<div class="flex flex-row justify-center">
-							<ImplementationIcon class="mr-2" status={productFeature.implementation_status} />
-							{productFeature.implementation_status}
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>Date:</td>
-					<td>
-						{new Date(productFeature?.implementation_date).toLocaleDateString(undefined, {
-							month: 'short',
-							year: 'numeric'
-						})}
-					</td>
-				</tr>
-				{#if productFeature.implementation_version}
+				{#if productFeature}
 					<tr>
-						<td>Version:</td>
-						<td>{productFeature.implementation_version}</td>
+						<td> Status: </td>
+						<td>
+							<div class="flex flex-row justify-center">
+								<ImplementationIcon class="mr-2" status={productFeature.implementation_status} />
+								{productFeature.implementation_status}
+							</div>
+						</td>
 					</tr>
-				{/if}
-				{#if productFeature.note}
+					{#if productFeature.implementation_date}
+						<tr>
+							<td>Date:</td>
+							<td>
+								{new Date(productFeature?.implementation_date).toLocaleDateString(undefined, {
+									month: 'short',
+									year: 'numeric'
+								})}
+							</td>
+						</tr>
+					{/if}
+					{#if productFeature.implementation_version}
+						<tr>
+							<td>Version:</td>
+							<td>{productFeature.implementation_version}</td>
+						</tr>
+					{/if}
+					{#if productFeature.note}
+						<tr>
+							<td>Note:</td>
+							<td />
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div
+									class="prose whitespace-normal prose-h1:text-lg prose-h2:text-sm bg-base-100 p-2 rounded-md max-h-72 overflow-y-auto"
+								>
+									{@html marked.parse(productFeature.note)}
+								</div>
+							</td>
+						</tr>
+					{/if}
+				{:else}
 					<tr>
-						<td>Note:</td>
-						<td />
-					</tr>
-					<tr>
-						<td colspan="2">
-							<div
-								class="prose whitespace-normal prose-h1:text-lg prose-h2:text-sm bg-base-100 p-2 rounded-md max-h-72 overflow-y-auto"
-							>
-								{@html marked.parse(productFeature.note)}
+						<td> Status: </td>
+						<td>
+							<div class="flex flex-row justify-center">
+								<ImplementationIcon class="mr-2" status={ImplementationStatus.NOT_AVAILABLE} />
+								{ImplementationStatus.NOT_AVAILABLE}
 							</div>
 						</td>
 					</tr>
