@@ -18,6 +18,7 @@
 
 	let now = new Date(Date.now());
 	let date = value ? new Date(value) : new Date(now.getUTCFullYear(), now.getUTCMonth(), 1);
+	$: console.log(date);
 	value = date.toISOString();
 
 	$: month = date.getMonth() + 1;
@@ -26,7 +27,7 @@
 	$: inputValue = `${year}-${month}`;
 
 	let updateValue = (d: number) => {
-		date = new Date(date.setUTCMonth(date.getUTCMonth() + d));
+		date = new Date(date.setMonth(date.getMonth() + d));
 		value = date.toISOString();
 	};
 
