@@ -10,7 +10,7 @@
 	import { info, danger } from '$lib/util/alert';
 
 	import { productFeatures } from '$lib/stores';
-	import { Feature, ImplementationStatus, Product, ProductFeature } from '@prisma/client';
+	import type { Feature, Product, ProductFeature, ImplementationStatus } from '@prisma/client';
 
 	const dispatch = createEventDispatcher();
 	let editable: Writable<boolean> = getContext('editable');
@@ -46,7 +46,7 @@
 	};
 
 	$: title = productFeature
-		? productFeature.implementation_status === ImplementationStatus.NOT_AVAILABLE
+		? productFeature.implementation_status == 'NOT_AVAILABLE'
 			? 'N/A'
 			: productFeature.id
 		: 'N/A';
@@ -149,8 +149,8 @@
 						<td> Status: </td>
 						<td>
 							<div class="flex flex-row justify-center">
-								<ImplementationIcon class="mr-2" status={ImplementationStatus.NOT_AVAILABLE} />
-								{ImplementationStatus.NOT_AVAILABLE}
+								<ImplementationIcon class="mr-2" status={'NOT_AVAILABLE'} />
+								{'NOT_AVAILABLE'}
 							</div>
 						</td>
 					</tr>

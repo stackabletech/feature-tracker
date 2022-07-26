@@ -12,13 +12,12 @@
 	import ProductFeatureModal from '$lib/components/ui/ProductFeatureModal.svelte';
 	import ImplementationIcon from '$lib/components/ui/ImplementationIcon.svelte';
 	import ProductFeatureInput from '$lib/components/ui/ProductFeatureInput.svelte';
-	import type { Feature, Product, ProductFeature } from '$lib/prisma';
+	import type { Feature, Product, ProductFeature, ImplementationStatus } from '$lib/prisma';
 	import { MinusIcon, InfoIcon } from 'svelte-feather-icons';
 	import Data from './Data.svelte';
 
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
-	import { ImplementationStatus } from '@prisma/client';
 
 	let editable: Writable<boolean> = getContext('editable');
 
@@ -166,7 +165,7 @@
 				class="flex flex-row gap-2 items-center justify-center 'cursor-pointer'"
 				on:click={showInfo}
 			>
-				<ImplementationIcon status={ImplementationStatus.NOT_AVAILABLE} />
+				<ImplementationIcon status={'NOT_AVAILABLE'} />
 				<!-- <date>{date}</date> -->
 			</div>
 		{/if}
