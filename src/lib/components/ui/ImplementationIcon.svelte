@@ -23,4 +23,10 @@
 	<div class="p-1 rounded-full bg-success {classes}">
 		<CheckCircleIcon size="14" class="text-white" />
 	</div>
+{:else if status == 'NOT_AVAILABLE'}
+	<div
+		class="rounded-full bg-base-300 text-white w-[22px] h-[22px] text-[9px] leading-[22px] font-bold {classes}"
+	>
+		N/A
+	</div>
 {/if}
