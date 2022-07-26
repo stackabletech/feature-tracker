@@ -61,6 +61,7 @@
 			<option value={'PLANNED'}>Planned</option>
 			<option value={'IN_PROGRESS'}>In Progress</option>
 			<option value={'COMPLETED'}>Completed</option>
+			<option value={'NOT_AVAILABLE'}>Not Available</option>
 		</select>
 		<button class="btn btn-square btn-outline btn-xs" on:click={() => updateValue(-1)}>
 			<MinusIcon size="16" />

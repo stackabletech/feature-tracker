@@ -12,6 +12,7 @@ enum ImplementationStatus {
   PLANNED
   IN_PROGRESS
   COMPLETED
+  NOT_AVAILABLE
 }
 
 model Category {

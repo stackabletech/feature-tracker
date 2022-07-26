@@ -10,7 +10,8 @@
 		{ value: 'NOT_PLANNED', label: 'Not Planned' },
 		{ value: 'PLANNED', label: 'Planned' },
 		{ value: 'IN_PROGRESS', label: 'In Progress' },
-		{ value: 'COMPLETED', label: 'Completed' }
+		{ value: 'COMPLETED', label: 'Completed' },
+		{ value: 'NOT_AVAILABLE', label: 'Not Available' }
 	];
 </script>
 
