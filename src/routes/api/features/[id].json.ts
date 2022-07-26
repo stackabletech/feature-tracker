@@ -1,7 +1,7 @@
 import { prisma } from "$lib/prisma";
 
 // GET /features/:id.json
-export const get = async ({ params }) => {
+export const GET = async ({ params }) => {
     const id = parseInt(params.id);
     
     try {
@@ -18,7 +18,7 @@ export const get = async ({ params }) => {
 }
 
 // PATCH /features/:id.json
-export const patch = async ({ params, request }) => {
+export const PATCH = async ({ params, request }) => {
     const data = await request.json()
     const id = parseInt(params.id);
     data.category_id = data.category_id || null
@@ -38,7 +38,7 @@ export const patch = async ({ params, request }) => {
 }
 
 // DELETE /features/:id.json
-export const del = async ({ params }) => {
+export const DELETE = async ({ params }) => {
     const id = parseInt(params.id);
     
     try {
