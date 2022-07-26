@@ -25,7 +25,7 @@
 	</div>
 {:else if status == 'NOT_AVAILABLE'}
 	<div
-		class="rounded-full bg-base-300 text-white w-[22px] h-[22px] text-[9px] leading-[22px] font-bold {classes}"
+		class="rounded-full bg-base-300 text-white w-[22px] h-[22px] text-[9px] leading-[22px] font-bold flex align-middle justify-center {classes}"
 	>
 		N/A
 	</div>
