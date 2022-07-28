@@ -18,17 +18,16 @@
 
 	let now = new Date(Date.now());
 	let date = value ? new Date(value) : new Date(now.getUTCFullYear(), now.getUTCMonth(), 1);
-	$: console.log(date);
-	value = date.toISOString();
+	let checked = !(value === null);
 
 	$: month = date.getMonth() + 1;
 	$: year = date.getFullYear();
 
 	$: inputValue = `${year}-${month}`;
+	$: value = checked ? date.toISOString() : null;
 
 	let updateValue = (d: number) => {
 		date = new Date(date.setMonth(date.getMonth() + d));
-		value = date.toISOString();
 	};
 
 	let globalShortcuts = (e: KeyboardEvent) => {
@@ -64,18 +63,30 @@
 			<option value={'COMPLETED'}>Completed</option>
 			<option value={'NOT_AVAILABLE'}>Not Available</option>
 		</select>
-		<button class="btn btn-square btn-outline btn-xs" on:click={() => updateValue(-1)}>
+		<div class="tooltip" data-tip={checked ? 'uncheck to remove date' : 'check to add date'}>
+			<input type="checkbox" class="checkbox !rounded-none" bind:checked />
+		</div>
+		<button
+			class="btn btn-square btn-outline btn-xs"
+			on:click={() => updateValue(-1)}
+			disabled={!checked}
+		>
 			<MinusIcon size="16" />
 		</button>
 		<input
 			type="text"
-			class="input input-bordered input-xs w-20 text-center"
+			class="input input-bordered input-xs w-20 text-center disabled:text-white disabled:text-opacity-20"
 			placeholder="2022-01"
 			bind:this={input}
 			bind:value={inputValue}
 			on:keydown={handle}
+			disabled={!checked}
 		/>
-		<button class="btn btn-square btn-outline btn-xs" on:click={() => updateValue(+1)}>
+		<button
+			class="btn btn-square btn-outline btn-xs"
+			on:click={() => updateValue(+1)}
+			disabled={!checked}
+		>
 			<PlusIcon size="16" />
 		</button>
 		<button class="btn btn-square btn-outline btn-success btn-xs" on:click={submit}>

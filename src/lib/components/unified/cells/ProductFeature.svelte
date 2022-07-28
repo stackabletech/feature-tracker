@@ -26,7 +26,6 @@
 	export let productFeature: ProductFeature = undefined;
 
 	const addProductFeature = async (e: CustomEvent) => {
-		console.log('adding:', product.name, feature.name, e.detail);
 		const res = await fetch('/api/product_features.json', {
 			method: 'POST',
 			headers: {
@@ -83,9 +82,8 @@
 
 		if (res.ok) {
 			editMode = false;
-			productFeature.implementation_status =
-				e.detail.status || productFeature.implementation_status;
-			productFeature.implementation_date = e.detail.date || productFeature.implementation_date;
+			productFeature.implementation_status = e.detail.status;
+			productFeature.implementation_date = e.detail.date;
 			const json = await res.json();
 			info(`Updated product feature #${json.id}: ${json.product_id} ${json.feature_id}`);
 		} else {

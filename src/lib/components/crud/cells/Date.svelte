@@ -1,5 +1,6 @@
 <script lang="ts">
-	export let value: string = new Date(Date.now()).toISOString();
+	export let value = undefined;
+	let checked = !(value === null);
 
 	export let rowspan: number = 1;
 	export let colspan: number = 1;
@@ -9,10 +10,10 @@
 	$: year = date.getFullYear();
 
 	$: inputValue = `${year}-${month}`;
+	$: value = checked ? date.toISOString() : null;
 
 	let updateValue = (d: number) => {
 		date = new Date(date.setMonth(date.getMonth() + d));
-		value = date.toISOString();
 	};
 
 	let handleInput = (e: KeyboardEvent) => {
@@ -25,7 +26,24 @@
 </script>
 
 <td {colspan} {rowspan}>
-	<button class="btn btn-ghost focus:btn-outline" on:click={() => updateValue(-1)}>-</button>
-	<input type="text" class="input" bind:value={inputValue} on:keydown={handleInput} />
-	<button class="btn btn-ghost focus:btn-outline" on:click={() => updateValue(1)}>+</button>
+	<div class="tooltip" data-tip={checked ? 'uncheck to remove date' : 'check to add date'}>
+		<input type="checkbox" bind:checked class="checkbox" />
+	</div>
+	<button
+		class="btn btn-ghost focus:btn-outline"
+		on:click={() => updateValue(-1)}
+		disabled={!checked}>-</button
+	>
+	<input
+		type="text"
+		class="input"
+		bind:value={inputValue}
+		on:keydown={handleInput}
+		disabled={!checked}
+	/>
+	<button
+		class="btn btn-ghost focus:btn-outline"
+		on:click={() => updateValue(1)}
+		disabled={!checked}>+</button
+	>
 </td>
