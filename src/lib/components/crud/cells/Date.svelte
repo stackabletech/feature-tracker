@@ -26,24 +26,31 @@
 </script>
 
 <td {colspan} {rowspan}>
-	<div class="tooltip" data-tip={checked ? 'uncheck to remove date' : 'check to add date'}>
-		<input type="checkbox" bind:checked class="checkbox" />
+	<div class="flex flex-row items-center justify-center">
+		<div
+			class="tooltip w-6 h-6 mr-2 z-10"
+			data-tip={checked ? 'uncheck to remove date' : 'check to add date'}
+		>
+			<input type="checkbox" bind:checked class="checkbox" />
+		</div>
+		<div class="input-group">
+			<button
+				class="btn btn-ghost focus:btn-outline"
+				on:click={() => updateValue(-1)}
+				disabled={!checked}>-</button
+			>
+			<input
+				type="text"
+				class="input disabled:text-white disabled:text-opacity-20"
+				bind:value={inputValue}
+				on:keydown={handleInput}
+				disabled={!checked}
+			/>
+			<button
+				class="btn btn-ghost focus:btn-outline"
+				on:click={() => updateValue(1)}
+				disabled={!checked}>+</button
+			>
+		</div>
 	</div>
-	<button
-		class="btn btn-ghost focus:btn-outline"
-		on:click={() => updateValue(-1)}
-		disabled={!checked}>-</button
-	>
-	<input
-		type="text"
-		class="input"
-		bind:value={inputValue}
-		on:keydown={handleInput}
-		disabled={!checked}
-	/>
-	<button
-		class="btn btn-ghost focus:btn-outline"
-		on:click={() => updateValue(1)}
-		disabled={!checked}>+</button
-	>
 </td>
