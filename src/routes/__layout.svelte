@@ -123,6 +123,8 @@
 <div id="mouse" class="fixed w-64" style="left: {mouse.x - 64}px; top: {mouse.y + 16}px;" />
 <svelte:window on:pointermove={setMouseCoords} />
 
+<div id="modal" />
+
 <style lang="postcss">
 	:global(._toastContainer) {
 		@apply z-50;
