@@ -2,10 +2,45 @@ import type { Product, Category, Feature, ProductFeature } from "$lib/prisma";
 import { writable, derived } from "svelte/store";
 import type { Writable } from 'svelte/store';
 
+export interface Sortable<T> extends Writable<T> {
+    sort(sorting: "id" | "name", direction: "asc" | "desc"): void;
+}
+
+const sortable = (content: any[]) => {
+    const { subscribe, set, update } = writable(content);
+
+    const sort = (sorting: "id" | "name", direction: "asc" | "desc") => {
+        if (sorting === "id") {
+            update(c => c.sort((a, b) => {
+                    if (direction === "asc") {
+                        return a.id - b.id;
+                    } else {
+                        return b.id - a.id;
+                    }
+                }))
+        } else if (sorting === "name") {
+            update(c => c.sort((a, b) => {
+                if (direction === "asc") {
+                    return a.name.localeCompare(b.name);
+                } else {
+                    return b.name.localeCompare(a.name);
+                }
+            }));
+        }
+    }
+
+    return {
+        subscribe,
+        set,
+        update,
+        sort
+    };
+}
+
 // These stores contain the data in a flat array.
-export const categories: Writable<Category[]> = writable();
-export const products: Writable<Product[]> = writable();
-export const features: Writable<Feature[]> = writable();
+export const categories: Sortable<Category[]> = sortable([]);
+export const products: Sortable<Product[]> = sortable([]);
+export const features: Sortable<Feature[]> = sortable([]);
 export const productFeatures: Writable<ProductFeature[]> = writable();
 
 // Filter Stores
