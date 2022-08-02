@@ -2,9 +2,11 @@
 	import type { HierarchicalCategory } from '$lib/stores';
 	import { filteredFeatures, filteredProducts } from '$lib/stores';
 	import { getContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
 
 	import FeatureRow from './FeatureRow.svelte';
 	import Category from '../cells/Category.svelte';
+	import { children } from 'svelte/internal';
 
 	export let level: number = 0;
 	export let expanded: boolean = false;
@@ -32,7 +34,7 @@
 		{/if}
 	{/each}
 
-	{#each category.children as child}
+	{#each category.children as child (child.id)}
 		<svelte:self category={child} level={level + 1} {forcedOpen} />
 	{/each}
 {/if}
