@@ -12,10 +12,12 @@
 	import { setContext } from 'svelte';
 
 	import {
+		products,
+		categories,
+		features,
 		filteredProducts,
 		categoryTree,
 		categoryFilter,
-		featureFilter,
 		productFilter
 	} from '$lib/stores';
 
@@ -35,14 +37,21 @@
 			<th class="bg-transparent">
 				<DisplayButton on:click={showSettings} />
 			</th>
-			<FilterableHeader bind:filter={$productFilter} class="rounded-tl-lg left-96">
+			<FilterableHeader
+				bind:filter={$productFilter}
+				sortable={{ Products: products }}
+				class="rounded-tl-lg left-96"
+			>
 				Products
 			</FilterableHeader>
 			<th colspan={$filteredProducts.length - 1} class="bg-base-300" />
 		</tr>
 		<tr>
 			<!-- Feature Header -->
-			<FilterableHeader bind:filter={$categoryFilter}>
+			<FilterableHeader
+				bind:filter={$categoryFilter}
+				sortable={{ Categories: categories, Features: features }}
+			>
 				<ExpandButton slot="pre" double bind:expanded={expandAll} />
 				Features
 			</FilterableHeader>
@@ -54,9 +63,11 @@
 		</tr>
 	</svelte:fragment>
 	<svelte:fragment>
-		{#each $categoryTree as category (category.id)}
-			<CategoryRow {category} forcedOpen={expandAll} />
-		{/each}
+		{#if $categoryTree}
+			{#each $categoryTree as category (category.id)}
+				<CategoryRow {category} forcedOpen={expandAll} />
+			{/each}
+		{/if}
 	</svelte:fragment>
 </Table>
 
