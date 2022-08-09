@@ -141,6 +141,7 @@ export const categoriesWithParents = derived(categories, ($categories: Category[
             parent = $categories.find(c => c.id === parent.parent_id);
             parents.push(parent.name);
         }
+        parents.reverse()
         return { id: category.id, name: category.name, parents };
     })
 })
@@ -158,6 +159,7 @@ export const featuresWithParents = derived([categories, features], ([$categories
                 parents.push(parent.name);
             }
         }
+        parents.reverse()
         return { id: feature.id, name: feature.name, parents };
     }).sort((a, b) => a.name.localeCompare(b.name));
 })
