@@ -31,7 +31,7 @@
 	<div class="dropdown">
 		<div
 			tabindex="0"
-			class="btn btn-ghost border border-base-300 bg-base-100 flex flex-row justify-between m-1 w-64 group"
+			class="btn btn-ghost border border-base-300 bg-base-100 flex flex-row justify-between m-1 min-w-[16rem] group"
 		>
 			<span>
 				{title}
