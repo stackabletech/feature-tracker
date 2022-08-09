@@ -131,3 +131,33 @@ export const categoryTree = derived(filteredCategories, ($categories: Category[]
     buildTree($categories, base);
     return base
 })
+
+// This store contains a list of all categories with a recursive array of parents.
+export const categoriesWithParents = derived(categories, ($categories: Category[]) => {
+    return $categories.map(category => {
+        const parents = [];
+        let parent = category;
+        while (parent.parent_id) {
+            parent = $categories.find(c => c.id === parent.parent_id);
+            parents.push(parent.name);
+        }
+        return { id: category.id, name: category.name, parents };
+    })
+})
+
+// This store contains a list of all features with a recursive array of parents.
+export const featuresWithParents = derived([categories, features], ([$categories, $features]) => {
+    return $features.map(feature => {
+        const parents = [];
+        let parent: Category;
+        if (feature.category_id) {
+            parent = $categories.find(c => c.id === feature.category_id);
+            parents.push(parent.name);
+            while (parent.parent_id) {
+                parent = $categories.find(c => c.id === parent.parent_id);
+                parents.push(parent.name);
+            }
+        }
+        return { id: feature.id, name: feature.name, parents };
+    }).sort((a, b) => a.name.localeCompare(b.name));
+})
