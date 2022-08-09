@@ -26,3 +26,11 @@
 tr.category th, tr.category td {
     background-color: hsl(var(--b2));
 }
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
+}
