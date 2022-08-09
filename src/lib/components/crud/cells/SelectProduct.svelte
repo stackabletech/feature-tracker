@@ -24,6 +24,12 @@
 		title = e.detail.label;
 		value = e.detail.value;
 		console.log('selected', value);
+		cancel();
+	};
+
+	const cancel = () => {
+		filter = '';
+		input.blur();
 		menu.blur();
 	};
 </script>
@@ -42,10 +48,10 @@
 					class="opacity-0 w-0 h-0"
 					bind:value={filter}
 					bind:this={input}
-					on:blur={() => (filter = '')}
 					on:keydown={(e) => {
-						e.key === 'Escape' && input.blur();
+						e.key === 'Escape' && cancel();
 					}}
+					autocomplete="off"
 				/>
 			</span>
 			<ChevronDownIcon class="group-focus-within:rotate-180 transition-all" size="16" />
@@ -61,7 +67,7 @@
 			{#if optional}
 				<Option value={undefined} prefix="" label="No Category" on:select={(e) => select(e)} />
 			{/if}
-			{#each $filteredProducts as { id, name }}
+			{#each $filteredProducts as { id, name } (id)}
 				<Option value={id} prefix="#{id}" label={name} on:select={(e) => select(e)} />
 			{/each}
 		</ul>
