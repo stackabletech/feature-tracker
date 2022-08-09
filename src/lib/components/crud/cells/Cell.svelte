@@ -16,8 +16,10 @@
 
 {#if type === 'id'}
 	<td class="text-base-300">#{value}</td>
-{:else if type === 'category_id' || type === 'parent_id'}
+{:else if type === 'category_id'}
 	<SelectCategory bind:value {colspan} {rowspan} />
+{:else if type === 'parent_id'}
+	<SelectCategory bind:value {colspan} {rowspan} optional />
 {:else if type === 'product_id'}
 	<SelectProduct bind:value {colspan} {rowspan} />
 {:else if type === 'feature_id'}
