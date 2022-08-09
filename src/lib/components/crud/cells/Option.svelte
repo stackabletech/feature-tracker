@@ -13,9 +13,9 @@
 	<div class="cursor-pointer mb-1 group hover:bg-base-200 p-1 rounded-lg" on:click={select}>
 		{#if parents}
 			<div
-				class="flex flex-row justify-center text-2xs text-base-300 group-hover:text-base-content font-bold gap-2"
+				class="flex flex-row justify-center text-2xs text-base-300 group-hover:text-base-content font-bold gap-2 max-w-full overflow-x-auto no-scrollbar group-hover:overflow-visible"
 			>
-				{#each parents.reverse() as parent}
+				{#each parents as parent}
 					<span class="parent">{parent}</span>
 				{/each}
 			</div>
