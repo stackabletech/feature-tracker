@@ -1,23 +1,46 @@
 <script lang="ts">
-	import Select from './Select.svelte';
-	export let value: number | string;
-	export let colspan: number = 1;
-	export let rowspan: number = 1;
+	import { products } from '$lib/stores';
+	import Option from '$lib/components/crud/cells/Option.svelte';
+	import { ChevronDownIcon } from 'svelte-feather-icons';
 
-	async function getProducts() {
-		const res = await fetch('/api/products/minimal.json');
-		const products = await res.json();
-		return products.map(({ name, id }) => ({
-			label: `${name} (#${id})`,
-			value: id
-		}));
-	}
+	export let value: any = undefined;
+	export let colspan: number;
+	export let rowspan: number;
+	export let optional = false;
 
-	let promise = getProducts();
+	let title = $products.find((c) => c.id === value)?.name ?? 'Select Product';
+	let menu: HTMLElement;
+
+	let select = (e: CustomEvent) => {
+		title = e.detail.label;
+		value = e.detail.value;
+		console.log('selected', value);
+		menu.blur();
+	};
 </script>
 
-{#await promise}
-	<td {colspan} {rowspan}>{value}</td>
-{:then options}
-	<Select bind:value {options} optional />
-{/await}
+<td {colspan} {rowspan}>
+	<div class="dropdown">
+		<div
+			tabindex="0"
+			class="btn btn-ghost border border-base-300 bg-base-100 flex flex-row justify-between m-1 w-64 group"
+		>
+			<span>
+				{title}
+			</span>
+			<ChevronDownIcon class="group-focus-within:rotate-180 transition-all" size="16" />
+		</div>
+		<ul
+			tabindex="0"
+			class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-96"
+			bind:this={menu}
+		>
+			{#if optional}
+				<Option value={undefined} prefix="" label="No Category" on:select={(e) => select(e)} />
+			{/if}
+			{#each $products as { id, name }}
+				<Option value={id} prefix="#{id}" label={name} on:select={(e) => select(e)} />
+			{/each}
+		</ul>
+	</div>
+</td>
