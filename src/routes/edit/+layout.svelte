@@ -1,11 +1,3 @@
-<script context="module">
-	import { guard } from '$lib/util/guard';
-
-	export const load = async ({ fetch, session }) => {
-		return guard(fetch, session, {});
-	};
-</script>
-
 <script lang="ts">
 	import Tabs from '$lib/components/tabs/Tabs.svelte';
 
