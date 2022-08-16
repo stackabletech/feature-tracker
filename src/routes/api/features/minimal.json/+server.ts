@@ -1,3 +1,4 @@
+import { json } from '@sveltejs/kit';
 import { prisma } from "$lib/prisma";
 
 // GET /features/ids.json
@@ -7,11 +8,10 @@ export const GET = async ({}) => {
             select: { id: true, name: true },
             orderBy: { name: 'asc' }
         });
-        return { body }
+        return json(body);
     } catch ({ code, message }) {
-        return {
-            status: 500,
-            body: { code, message }
-        }
+        return json({ code, message }, {
+            status: 500
+        })
     }
 };
