@@ -1,16 +1,13 @@
-<script context="module" lang="ts">
-	export const load = async ({ fetch }) => {
-		const response = await fetch('/api/categories.json');
-		const categories = await response.json();
-		return { props: { categories } };
-	};
-</script>
-
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Code from '$lib/components/Code.svelte';
+
+	// FIXME check this import / generated types
+	import type { PageData } from './$types';
 	import type { Category } from '$lib/prisma';
-	export let categories: Category[];
+
+	export let data: PageData;
+	$: ({ categories } = data);
 </script>
 
 <Code filename="/api/categories.json">
