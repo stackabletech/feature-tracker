@@ -20,7 +20,7 @@ model Category {
   name       String
   note       String?    @db.VarChar(1024)
   parent_id  Int?
-  parent     Category?  @relation("nestedCategories", fields: [parent_id], references: [id])
+  parent     Category?  @relation("nestedCategories", fields: [parent_id], references: [id], onDelete: Cascade)
   categories Category[] @relation("nestedCategories")
   features   Feature[]
 
@@ -41,7 +41,7 @@ model Feature {
   name             String
   note             String?          @db.VarChar(1024)
   category_id      Int
-  categories       Category         @relation(fields: [category_id], references: [id])
+  categories       Category         @relation(fields: [category_id], references: [id], onDelete: Cascade)
   product_features ProductFeature[]
 
   @@map("features")
@@ -57,8 +57,8 @@ model ProductFeature {
   dependencies           ProductFeature[]     @relation("dependencies")
   dependants             ProductFeature[]     @relation("dependencies")
   note                   String?              @db.VarChar(1024)
-  products               Product              @relation(fields: [product_id], references: [id])
-  features               Feature              @relation(fields: [feature_id], references: [id])
+  products               Product              @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  features               Feature              @relation(fields: [feature_id], references: [id], onDelete: Cascade)
 
   @@map("product_features")
 }
