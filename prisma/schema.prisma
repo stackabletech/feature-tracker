@@ -60,5 +60,6 @@ model ProductFeature {
   products               Product              @relation(fields: [product_id], references: [id], onDelete: Cascade)
   features               Feature              @relation(fields: [feature_id], references: [id], onDelete: Cascade)
 
+  @@unique([product_id, feature_id])
   @@map("product_features")
 }
