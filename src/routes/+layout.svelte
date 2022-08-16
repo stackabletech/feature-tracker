@@ -1,26 +1,3 @@
-<script context="module" lang="ts">
-	export const load = async ({ fetch }) => {
-		const productResponse = await fetch('/api/products.json');
-		const categoryResponse = await fetch('/api/categories.json');
-		const featuresResponse = await fetch('/api/features.json');
-		const productFeaturesResponse = await fetch('/api/product_features.json');
-
-		const products = await productResponse.json();
-		const categories = await categoryResponse.json();
-		const features = await featuresResponse.json();
-		const productFeatures = await productFeaturesResponse.json();
-
-		return {
-			props: {
-				products,
-				categories,
-				features,
-				productFeatures
-			}
-		};
-	};
-</script>
-
 <script lang="ts">
 	import '/src/app.css';
 	import {
@@ -34,15 +11,13 @@
 	import { onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
 
-	export let products;
-	export let categories;
-	export let features;
-	export let productFeatures;
+	import type { LayoutData } from './$types';
+	export let data: LayoutData;
 
-	$productStore = products;
-	$categoryStore = categories;
-	$featureStore = features;
-	$productFeatureStore = productFeatures;
+	$: $productStore = data.products;
+	$: $categoryStore = data.categories;
+	$: $featureStore = data.features;
+	$: $productFeatureStore = data.productFeatures;
 
 	const toastOptions = {
 		pausable: true
