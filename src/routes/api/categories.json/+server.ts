@@ -1,3 +1,4 @@
+import { json } from '@sveltejs/kit';
 import { prisma } from "$lib/prisma";
 
 /*
@@ -10,12 +11,11 @@ export const GET = async ({}) => {
         const body = await prisma.category.findMany({
             orderBy: { name: 'asc' }
         });
-        return { body }
+        return json(body);
     } catch ({ code, message }) {
-        return {
-            status: 500,
-            body: { code, message }
-        }
+        return json({ code, message }, {
+            status: 500
+        })
     }
 };
 
@@ -26,11 +26,10 @@ export const POST = async ({ request }) => {
     
     try {
         const body = await prisma.category.create({ data });
-        return { body }
+        return json(body);
     } catch ({ code, message }) {
-        return {
-            status: 500,
-            body: { code, message }
-        }
+        return json({ code, message }, {
+            status: 500
+        })
     }
 }
