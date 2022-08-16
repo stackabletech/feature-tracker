@@ -1,3 +1,4 @@
+import { json } from '@sveltejs/kit';
 import { prisma } from "$lib/prisma";
 
 // GET /categories/:id.json
@@ -8,12 +9,11 @@ export const GET = async ({ params }) => {
         const body = await prisma.category.findUnique({
             where: { id }
         })
-        return { body }
+        return json(body);
     } catch ({ code, message }) {
-        return {
-            status: 500,
-            body: { code, message }
-        }
+        return json({ code, message }, {
+            status: 500
+        })
     }
 }
 
@@ -24,13 +24,12 @@ export const PATCH = async ({ params, request }) => {
     const id = parseInt(params.id);
 
     if (id === data.parent_id) {
-        return {
-            status: 400,
-            body: {
-                code: "INVALID_PARENT_ID",
-                message: "Cannot set parent_id to the same value as the category id"
-            }
-        }
+        return json({
+            code: "INVALID_PARENT_ID",
+            message: "Cannot set parent_id to the same value as the category id"
+        }, {
+            status: 400
+        })
     }
     
     try {
@@ -38,12 +37,11 @@ export const PATCH = async ({ params, request }) => {
             where: { id },
             data
         })
-        return { body }
+        return json(body);
     } catch ({ code, message }) {
-        return {
-            status: 500,
-            body: { code, message }
-        }
+        return json({ code, message }, {
+            status: 500
+        })
     }
 }
 
@@ -55,11 +53,10 @@ export const DELETE = async ({ params }) => {
         const body = await prisma.category.delete({
             where: { id }
         })
-        return { body }
+        return json(body);
     } catch ({ code, message }) {
-        return {
-            status: 500,
-            body: { code, message }
-        }
+        return json({ code, message }, {
+            status: 500
+        })
     }
 }
