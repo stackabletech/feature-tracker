@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Code from '$lib/components/Code.svelte';
-	// FIXME check this import / generated types
 	import type { PageData } from './$types';
-	import type { Product } from '$lib/prisma';
 
 	export let data: PageData;
 	$: ({ products } = data);
