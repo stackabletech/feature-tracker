@@ -1,3 +1,4 @@
+import { json } from '@sveltejs/kit';
 import { prisma } from "$lib/prisma";
 // import type { Product } from "@prisma/client";
 
@@ -11,26 +12,23 @@ export const GET = async ({params, request, url}) => {
         const body = await prisma.product.findMany({
             orderBy: { name: 'asc' }
         });
-        return { body }
+        return json(body);
     } catch ({ code, message }) {
-        return {
-            status: 500,
-            body: { code, message }
-        }
+        return json({ code, message }, {
+            status: 500
+        })
     }
 };
 
 // POST /products.json
 export const POST = async ({ request }) => {
     const data = await request.json()
-
     try {
         const body = await prisma.product.create({ data });
-        return { body }
+        return json(body);
     } catch ({ code, message }) {
-        return {
-            status: 500,
-            body: { code, message }
-        }
+        return json({ code, message }, {
+            status: 500
+        })
     }
 }
