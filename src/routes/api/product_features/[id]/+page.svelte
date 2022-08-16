@@ -1,15 +1,11 @@
-<script context="module" lang="ts">
-	export const load = async ({ params, fetch }) => {
-		const response = await fetch(`/api/product_features/${params.id}.json`);
-		const product_feature = await response.json();
-		return { props: { product_feature } };
-	};
-</script>
-
 <script lang="ts">
+	// FIXME check this import / generated types
+	import type { PageData } from './$types';
 	import type { ProductFeature } from '$lib/prisma';
 	import Code from '$lib/components/Code.svelte';
-	export let product_feature: ProductFeature;
+
+	export let data: PageData;
+	$: ({ product_feature } = data);
 </script>
 
 <Code>
