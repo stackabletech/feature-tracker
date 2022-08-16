@@ -14,7 +14,7 @@
 
 	export let category: HierarchicalCategory = undefined;
 	export let expanded: boolean = false;
-	export let forcedOpen: boolean = false;
+
 	export let level: number = 0;
 
 	import type { Writable } from 'svelte/store';
@@ -162,7 +162,7 @@
 				<GitCommitIcon size="18" class="text-base-300 first:ml-0.5" />
 			{/each}
 		</span>
-		<ExpandButton slot="pre" bind:expanded {forcedOpen} />
+		<ExpandButton slot="pre" bind:expanded />
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<AddSiblingButton on:click={() => startAdding(parent_id)} />
 			<AddChildButton on:click={() => startAdding(category.id)} />

@@ -1,16 +1,25 @@
 <script lang="ts">
 	import type { HierarchicalCategory } from '$lib/stores';
 	import { filteredFeatures, filteredProducts } from '$lib/stores';
-	import { getContext } from 'svelte';
+	import { afterUpdate, getContext, tick } from 'svelte';
 	import type { Writable } from 'svelte/store';
 
 	import FeatureRow from './FeatureRow.svelte';
 	import Category from '../cells/Category.svelte';
-	import { children } from 'svelte/internal';
 
 	export let level: number = 0;
 	export let expanded: boolean = false;
-	export let forcedOpen: boolean;
+	export let expandAll: boolean = false;
+
+	export const expand = () => {
+		expanded = true;
+		expandAll = true;
+	};
+
+	export const collapse = () => {
+		expanded = false;
+		expandAll = false;
+	};
 
 	export let category: HierarchicalCategory;
 	$: categoryFeatures = $filteredFeatures.filter((f) => f.category_id === category.id);
@@ -20,12 +29,12 @@
 
 <tr class="hover category">
 	<!-- First Column: Category Name -->
-	<Category {category} bind:expanded {forcedOpen} {level} />
+	<Category {category} bind:expanded {level} />
 	<!-- Rest Columns: ProductFeature Cells -->
 	<td colspan={$filteredProducts.length} />
 </tr>
 
-{#if expanded || forcedOpen}
+{#if expanded}
 	{#each categoryFeatures as feature, n}
 		<FeatureRow {category} {feature} />
 	{:else}
@@ -34,7 +43,7 @@
 		{/if}
 	{/each}
 
-	{#each category.children as child (child.id)}
-		<svelte:self category={child} level={level + 1} {forcedOpen} />
+	{#each category.children as child, n (child.id)}
+		<svelte:self category={child} level={level + 1} expanded={expandAll} {expandAll} />
 	{/each}
 {/if}
