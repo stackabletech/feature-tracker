@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ExpandButton from '$lib/components/ui/ExpandButton.svelte';
+	import ExpandAllButton from '$lib/components/ui/ExpandAllButton.svelte';
 	import FilterableHeader from '$lib/components/unified/cells/FilterableHeader.svelte';
 	import Product from '$lib/components/unified/cells/Product.svelte';
 	import CategoryRow from '$lib/components/unified/table/CategoryRow.svelte';
@@ -25,7 +25,6 @@
 		showUnusedProducts
 	} from '$lib/stores';
 
-	let expandAll: boolean = false;
 	let editable: Writable<boolean> = writable(false);
 
 	let settingsModal: boolean = false;
@@ -33,6 +32,16 @@
 	const hideSettings = () => (settingsModal = false);
 
 	setContext('editable', editable);
+
+	let rows: CategoryRow[] = [];
+
+	const expandAll = () => {
+		rows.forEach((row) => row.expand());
+	};
+
+	const collapseAll = () => {
+		rows.forEach((row) => row.collapse());
+	};
 </script>
 
 <Table>
@@ -40,6 +49,8 @@
 		<tr>
 			<th class="bg-transparent">
 				<DisplayButton on:click={showSettings} />
+				<ExpandAllButton on:click={expandAll} />
+				<ExpandAllButton on:click={collapseAll} collapse />
 			</th>
 			<FilterableHeader
 				bind:filter={$productFilter}
@@ -56,7 +67,6 @@
 				bind:filter={$categoryFilter}
 				sortable={{ Categories: categories, Features: features }}
 			>
-				<ExpandButton slot="pre" double bind:expanded={expandAll} />
 				Features
 			</FilterableHeader>
 
@@ -67,8 +77,8 @@
 		</tr>
 	</svelte:fragment>
 	<svelte:fragment>
-		{#each $categoryTree as category (category.id)}
-			<CategoryRow {category} forcedOpen={expandAll} />
+		{#each $categoryTree as category, i (category.id)}
+			<CategoryRow {category} bind:this={rows[i]} />
 		{/each}
 	</svelte:fragment>
 </Table>
