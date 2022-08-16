@@ -1,3 +1,4 @@
+import { json } from '@sveltejs/kit';
 import { prisma } from "$lib/prisma";
 
 // GET /products/:id.json
@@ -8,12 +9,11 @@ export const GET = async ({ params }) => {
         const body = await prisma.product.findUnique({
             where: { id }
         })
-        return { body }
+        return json(body);
     } catch ({ code, message }) {
-        return {
-            status: 500,
-            body: { code, message }
-        }
+        return json({ code, message }, {
+            status: 500
+        })
     }
 }
 
@@ -27,12 +27,11 @@ export const PATCH = async ({ params, request }) => {
             where: { id },
             data
         })
-        return { body }
+        return json(body);
     } catch ({ code, message }) {
-        return {
-            status: 500,
-            body: { code, message }
-        }
+        return json({ code, message }, {
+            status: 500
+        })
     }
 }
 
@@ -44,11 +43,10 @@ export const DELETE = async ({ params }) => {
         const body = await prisma.product.delete({
             where: { id }
         })
-        return { body }
+        return json(body);
     } catch ({ code, message }) {
-        return {
-            status: 500,
-            body: { code, message }
-        }
+        return json({ code, message }, {
+            status: 500
+        })
     }
 }
