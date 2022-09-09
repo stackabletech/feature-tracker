@@ -34,6 +34,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Stackable Feature Tracker</title>
+</svelte:head>
+
 <div
 	class="drawer drawer-mobile min-h-screen min-w-screen h-full w-full max-h-full max-w-full overflow-hidden"
 >
