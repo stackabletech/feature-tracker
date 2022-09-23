@@ -30,6 +30,8 @@
 	<Date bind:value {colspan} {rowspan} />
 {:else if type === 'name' || type === 'implementation_version'}
 	<Text bind:value {colspan} {rowspan} />
+{:else if type === 'date'}
+	<Date bind:value {colspan} {rowspan} />
 {:else if type.toLowerCase() === 'note'}
 	<TextArea bind:value {colspan} {rowspan} />
 {:else}

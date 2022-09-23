@@ -1,6 +1,8 @@
 <script lang="ts">
+	export let optional = true;
+
 	export let value = undefined;
-	let checked = !(value === null);
+	let checked = optional ? !(value === null) : true;
 
 	export let rowspan: number = 1;
 	export let colspan: number = 1;
@@ -27,12 +29,14 @@
 
 <td {colspan} {rowspan}>
 	<div class="flex flex-row items-center justify-center">
-		<div
-			class="tooltip w-6 h-6 mr-2 z-10"
-			data-tip={checked ? 'uncheck to remove date' : 'check to add date'}
-		>
-			<input type="checkbox" bind:checked class="checkbox" />
-		</div>
+		{#if optional}
+			<div
+				class="tooltip w-6 h-6 mr-2 z-10"
+				data-tip={checked ? 'uncheck to remove date' : 'check to add date'}
+			>
+				<input type="checkbox" bind:checked class="checkbox" />
+			</div>
+		{/if}
 		<div class="input-group">
 			<button
 				class="btn btn-ghost focus:btn-outline"
