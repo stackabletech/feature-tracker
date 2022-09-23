@@ -1,34 +1,20 @@
 <script lang="ts">
-	import { CheckIcon, MinusIcon, PlusIcon, XIcon } from 'svelte-feather-icons';
-	import { createEventDispatcher, onMount } from 'svelte';
+	import { releases } from '$lib/stores';
+	import { CheckIcon, XIcon } from 'svelte-feather-icons';
+	import { createEventDispatcher } from 'svelte';
 
 	let dispatch = createEventDispatcher();
 
 	const submit = () => {
-		dispatch('submit', { status, date: value });
+		dispatch('submit', { status, release });
 	};
 
 	const cancel = () => {
 		dispatch('cancel');
 	};
 
-	export let value = undefined;
+	export let release = undefined;
 	export let status = undefined;
-	export let input: HTMLElement = undefined;
-
-	let now = new Date(Date.now());
-	let date = value ? new Date(value) : new Date(now.getUTCFullYear(), now.getUTCMonth(), 1);
-	let checked = !(value === null);
-
-	$: month = date.getMonth() + 1;
-	$: year = date.getFullYear();
-
-	$: inputValue = `${year}-${month}`;
-	$: value = checked ? date.toISOString() : null;
-
-	let updateValue = (d: number) => {
-		date = new Date(date.setMonth(date.getMonth() + d));
-	};
 
 	let globalShortcuts = (e: KeyboardEvent) => {
 		if (e.key === 'Enter') {
@@ -40,63 +26,46 @@
 			cancel();
 		}
 	};
-
-	let handle = (e: KeyboardEvent) => {
-		if (e.key == 'Tab') return;
-
-		e.preventDefault();
-		(e.key == 'ArrowUp' || e.key == 'ArrowRight') && updateValue(1);
-		(e.key == 'ArrowDown' || e.key == 'ArrowLeft') && updateValue(-1);
-	};
-
-	onMount(() => input.focus());
 </script>
 
 <svelte:window on:keydown={globalShortcuts} />
 
 <div class="form-control max-w-full">
-	<label class="input-group input-group-sm max-w-full m-1">
-		<select class="select select-xs select-bordered" bind:value={status}>
-			<option value={'NOT_PLANNED'} selected>Not Planned</option>
-			<option value={'PLANNED'}>Planned</option>
-			<option value={'IN_PROGRESS'}>In Progress</option>
-			<option value={'COMPLETED'}>Completed</option>
-			<option value={'NOT_AVAILABLE'}>Not Available</option>
-		</select>
-		<div class="tooltip" data-tip={checked ? 'uncheck to remove date' : 'check to add date'}>
-			<input type="checkbox" class="checkbox !rounded-none" bind:checked />
+	<label class="max-w-full m-1 flex items-center flex-row">
+		<div class="tooltip" data-tip="Select Status">
+			<select
+				class="select select-xs select-bordered rounded-tl-md rounded-bl-md rounded-tr-none rounded-br-none"
+				bind:value={status}
+			>
+				<option value={'NOT_PLANNED'} selected>Not Planned</option>
+				<option value={'PLANNED'}>Planned</option>
+				<option value={'IN_PROGRESS'}>In Progress</option>
+				<option value={'COMPLETED'}>Completed</option>
+				<option value={'NOT_AVAILABLE'}>Not Available</option>
+			</select>
 		</div>
-		<button
-			class="btn btn-square btn-outline btn-xs"
-			on:click={() => updateValue(-1)}
-			disabled={!checked}
-		>
-			<MinusIcon size="16" />
-		</button>
-		<input
-			type="text"
-			class="input input-bordered input-xs w-20 text-center disabled:text-white disabled:text-opacity-20"
-			placeholder="2022-01"
-			bind:this={input}
-			bind:value={inputValue}
-			on:keydown={handle}
-			disabled={!checked}
-		/>
-		<button
-			class="btn btn-square btn-outline btn-xs"
-			on:click={() => updateValue(+1)}
-			disabled={!checked}
-		>
-			<PlusIcon size="16" />
-		</button>
-		<button class="btn btn-square btn-outline btn-success btn-xs" on:click={submit}>
-			<CheckIcon size="16" />
-		</button>
-		<button
-			class="btn btn-square btn-outline btn-error text-error-content btn-xs"
-			on:click={cancel}
-		>
-			<XIcon size="16" />
-		</button>
+		<div class="tooltip" data-tip="Select Release">
+			<select class="select select-xs select-bordered rounded-none m-0" bind:value={release}>
+				{#each $releases as release}
+					<option value={release.id} selected>{release.name}</option>
+				{/each}
+			</select>
+		</div>
+		<div class="tooltip" data-tip="Submit">
+			<button
+				class="btn btn-square btn-outline btn-success btn-xs m-0 rounded-none"
+				on:click={submit}
+			>
+				<CheckIcon size="16" />
+			</button>
+		</div>
+		<div class="tooltip" data-tip="Cancel">
+			<button
+				class="btn btn-square btn-outline btn-error text-error-content btn-xs rounded-l-none m-0 rounded-r-md"
+				on:click={cancel}
+			>
+				<XIcon size="16" />
+			</button>
+		</div>
 	</label>
 </div>
