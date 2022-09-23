@@ -67,7 +67,7 @@ model ProductFeature {
 model Release {
   id               Int              @id @default(autoincrement())
   name             String
-  date             DateTime
+  date             DateTime?
   released         Boolean
   product_features ProductFeature[]
 
