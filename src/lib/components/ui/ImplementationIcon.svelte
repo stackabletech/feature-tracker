@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { ImplementationStatus } from '$lib/prisma';
 	import { ActivityIcon, CalendarIcon, CheckCircleIcon, XCircleIcon } from 'svelte-feather-icons';
+
 	export let status: ImplementationStatus;
+	export let released: boolean = false;
 
 	let classes = '';
 	export { classes as class };
@@ -20,9 +22,15 @@
 		<ActivityIcon size="14" class="text-white" />
 	</div>
 {:else if status == 'COMPLETED'}
-	<div class="p-1 rounded-full bg-success {classes}">
-		<CheckCircleIcon size="14" class="text-white" />
-	</div>
+	{#if released}
+		<div class="p-1 rounded-full bg-success {classes}">
+			<CheckCircleIcon size="14" class="text-white" />
+		</div>
+	{:else}
+		<div class="p-1 rounded-full bg-white border border-success {classes}">
+			<CheckCircleIcon size="14" class="text-success" />
+		</div>
+	{/if}
 {:else if status == 'NOT_AVAILABLE'}
 	<div
 		class="rounded-full bg-base-300 text-white w-[22px] h-[22px] text-[9px] leading-[22px] font-bold flex align-middle justify-center {classes}"
