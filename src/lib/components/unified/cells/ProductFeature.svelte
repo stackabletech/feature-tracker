@@ -5,7 +5,7 @@
 	import InfoButton from '$lib/components/ui/InfoButton.svelte';
 	import HoverNote from '$lib/components/ui/HoverNote.svelte';
 
-	import { productFeatures, products } from '$lib/stores';
+	import { productFeatures, products, releases } from '$lib/stores';
 
 	import { info, danger } from '$lib/util/alert';
 
@@ -25,6 +25,8 @@
 	export let feature: Feature = undefined;
 	export let productFeature: ProductFeature = undefined;
 
+	$: released = $releases[productFeature?.release_id]?.released || false;
+
 	const addProductFeature = async (e: CustomEvent) => {
 		const res = await fetch('/api/product_features.json', {
 			method: 'POST',
@@ -35,7 +37,7 @@
 				product_id: product.id,
 				feature_id: feature.id,
 				implementation_status: e.detail.status,
-				implementation_date: e.detail.date
+				release_id: e.detail.release
 			})
 		});
 
@@ -76,14 +78,14 @@
 			},
 			body: JSON.stringify({
 				implementation_status: e.detail.status,
-				implementation_date: e.detail.date
+				release_id: e.detail.release
 			})
 		});
 
 		if (res.ok) {
 			editMode = false;
 			productFeature.implementation_status = e.detail.status;
-			productFeature.implementation_date = e.detail.date;
+			productFeature.release_id = e.detail.release;
 			const json = await res.json();
 			info(`Updated product feature #${json.id}: ${json.product_id} ${json.feature_id}`);
 		} else {
@@ -91,11 +93,6 @@
 			danger(`${code}: ${message}`);
 		}
 	};
-
-	$: date = new Date(productFeature?.implementation_date).toLocaleDateString(undefined, {
-		month: 'short',
-		year: 'numeric'
-	});
 
 	let adding: boolean = false;
 	const startAdding = () => (adding = true);
@@ -123,7 +120,7 @@
 			<ProductFeatureInput
 				on:submit={updateProductFeature}
 				on:cancel={toggleEditMode}
-				value={productFeature.implementation_date}
+				release={productFeature.release_id}
 				status={productFeature.implementation_status}
 			/>
 		</div>
@@ -136,7 +133,7 @@
 				: 'cursor-pointer'}"
 			on:click={handleClick}
 		>
-			<ImplementationIcon status={productFeature.implementation_status} />
+			<ImplementationIcon status={productFeature.implementation_status} {released} />
 			<!-- <date>{date}</date> -->
 		</div>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
@@ -160,11 +157,10 @@
 			<AddButton on:click={startAdding} />
 		{:else}
 			<div
-				class="flex flex-row gap-2 items-center justify-center 'cursor-pointer'"
+				class="flex flex-row gap-2 items-center justify-center cursor-pointer"
 				on:click={showInfo}
 			>
 				<ImplementationIcon status={'NOT_AVAILABLE'} />
-				<!-- <date>{date}</date> -->
 			</div>
 		{/if}
 	</Data>
