@@ -27,6 +27,6 @@ export const prisma = new pc()
 //     });
 // }
 
-import type { Category, Feature, Product, ProductFeature, ImplementationStatus } from '@prisma/client';
+import type { Category, Feature, Product, ProductFeature, ImplementationStatus, Release } from '@prisma/client';
 
-export type { Category, Feature, Product, ProductFeature, ImplementationStatus };
+export type { Category, Feature, Product, ProductFeature, ImplementationStatus, Release };
