@@ -2,10 +2,12 @@
 	import Text from './Text.svelte';
 	import TextArea from './TextArea.svelte';
 	import Date from './Date.svelte';
+	import Boolean from './Boolean.svelte';
 	import SelectImplementationStatus from './SelectImplementationStatus.svelte';
 	import SelectCategory from './SelectCategory.svelte';
 	import SelectProduct from './SelectProduct.svelte';
 	import SelectFeature from './SelectFeature.svelte';
+	import SelectRelease from './SelectRelease.svelte';
 
 	export let value: any;
 	export let type: string;
@@ -24,6 +26,8 @@
 	<SelectProduct bind:value {colspan} {rowspan} />
 {:else if type === 'feature_id'}
 	<SelectFeature bind:value {colspan} {rowspan} />
+{:else if type === 'release_id'}
+	<SelectRelease bind:value {colspan} {rowspan} />
 {:else if type === 'implementation_status'}
 	<SelectImplementationStatus bind:value {colspan} {rowspan} />
 {:else if type === 'implementation_date'}
@@ -32,6 +36,8 @@
 	<Text bind:value {colspan} {rowspan} />
 {:else if type === 'date'}
 	<Date bind:value {colspan} {rowspan} />
+{:else if type === 'released'}
+	<Boolean bind:value {colspan} {rowspan} labelFalse="Unreleased" labelTrue="Released" />
 {:else if type.toLowerCase() === 'note'}
 	<TextArea bind:value {colspan} {rowspan} />
 {:else}
