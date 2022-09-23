@@ -10,7 +10,7 @@
 <Code filename="/api/releases.json">
 	<pre>[</pre>
 	{#each releases as release}
-		<pre class="cursor-pointer" on:click={() => goto(`products/${release.id}`)}>
+		<pre class="cursor-pointer" on:click={() => goto(`releases/${release.id}`)}>
 			{JSON.stringify(release, null, 2)},
 		</pre>
 	{/each}
