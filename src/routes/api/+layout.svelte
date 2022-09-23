@@ -17,6 +17,10 @@
 		{
 			name: 'Product Features',
 			url: '/api/product_features'
+		},
+		{
+			name: 'Releases',
+			url: '/api/releases'
 		}
 	];
 </script>
