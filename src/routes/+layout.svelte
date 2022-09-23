@@ -1,11 +1,6 @@
 <script lang="ts">
 	import '/src/app.css';
-	import {
-		categories as categoryStore,
-		products as productStore,
-		features as featureStore,
-		productFeatures as productFeatureStore
-	} from '$lib/stores';
+	import { categories, products, features, productFeatures, releases } from '$lib/stores';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import { FeatherIcon, LockIcon, MenuIcon } from 'svelte-feather-icons';
 	import { onMount } from 'svelte';
@@ -14,10 +9,11 @@
 	import type { LayoutData } from './$types';
 	export let data: LayoutData;
 
-	$: $productStore = data.products;
-	$: $categoryStore = data.categories;
-	$: $featureStore = data.features;
-	$: $productFeatureStore = data.productFeatures;
+	$: $products = data.products;
+	$: $categories = data.categories;
+	$: $features = data.features;
+	$: $productFeatures = data.productFeatures;
+	$: $releases = data.releases;
 
 	const toastOptions = {
 		pausable: true
