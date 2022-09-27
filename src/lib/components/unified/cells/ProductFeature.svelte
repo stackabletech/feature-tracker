@@ -25,7 +25,8 @@
 	export let feature: Feature = undefined;
 	export let productFeature: ProductFeature = undefined;
 
-	$: released = $releases[productFeature?.release_id]?.released || false;
+	$: released =
+		productFeature && $releases.find((r) => r.id === productFeature.release_id)?.released;
 
 	const addProductFeature = async (e: CustomEvent) => {
 		const res = await fetch('/api/product_features.json', {
@@ -134,7 +135,7 @@
 			on:click={handleClick}
 		>
 			<ImplementationIcon status={productFeature.implementation_status} {released} />
-			<!-- <date>{date}</date> -->
+			<span>{productFeature.release_id}</span>
 		</div>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<InfoButton on:click={showInfo} />
