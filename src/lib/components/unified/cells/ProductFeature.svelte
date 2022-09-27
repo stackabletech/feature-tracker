@@ -5,15 +5,17 @@
 	import InfoButton from '$lib/components/ui/InfoButton.svelte';
 	import HoverNote from '$lib/components/ui/HoverNote.svelte';
 
-	import { productFeatures, products, releases } from '$lib/stores';
+	import { productFeatures, products, releases, showUnreleasedProductFeatures } from '$lib/stores';
 
 	import { info, danger } from '$lib/util/alert';
 
 	import ProductFeatureModal from '$lib/components/ui/ProductFeatureModal.svelte';
 	import ImplementationIcon from '$lib/components/ui/ImplementationIcon.svelte';
 	import ProductFeatureInput from '$lib/components/ui/ProductFeatureInput.svelte';
-	import type { Feature, Product, ProductFeature, ImplementationStatus } from '$lib/prisma';
+
+	import type { Feature, Product, ProductFeature } from '$lib/prisma';
 	import { MinusIcon, InfoIcon } from 'svelte-feather-icons';
+
 	import Data from './Data.svelte';
 
 	import type { Writable } from 'svelte/store';
@@ -125,7 +127,7 @@
 			/>
 		</div>
 	</th>
-{:else if productFeature}
+{:else if productFeature && ($showUnreleasedProductFeatures || release.released)}
 	<Data menu={$editable} centered>
 		<div
 			class="flex flex-row gap-2 items-center justify-center {$editable
@@ -149,7 +151,7 @@
 						{release.name}
 					</span>
 					{#if release.date}
-						{release.released ? 'has been' : 'will be'}
+						{release.released ? 'was' : 'will be'}
 						released on {new Date(release.date).toLocaleDateString()}
 					{:else}
 						is {release.released ? 'released' : 'not yet released'}
@@ -163,7 +165,7 @@
 			{/if}
 		</svelte:fragment>
 	</Data>
-{:else if product && feature}
+{:else if product && feature && !release}
 	<Data centered>
 		{#if $editable}
 			<AddButton on:click={startAdding} />
