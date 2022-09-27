@@ -8,6 +8,7 @@
 	import DeleteButton from '$lib/components/ui/DeleteButton.svelte';
 	import TextCell from './TextCell.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import HoverNote from '$lib/components/ui/HoverNote.svelte';
 
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
@@ -115,5 +116,10 @@
 			<DeleteButton on:click={deleteProduct} />
 			<AddSiblingButton on:click={startAdding} horizontal />
 		</div>
+		<svelte:fragment slot="note">
+			{#if product.note}
+				<HoverNote note={product.note} />
+			{/if}
+		</svelte:fragment>
 	</TextCell>
 {/if}

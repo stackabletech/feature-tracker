@@ -10,6 +10,8 @@
 	import ExpandButton from '$lib/components/ui/ExpandButton.svelte';
 	import TextCell from './TextCell.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import HoverNote from '$lib/components/ui/HoverNote.svelte';
+
 	import { GitCommitIcon } from 'svelte-feather-icons';
 
 	export let category: HierarchicalCategory = undefined;
@@ -168,5 +170,10 @@
 			<AddChildButton on:click={() => startAdding(category.id)} />
 			<DeleteButton on:click={() => deleteCategory(category)} />
 		</div>
+		<svelte:fragment slot="note">
+			{#if category.note}
+				<HoverNote note={category.note} />
+			{/if}
+		</svelte:fragment>
 	</TextCell>
 {/if}
