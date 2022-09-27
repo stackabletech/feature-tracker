@@ -1,7 +1,12 @@
 <script>
 	import Modal from './Modal.svelte';
 
-	import { showUnusedCategories, showUnusedFeatures, showUnusedProducts } from '$lib/stores';
+	import {
+		showUnusedCategories,
+		showUnusedFeatures,
+		showUnusedProducts,
+		showUnreleasedProductFeatures
+	} from '$lib/stores';
 </script>
 
 <Modal on:close>
@@ -19,5 +24,10 @@
 	<label class="label cursor-pointer">
 		<input type="checkbox" bind:checked={$showUnusedProducts} class="toggle" />
 		<span class="label-text"> Show empty products </span>
+	</label>
+
+	<label class="label cursor-pointer">
+		<input type="checkbox" bind:checked={$showUnreleasedProductFeatures} class="toggle" />
+		<span class="label-text"> Show unreleased product features. </span>
 	</label>
 </Modal>

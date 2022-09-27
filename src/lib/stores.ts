@@ -52,6 +52,7 @@ export const featureFilter: Writable<string> = writable();
 export const showUnusedCategories: Writable<boolean> = writable(true);
 export const showUnusedProducts: Writable<boolean> = writable(true);
 export const showUnusedFeatures: Writable<boolean> = writable(true);
+export const showUnreleasedProductFeatures: Writable<boolean> = writable(true);
 
 // Filtered stores
 export const stringFilter = (store: any, filter: string) => {
