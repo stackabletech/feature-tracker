@@ -25,8 +25,7 @@
 	export let feature: Feature = undefined;
 	export let productFeature: ProductFeature = undefined;
 
-	$: released =
-		productFeature && $releases.find((r) => r.id === productFeature.release_id)?.released;
+	$: release = productFeature && $releases.find((r) => r.id === productFeature.release_id);
 
 	const addProductFeature = async (e: CustomEvent) => {
 		const res = await fetch('/api/product_features.json', {
@@ -134,17 +133,29 @@
 				: 'cursor-pointer'}"
 			on:click={handleClick}
 		>
-			<ImplementationIcon status={productFeature.implementation_status} {released} />
-			<span>{productFeature.release_id}</span>
+			<ImplementationIcon
+				status={productFeature.implementation_status}
+				released={release.released}
+			/>
 		</div>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<InfoButton on:click={showInfo} />
 			<DeleteButton on:click={deleteProductFeature} />
 		</div>
 		<svelte:fragment slot="note">
-			{#if productFeature.note}
-				<HoverNote note={productFeature.note} />
-			{/if}
+			<HoverNote note={productFeature.note}>
+				<svelte:fragment slot="pre">
+					<span class="font-bold">
+						{release.name}
+					</span>
+					{#if release.date}
+						{release.released ? 'has been' : 'will be'}
+						released on {new Date(release.date).toLocaleDateString()}
+					{:else}
+						is {release.released ? 'released' : 'not yet released'}
+					{/if}
+				</svelte:fragment>
+			</HoverNote>
 		</svelte:fragment>
 		<svelte:fragment slot="post">
 			{#if productFeature.note}
