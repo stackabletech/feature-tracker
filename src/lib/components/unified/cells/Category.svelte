@@ -13,6 +13,7 @@
 	import HoverNote from '$lib/components/ui/HoverNote.svelte';
 
 	import { GitCommitIcon } from 'svelte-feather-icons';
+	import { InfoIcon } from 'svelte-feather-icons';
 
 	export let category: HierarchicalCategory = undefined;
 	export let expanded: boolean = false;
@@ -173,6 +174,11 @@
 		<svelte:fragment slot="note">
 			{#if category.note}
 				<HoverNote note={category.note} />
+			{/if}
+		</svelte:fragment>
+		<svelte:fragment slot="post">
+			{#if category.note}
+				<InfoIcon size="16" class="text-base opacity-25 group-hover:opacity-100" />
 			{/if}
 		</svelte:fragment>
 	</TextCell>
