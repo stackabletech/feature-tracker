@@ -27,7 +27,7 @@
 {:else if type === 'feature_id'}
 	<SelectFeature bind:value {colspan} {rowspan} />
 {:else if type === 'release_id'}
-	<SelectRelease bind:value {colspan} {rowspan} />
+	<SelectRelease bind:value {colspan} {rowspan} optional />
 {:else if type === 'implementation_status'}
 	<SelectImplementationStatus bind:value {colspan} {rowspan} />
 {:else if type === 'implementation_date'}

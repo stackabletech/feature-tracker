@@ -65,7 +65,7 @@
 				{filter === '' ? 'start typing to filter' : filter}
 			</span>
 			{#if optional}
-				<Option value={undefined} prefix="" label="No Category" on:select={(e) => select(e)} />
+				<Option value={null} prefix="" label="No Category" on:select={(e) => select(e)} />
 			{/if}
 			{#each $filteredProducts as { id, name } (id)}
 				<Option value={id} prefix="#{id}" label={name} on:select={(e) => select(e)} />

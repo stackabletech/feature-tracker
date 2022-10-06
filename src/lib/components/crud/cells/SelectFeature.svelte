@@ -65,7 +65,7 @@
 				{filter === '' ? 'start typing to filter' : filter}
 			</span>
 			{#if optional}
-				<Option value={undefined} prefix="" label="No Feature" on:select={(e) => select(e)} />
+				<Option value={null} prefix="" label="No Feature" on:select={(e) => select(e)} />
 			{/if}
 			{#each $filteredFeaturesWithParents as { id, name, parents } (id)}
 				<Option value={id} prefix="#{id}" label={name} {parents} on:select={(e) => select(e)} />

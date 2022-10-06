@@ -9,7 +9,7 @@
 <td {colspan} {rowspan}>
 	<select id="select" name="select" class="select w-full" bind:value>
 		{#if optional}
-			<option value="" />
+			<option value={null} />
 		{/if}
 		{#each options as { value, label }}
 			<option {value}>{label}</option>

@@ -45,7 +45,7 @@
 		>
 			{#if optional}
 				<Option
-					value={undefined}
+					value={null}
 					prefix=""
 					label="No Implementation Status"
 					on:select={(e) => select(e)}

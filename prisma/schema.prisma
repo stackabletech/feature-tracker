@@ -52,8 +52,8 @@ model ProductFeature {
   product_id            Int
   feature_id            Int
   implementation_status ImplementationStatus
-  release_id            Int
-  release               Release              @relation(fields: [release_id], references: [id], onDelete: Cascade)
+  release_id            Int?
+  release               Release?             @relation(fields: [release_id], references: [id], onDelete: Cascade)
   dependencies          ProductFeature[]     @relation("dependencies")
   dependants            ProductFeature[]     @relation("dependencies")
   note                  String?              @db.VarChar(1024)
