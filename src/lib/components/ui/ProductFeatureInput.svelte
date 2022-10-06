@@ -46,6 +46,7 @@
 		</div>
 		<div class="tooltip" data-tip="Select Release">
 			<select class="select select-xs select-bordered rounded-none m-0" bind:value={release}>
+				<option value={null}>No Release</option>
 				{#each $releases as release}
 					<option value={release.id} selected>{release.name}</option>
 				{/each}

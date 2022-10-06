@@ -127,7 +127,7 @@
 			/>
 		</div>
 	</th>
-{:else if productFeature && ($showUnreleasedProductFeatures || release.released)}
+{:else if productFeature && ($showUnreleasedProductFeatures || release?.released)}
 	<Data menu={$editable} centered>
 		<div
 			class="flex flex-row gap-2 items-center justify-center {$editable
@@ -137,7 +137,7 @@
 		>
 			<ImplementationIcon
 				status={productFeature.implementation_status}
-				released={release.released}
+				released={release?.released}
 			/>
 		</div>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
@@ -148,13 +148,15 @@
 			<HoverNote note={productFeature.note}>
 				<svelte:fragment slot="pre">
 					<span class="font-bold">
-						{release.name}
+						{release?.name || 'No Release'}
 					</span>
-					{#if release.date}
-						{release.released ? 'was' : 'will be'}
-						released on {new Date(release.date).toLocaleDateString()}
-					{:else}
-						is {release.released ? 'released' : 'not yet released'}
+					{#if release}
+						{#if release.date}
+							{release.released ? 'was' : 'will be'}
+							released on {new Date(release.date).toLocaleDateString()}
+						{:else}
+							is {release.released ? 'released' : 'not yet released'}
+						{/if}
 					{/if}
 				</svelte:fragment>
 			</HoverNote>

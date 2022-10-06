@@ -109,9 +109,11 @@
 					</tr>
 					<tr>
 						<td>Release:</td>
-						<td>{release.name} ({release.released ? 'released' : 'unreleased'})</td>
+						<td
+							>{release?.name || 'No release'} ({release?.released ? 'released' : 'unreleased'})</td
+						>
 					</tr>
-					{#if release.date}
+					{#if release?.date}
 						<tr>
 							<td>{release.released ? 'Released on:' : 'Expected release date:'}</td>
 							<td>{new Date(release.date).toLocaleDateString()}</td>
