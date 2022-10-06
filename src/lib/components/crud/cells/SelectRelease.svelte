@@ -41,6 +41,7 @@
 			on:click={() => input.focus()}
 		>
 			<span>
+				{#if value}<span class="text-primary">#{value}:</span>{/if}
 				{title}
 				<input
 					type="text"
@@ -60,7 +61,7 @@
 			class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-96"
 			bind:this={menu}
 		>
-			<span class="text-center text-base-300">
+			<span class="text-center text-primary">
 				{filter === '' ? 'start typing to filter' : filter}
 			</span>
 			{#if optional}
