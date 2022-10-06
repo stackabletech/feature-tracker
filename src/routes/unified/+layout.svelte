@@ -1,3 +1,3 @@
-<div class="grow overflow-auto flex flex-col">
+<div class="grow flex flex-col">
 	<slot />
 </div>
