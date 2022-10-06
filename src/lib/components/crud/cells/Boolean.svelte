@@ -9,7 +9,7 @@
 
 <td {colspan} {rowspan}>
 	<div class="flex flex-row items-center justify-center">
-		<div class="tooltip w-6 h-6 mr-2 z-10" data-tip={value ? labelTrue : labelFalse}>
+		<div class="tooltip w-6 h-6 mr-2" data-tip={value ? labelTrue : labelFalse}>
 			<input type="checkbox" bind:checked={value} class="checkbox" />
 		</div>
 	</div>

@@ -37,11 +37,10 @@
 {#if expanded}
 	{#each categoryFeatures as feature, n}
 		<FeatureRow {category} {feature} />
-	{:else}
-		{#if $editable}
-			<FeatureRow {category} />
-		{/if}
 	{/each}
+	{#if $editable}
+		<FeatureRow {category} />
+	{/if}
 
 	{#each category.children as child, n (child.id)}
 		<svelte:self category={child} level={level + 1} expanded={expandAll} {expandAll} />

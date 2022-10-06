@@ -2,6 +2,8 @@
 	import { CheckIcon, XIcon } from 'svelte-feather-icons';
 	import { createEventDispatcher, onMount } from 'svelte';
 
+	export let placeholder = 'Enter feature name';
+
 	let dispatch = createEventDispatcher();
 	let input: HTMLInputElement;
 
@@ -39,7 +41,7 @@
 			name="input"
 			id="input"
 			class="input input-bordered input-sm"
-			placeholder="Enter feature name"
+			{placeholder}
 			on:focus={() => (active = true)}
 			on:blur={() => (active = false)}
 			on:keydown={handle}

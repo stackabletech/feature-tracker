@@ -134,7 +134,7 @@
 	>
 		<div class="flex flex-row justify-center gap-1" slot="menu">
 			<InfoButton on:click={showInfo} />
-			<AddSiblingButton on:click={startAdding} />
+			<AddSiblingButton on:click={startAdding} tip="add sibling feature" />
 			<DeleteButton on:click={deleteFeature} />
 		</div>
 		<svelte:fragment slot="note">
@@ -151,7 +151,7 @@
 {:else}
 	<Header sticky centered class="left-48">
 		{#if $editable}
-			<AddButton on:click={startAdding} />
+			<AddButton on:click={startAdding} tip="add feature" />
 		{/if}
 	</Header>
 {/if}

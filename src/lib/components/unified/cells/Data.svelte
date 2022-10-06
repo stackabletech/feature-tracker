@@ -9,7 +9,7 @@
 	export let centered: boolean = false;
 </script>
 
-<td class="group {sticky && 'sticky z-10'}">
+<td class="group {sticky && 'sticky'}">
 	<Cell {menu} bind:editMode {centered} bind:showMenu>
 		<slot name="indent" slot="indent" />
 		<slot name="pre" slot="pre" />

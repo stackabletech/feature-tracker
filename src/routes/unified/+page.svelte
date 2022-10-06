@@ -47,7 +47,7 @@
 <Table>
 	<svelte:fragment slot="head">
 		<tr>
-			<th class="bg-transparent">
+			<th class="bg-base-100">
 				<DisplayButton on:click={showSettings} />
 				<ExpandAllButton on:click={expandAll} />
 				<ExpandAllButton on:click={collapseAll} collapse />

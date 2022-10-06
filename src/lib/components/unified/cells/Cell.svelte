@@ -59,7 +59,7 @@
 		<div class="w-8">
 			<slot name="pre" />
 		</div>
-		<div class="mx-2 truncate grow {centered && 'text-center'}">
+		<div class="mx-2 grow {centered && 'text-center'}">
 			<slot />
 		</div>
 		<div class="w-8">

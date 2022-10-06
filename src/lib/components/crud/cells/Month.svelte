@@ -31,7 +31,7 @@
 	<div class="flex flex-row items-center justify-center">
 		{#if optional}
 			<div
-				class="tooltip w-6 h-6 mr-2 z-10"
+				class="tooltip w-6 h-6 mr-2"
 				data-tip={checked ? 'uncheck to remove date' : 'check to add date'}
 			>
 				<input type="checkbox" bind:checked class="checkbox" />

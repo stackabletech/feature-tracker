@@ -8,11 +8,12 @@
 	export let disabled: boolean = false;
 </script>
 
-<button
-	title={tip}
-	class="btn btn-xs {type} {round ? 'btn-circle' : 'btn-square'} {classes}"
-	{disabled}
-	on:click
->
-	<slot />
-</button>
+<div class={tip ? 'tooltip' : 'inline-block'} data-tip={tip}>
+	<button
+		class="btn btn-xs {type} {round ? 'btn-circle' : 'btn-square'} {classes}"
+		{disabled}
+		on:click
+	>
+		<slot />
+	</button>
+</div>

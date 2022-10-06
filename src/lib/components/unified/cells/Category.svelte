@@ -155,7 +155,7 @@
 {#if adding}
 	<th>
 		<div class="w-72">
-			<TextInput on:submit={addCategory} on:cancel={endAdding} />
+			<TextInput on:submit={addCategory} on:cancel={endAdding} placeholder="Enter category name" />
 		</div>
 	</th>
 {:else}
@@ -167,8 +167,8 @@
 		</span>
 		<ExpandButton slot="pre" bind:expanded />
 		<div class="flex flex-row justify-center gap-1" slot="menu">
-			<AddSiblingButton on:click={() => startAdding(parent_id)} />
-			<AddChildButton on:click={() => startAdding(category.id)} />
+			<AddSiblingButton on:click={() => startAdding(parent_id)} tip="add sibling category" />
+			<AddChildButton on:click={() => startAdding(category.id)} tip="add child category" />
 			<DeleteButton on:click={() => deleteCategory(category)} />
 		</div>
 		<svelte:fragment slot="note">

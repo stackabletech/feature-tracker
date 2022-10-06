@@ -17,7 +17,7 @@
 </script>
 
 {#if type === 'id'}
-	<td class="text-base-300">#{value}</td>
+	<th class="text-base-300">#{value}</th>
 {:else if type === 'category_id'}
 	<SelectCategory bind:value {colspan} {rowspan} />
 {:else if type === 'parent_id'}

@@ -38,7 +38,7 @@
 </script>
 
 <table class="table table-compact table-zebra my-2">
-	<thead class="sticky top-0 z-30">
+	<thead class="sticky top-0">
 		<tr>
 			{#each keys as key}
 				<th>{key}</th>

@@ -109,7 +109,7 @@
 {#if adding}
 	<th>
 		<div class="w-72">
-			<TextInput on:submit={addProduct} on:cancel={endAdding} />
+			<TextInput on:submit={addProduct} on:cancel={endAdding} placeholder="Enter product name" />
 		</div>
 	</th>
 {:else}

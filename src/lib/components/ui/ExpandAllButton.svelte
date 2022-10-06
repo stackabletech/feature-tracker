@@ -6,6 +6,8 @@
 	$: tip = collapse ? 'collapse all' : 'expand all';
 </script>
 
-<Button on:click {tip} type="btn-outline">
-	<ChevronsRightIcon size="16" class="transition-all {collapse || 'rotate-90'}" />
-</Button>
+<div class="tooltip tooltip-right" data-tip={tip}>
+	<Button on:click type="btn-outline">
+		<ChevronsRightIcon size="16" class="transition-all {collapse || 'rotate-90'}" />
+	</Button>
+</div>

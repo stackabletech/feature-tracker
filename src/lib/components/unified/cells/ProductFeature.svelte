@@ -170,7 +170,7 @@
 {:else if product && feature && !release}
 	<Data centered>
 		{#if $editable}
-			<AddButton on:click={startAdding} />
+			<AddButton on:click={startAdding} tip="add product feature" />
 		{:else}
 			<div
 				class="flex flex-row gap-2 items-center justify-center cursor-pointer"
