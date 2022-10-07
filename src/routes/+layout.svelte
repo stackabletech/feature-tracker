@@ -1,11 +1,6 @@
 <script lang="ts">
 	import '/src/app.css';
-	import {
-		categories as categoryStore,
-		products as productStore,
-		features as featureStore,
-		productFeatures as productFeatureStore
-	} from '$lib/stores';
+	import { categories, products, features, productFeatures, releases } from '$lib/stores';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import { FeatherIcon, LockIcon, MenuIcon } from 'svelte-feather-icons';
 	import { onMount } from 'svelte';
@@ -14,10 +9,11 @@
 	import type { LayoutData } from './$types';
 	export let data: LayoutData;
 
-	$: $productStore = data.products;
-	$: $categoryStore = data.categories;
-	$: $featureStore = data.features;
-	$: $productFeatureStore = data.productFeatures;
+	$: $products = data.products;
+	$: $categories = data.categories;
+	$: $features = data.features;
+	$: $productFeatures = data.productFeatures;
+	$: $releases = data.releases;
 
 	const toastOptions = {
 		pausable: true
@@ -39,11 +35,11 @@
 </svelte:head>
 
 <div
-	class="drawer drawer-mobile min-h-screen min-w-screen h-full w-full max-h-full max-w-full overflow-hidden"
+	class="drawer drawer-mobile min-h-screen min-w-screen h-full w-full max-h-[100vh] max-w-full overflow-hidden"
 >
 	<input type="checkbox" id="sidebar-drawer" class="drawer-toggle" />
-	<div class="drawer-content flex flex-col">
-		<nav class="w-full navbar sticky top-0 z-30 backdrop-blur">
+	<div class="drawer-content flex flex-col max-h-[100vh]">
+		<nav class="w-full navbar z-30 backdrop-blur">
 			<div class="flex-none lg:hidden">
 				<label for="sidebar-drawer" class="btn btn-square btn-ghost">
 					<MenuIcon size="24" />
@@ -61,7 +57,7 @@
 				</a>
 			</div>
 		</nav>
-		<div class="grow flex flex-col">
+		<div class="grow flex flex-col max-h-full overflow-auto">
 			<slot />
 		</div>
 	</div>
@@ -105,6 +101,14 @@
 <div id="modal" />
 
 <style lang="postcss">
+	:global(.tooltip::before) {
+		z-index: 1000;
+		filter: brightness(1.01);
+		-webkit-filter: brightness(1.01);
+		display: block;
+		position: absolute;
+	}
+
 	:global(._toastContainer) {
 		@apply z-50;
 	}

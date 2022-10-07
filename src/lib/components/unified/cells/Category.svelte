@@ -10,7 +10,10 @@
 	import ExpandButton from '$lib/components/ui/ExpandButton.svelte';
 	import TextCell from './TextCell.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import HoverNote from '$lib/components/ui/HoverNote.svelte';
+
 	import { GitCommitIcon } from 'svelte-feather-icons';
+	import { InfoIcon } from 'svelte-feather-icons';
 
 	export let category: HierarchicalCategory = undefined;
 	export let expanded: boolean = false;
@@ -152,7 +155,7 @@
 {#if adding}
 	<th>
 		<div class="w-72">
-			<TextInput on:submit={addCategory} on:cancel={endAdding} />
+			<TextInput on:submit={addCategory} on:cancel={endAdding} placeholder="Enter category name" />
 		</div>
 	</th>
 {:else}
@@ -164,9 +167,19 @@
 		</span>
 		<ExpandButton slot="pre" bind:expanded />
 		<div class="flex flex-row justify-center gap-1" slot="menu">
-			<AddSiblingButton on:click={() => startAdding(parent_id)} />
-			<AddChildButton on:click={() => startAdding(category.id)} />
+			<AddSiblingButton on:click={() => startAdding(parent_id)} tip="add sibling category" />
+			<AddChildButton on:click={() => startAdding(category.id)} tip="add child category" />
 			<DeleteButton on:click={() => deleteCategory(category)} />
 		</div>
+		<svelte:fragment slot="note">
+			{#if category.note}
+				<HoverNote note={category.note} />
+			{/if}
+		</svelte:fragment>
+		<svelte:fragment slot="post">
+			{#if category.note}
+				<InfoIcon size="16" class="text-base opacity-25 group-hover:opacity-100" />
+			{/if}
+		</svelte:fragment>
 	</TextCell>
 {/if}

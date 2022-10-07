@@ -9,7 +9,7 @@
 	import type { Writable } from 'svelte/store';
 	import { info, danger } from '$lib/util/alert';
 
-	import { productFeatures } from '$lib/stores';
+	import { productFeatures, releases } from '$lib/stores';
 	import type { Feature, Product, ProductFeature, ImplementationStatus } from '@prisma/client';
 
 	const dispatch = createEventDispatcher();
@@ -19,6 +19,8 @@
 	export let product: Product;
 	export let feature: Feature;
 	export let productFeature: ProductFeature = undefined;
+
+	$: release = productFeature && $releases.find((r) => r.id === productFeature.release_id);
 
 	let toggleEditMode = () => (editMode = !editMode);
 
@@ -76,15 +78,8 @@
 						<Cell type="implementation_status" bind:value={productFeature.implementation_status} />
 					</tr>
 					<tr>
-						<td>Date:</td>
-						<Cell type="implementation_date" bind:value={productFeature.implementation_date} />
-					</tr>
-					<tr>
-						<td>Version:</td>
-						<Cell
-							type="implementation_version"
-							bind:value={productFeature.implementation_version}
-						/>
+						<td>Release:</td>
+						<Cell type="release_id" bind:value={productFeature.release_id} />
 					</tr>
 					<tr>
 						<td>Note:</td>
@@ -106,27 +101,22 @@
 					<tr>
 						<td> Status: </td>
 						<td>
-							<div class="flex flex-row justify-center">
+							<div class="flex flex-row">
 								<ImplementationIcon class="mr-2" status={productFeature.implementation_status} />
 								{productFeature.implementation_status}
 							</div>
 						</td>
 					</tr>
-					{#if productFeature.implementation_date}
+					<tr>
+						<td>Release:</td>
+						<td
+							>{release?.name || 'No release'} ({release?.released ? 'released' : 'unreleased'})</td
+						>
+					</tr>
+					{#if release?.date}
 						<tr>
-							<td>Date:</td>
-							<td>
-								{new Date(productFeature?.implementation_date).toLocaleDateString(undefined, {
-									month: 'short',
-									year: 'numeric'
-								})}
-							</td>
-						</tr>
-					{/if}
-					{#if productFeature.implementation_version}
-						<tr>
-							<td>Version:</td>
-							<td>{productFeature.implementation_version}</td>
+							<td>{release.released ? 'Released on:' : 'Expected release date:'}</td>
+							<td>{new Date(release.date).toLocaleDateString()}</td>
 						</tr>
 					{/if}
 					{#if productFeature.note}

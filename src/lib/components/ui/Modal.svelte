@@ -19,12 +19,12 @@
 		on:click|stopPropagation
 	>
 		<div class="card-body">
-			<header class="flex mb-4">
+			<header class="flex mb-2">
 				<div class="flex grow align-middle">
 					<slot name="title" />
 				</div>
 				<div class="justify-end">
-					<CloseButton on:click={close} />
+					<CloseButton on:click={close} tipPlacement="left" />
 				</div>
 			</header>
 			<slot />

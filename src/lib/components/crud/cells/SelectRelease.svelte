@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { products } from '$lib/stores';
+	import { releases } from '$lib/stores';
 	import Option from '$lib/components/crud/cells/Option.svelte';
 	import { ChevronDownIcon } from 'svelte-feather-icons';
 	import { derived } from 'svelte/store';
@@ -11,19 +11,18 @@
 
 	let input: HTMLInputElement;
 	let filter = '';
-	$: filteredProducts = derived(products, ($) => {
-		return $.filter((product) => {
-			return product.name.toLowerCase().includes(filter.toLowerCase());
+	$: filteredReleases = derived(releases, ($) => {
+		return $.filter((releases) => {
+			return releases.name.toLowerCase().includes(filter.toLowerCase());
 		});
 	});
 
-	let title = $products.find((c) => c.id === value)?.name ?? 'Select Product';
+	let title = $releases.find((c) => c.id === value)?.name ?? 'Select Release';
 	let menu: HTMLElement;
 
 	let select = (e: CustomEvent) => {
 		title = e.detail.label;
 		value = e.detail.value;
-		console.log('selected', value);
 		cancel();
 	};
 
@@ -66,9 +65,9 @@
 				{filter === '' ? 'start typing to filter' : filter}
 			</span>
 			{#if optional}
-				<Option value={null} prefix="" label="No Category" on:select={(e) => select(e)} />
+				<Option value={null} prefix="" label="No Release" on:select={(e) => select(e)} />
 			{/if}
-			{#each $filteredProducts as { id, name } (id)}
+			{#each $filteredReleases as { id, name } (id)}
 				<Option value={id} prefix="#{id}" label={name} on:select={(e) => select(e)} />
 			{/each}
 		</ul>

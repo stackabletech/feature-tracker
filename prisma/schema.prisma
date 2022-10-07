@@ -48,18 +48,28 @@ model Feature {
 }
 
 model ProductFeature {
-  id                     Int                  @id @default(autoincrement())
-  product_id             Int
-  feature_id             Int
-  implementation_status  ImplementationStatus
-  implementation_date    DateTime?
-  implementation_version String?
-  dependencies           ProductFeature[]     @relation("dependencies")
-  dependants             ProductFeature[]     @relation("dependencies")
-  note                   String?              @db.VarChar(1024)
-  products               Product              @relation(fields: [product_id], references: [id], onDelete: Cascade)
-  features               Feature              @relation(fields: [feature_id], references: [id], onDelete: Cascade)
+  id                    Int                  @id @default(autoincrement())
+  product_id            Int
+  feature_id            Int
+  implementation_status ImplementationStatus
+  release_id            Int?
+  release               Release?             @relation(fields: [release_id], references: [id], onDelete: Cascade)
+  dependencies          ProductFeature[]     @relation("dependencies")
+  dependants            ProductFeature[]     @relation("dependencies")
+  note                  String?              @db.VarChar(1024)
+  product               Product              @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  feature               Feature              @relation(fields: [feature_id], references: [id], onDelete: Cascade)
 
   @@unique([product_id, feature_id])
   @@map("product_features")
+}
+
+model Release {
+  id               Int              @id @default(autoincrement())
+  name             String
+  date             DateTime?
+  released         Boolean
+  product_features ProductFeature[]
+
+  @@map("releases")
 }

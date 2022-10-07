@@ -43,7 +43,7 @@
 <Table>
 	<svelte:fragment slot="head">
 		<tr>
-			<th class="bg-transparent">
+			<th class="bg-base-100 border-b-0">
 				<DisplayButton on:click={showSettings} />
 				<ExpandAllButton on:click={expandAll} />
 				<ExpandAllButton on:click={collapseAll} collapse />
@@ -51,7 +51,7 @@
 			<FilterableHeader
 				bind:filter={$productFilter}
 				sortable={{ Products: products }}
-				class="rounded-tl-lg left-96"
+				class="rounded-tl-lg"
 			>
 				Products
 			</FilterableHeader>
@@ -62,6 +62,7 @@
 			<FilterableHeader
 				bind:filter={$categoryFilter}
 				sortable={{ Categories: categories, Features: features }}
+				class="rounded-tl-lg"
 			>
 				Features
 			</FilterableHeader>

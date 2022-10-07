@@ -8,6 +8,9 @@
 	import DeleteButton from '$lib/components/ui/DeleteButton.svelte';
 	import TextCell from './TextCell.svelte';
 	import TextInput from '$lib/components/ui/TextInput.svelte';
+	import HoverNote from '$lib/components/ui/HoverNote.svelte';
+
+	import { InfoIcon } from 'svelte-feather-icons';
 
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
@@ -106,7 +109,7 @@
 {#if adding}
 	<th>
 		<div class="w-72">
-			<TextInput on:submit={addProduct} on:cancel={endAdding} />
+			<TextInput on:submit={addProduct} on:cancel={endAdding} placeholder="Enter product name" />
 		</div>
 	</th>
 {:else}
@@ -115,5 +118,15 @@
 			<DeleteButton on:click={deleteProduct} />
 			<AddSiblingButton on:click={startAdding} horizontal />
 		</div>
+		<svelte:fragment slot="note">
+			{#if product.note}
+				<HoverNote note={product.note} />
+			{/if}
+		</svelte:fragment>
+		<svelte:fragment slot="post">
+			{#if product.note}
+				<InfoIcon size="16" class="text-base opacity-25 group-hover:opacity-100" />
+			{/if}
+		</svelte:fragment>
 	</TextCell>
 {/if}

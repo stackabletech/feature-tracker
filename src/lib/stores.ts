@@ -1,4 +1,4 @@
-import type { Product, Category, Feature, ProductFeature } from "$lib/prisma";
+import type { Product, Category, Feature, ProductFeature, Release } from "$lib/prisma";
 import { writable, derived } from "svelte/store";
 import type { Writable } from 'svelte/store';
 
@@ -42,6 +42,7 @@ export const categories: Sortable<Category[]> = sortable([]);
 export const products: Sortable<Product[]> = sortable([]);
 export const features: Sortable<Feature[]> = sortable([]);
 export const productFeatures: Writable<ProductFeature[]> = writable();
+export const releases: Writable<Release[]> = writable();
 
 // Filter Stores
 export const categoryFilter: Writable<string> = writable();
@@ -51,6 +52,7 @@ export const featureFilter: Writable<string> = writable();
 export const showUnusedCategories: Writable<boolean> = writable(true);
 export const showUnusedProducts: Writable<boolean> = writable(true);
 export const showUnusedFeatures: Writable<boolean> = writable(true);
+export const showUnreleasedProductFeatures: Writable<boolean> = writable(true);
 
 // Filtered stores
 export const stringFilter = (store: any, filter: string) => {
