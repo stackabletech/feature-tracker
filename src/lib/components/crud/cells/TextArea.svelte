@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { EditIcon } from 'svelte-feather-icons';
 	import Modal from '$lib/components/ui/Modal.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
 
 	export let value: string;
 	export let colspan: number = 1;
@@ -12,12 +13,15 @@
 </script>
 
 <td on:click={showModal} {colspan} {rowspan}>
-	<EditIcon size="20" class="mx-auto" />
+	<Button tip="open note editor">
+		<EditIcon />
+	</Button>
 </td>
 
 {#if modal}
 	<Modal on:close={hideModal}>
 		<h3 class="font-bold" slot="title">Edit text:</h3>
+		<span class="label-text-alt">Markdown is supported</span>
 		<div class="form-control">
 			<textarea class="textarea w-full h-64" placeholder="edit text" bind:value />
 			<label class="label" for="">
