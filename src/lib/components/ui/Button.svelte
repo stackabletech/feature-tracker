@@ -8,7 +8,7 @@
 	export let disabled: boolean = false;
 </script>
 
-<div class={tip ? 'tooltip' : 'inline-block'} data-tip={tip}>
+<div class={tip ? 'tooltip tooltip-right' : 'inline-block'} data-tip={tip}>
 	<button
 		class="btn btn-xs {type} {round ? 'btn-circle' : 'btn-square'} {classes}"
 		{disabled}

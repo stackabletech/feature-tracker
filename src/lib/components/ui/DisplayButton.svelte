@@ -5,8 +5,6 @@
 	export let tip = 'display options';
 </script>
 
-<div class="tooltip tooltip-right" data-tip={tip}>
-	<Button on:click type="btn-outline">
-		<EyeIcon size="16" />
-	</Button>
-</div>
+<Button on:click type="btn-outline" {tip}>
+	<EyeIcon size="16" />
+</Button>

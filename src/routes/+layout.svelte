@@ -101,6 +101,14 @@
 <div id="modal" />
 
 <style lang="postcss">
+	:global(.tooltip::before) {
+		z-index: 1000;
+		filter: brightness(1.01);
+		-webkit-filter: brightness(1.01);
+		display: block;
+		position: absolute;
+	}
+
 	:global(._toastContainer) {
 		@apply z-50;
 	}
