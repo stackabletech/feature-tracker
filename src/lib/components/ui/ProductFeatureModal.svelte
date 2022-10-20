@@ -102,7 +102,11 @@
 						<td> Status: </td>
 						<td>
 							<div class="flex flex-row">
-								<ImplementationIcon class="mr-2" status={productFeature.implementation_status} />
+								<ImplementationIcon
+									class="mr-2"
+									status={productFeature.implementation_status}
+									released={release.released}
+								/>
 								{productFeature.implementation_status}
 							</div>
 						</td>
@@ -139,7 +143,11 @@
 						<td> Status: </td>
 						<td>
 							<div class="flex flex-row justify-center">
-								<ImplementationIcon class="mr-2" status={'NOT_AVAILABLE'} />
+								<ImplementationIcon
+									class="mr-2"
+									status={'NOT_AVAILABLE'}
+									released={release.released}
+								/>
 								{'NOT_AVAILABLE'}
 							</div>
 						</td>

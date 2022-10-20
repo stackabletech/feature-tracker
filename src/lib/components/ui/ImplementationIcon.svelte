@@ -3,7 +3,7 @@
 	import { ActivityIcon, CalendarIcon, CheckCircleIcon, XCircleIcon } from 'svelte-feather-icons';
 
 	export let status: ImplementationStatus;
-	export let released: boolean = false;
+	export let released: boolean;
 	export let tip: boolean = true;
 
 	export let dataTip =
