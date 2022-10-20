@@ -42,7 +42,7 @@
 		<FeatureRow {category} />
 	{/if}
 
-	{#each category.children as child, n (child.id)}
+	{#each category.children as child (child.id)}
 		<svelte:self category={child} level={level + 1} expanded={expandAll} {expandAll} />
 	{/each}
 {/if}

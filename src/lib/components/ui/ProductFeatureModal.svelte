@@ -10,7 +10,7 @@
 	import { info, danger } from '$lib/util/alert';
 
 	import { productFeatures, releases } from '$lib/stores';
-	import type { Feature, Product, ProductFeature, ImplementationStatus } from '@prisma/client';
+	import type { Feature, Product, ProductFeature } from '@prisma/client';
 
 	const dispatch = createEventDispatcher();
 	let editable: Writable<boolean> = getContext('editable');

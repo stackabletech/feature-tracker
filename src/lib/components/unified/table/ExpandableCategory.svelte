@@ -13,9 +13,9 @@
 </script>
 
 {#each categoryFeatures as feature, n}
-	<Row showCategory={n === 0} {level} {category} {feature} bind:expanded {forcedOpen} />
+	<Row showCategory={n === 0} {level} {category} {feature} bind:expanded />
 {:else}
-	<Row {level} {category} bind:expanded {forcedOpen} />
+	<Row {level} {category} bind:expanded />
 {/each}
 
 {#if category.children && (expanded || forcedOpen)}

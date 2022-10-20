@@ -7,7 +7,7 @@ import { prisma } from "$lib/prisma";
 */
 
 // GET /releases.json
-export const GET = async ({params, request, url}) => {
+export const GET = async () => {
     try {
         const body = await prisma.release.findMany({
             orderBy: { date: 'desc' }

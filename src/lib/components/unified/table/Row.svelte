@@ -13,7 +13,6 @@
 
 	export let showCategory: boolean = true;
 	export let expanded: boolean = false;
-	export let forcedOpen: boolean = false;
 	export let level: number = 0;
 
 	export let category: HierarchicalCategory;
@@ -27,7 +26,7 @@
 <tr class="hover">
 	<!-- First Column: Category Header -->
 	{#if showCategory}
-		<Category {category} bind:expanded {forcedOpen} {level} />
+		<Category {category} bind:expanded {level} />
 	{:else}
 		<Header>
 			<span slot="indent" class="flex flex-row first:ml-0.5">

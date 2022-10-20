@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AlertTriangleIcon, DeleteIcon, XIcon } from 'svelte-feather-icons';
+	import { AlertTriangleIcon, DeleteIcon } from 'svelte-feather-icons';
 	import Button from './Button.svelte';
 
 	let confirm = false;

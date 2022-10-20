@@ -176,7 +176,7 @@
 				class="flex flex-row gap-2 items-center justify-center cursor-pointer"
 				on:click={showInfo}
 			>
-				<ImplementationIcon status={'NOT_AVAILABLE'} />
+				<ImplementationIcon status={'NOT_AVAILABLE'} released={false} />
 			</div>
 		{/if}
 	</Data>

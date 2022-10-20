@@ -3,7 +3,6 @@
 	import Modal from './Modal.svelte';
 	import Cell from '../crud/cells/Cell.svelte';
 	import { InfoIcon, EditIcon, XCircleIcon, SaveIcon } from 'svelte-feather-icons';
-	import ImplementationIcon from '$lib/components/ui/ImplementationIcon.svelte';
 
 	import { getContext, createEventDispatcher } from 'svelte';
 	import type { Writable } from 'svelte/store';

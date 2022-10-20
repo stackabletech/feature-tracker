@@ -7,7 +7,7 @@ import { prisma } from "$lib/prisma";
 */
 
 // GET /products.json
-export const GET = async ({params, request, url}) => {
+export const GET = async () => {
     try {
         const body = await prisma.product.findMany({
             orderBy: { name: 'asc' }

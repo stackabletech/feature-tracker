@@ -1,4 +1,4 @@
-import { redirect, error } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 export const guard = async (fetch, base) => {
     const res = await fetch('/api/pwd', { method: 'POST' });
