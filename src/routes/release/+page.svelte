@@ -8,29 +8,45 @@
 	import type { Writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 
-	import { productFilter, filteredProducts, productFeatures } from '$lib/stores';
+	import {
+		products,
+		productFilter,
+		filteredProducts,
+		productFeatures,
+		releases
+	} from '$lib/stores';
 	import RoadMapCell from '$lib/components/unified/cells/RoadMapCell.svelte';
-
-	const dates = [...new Set($productFeatures.map((pf) => pf.implementation_date).sort())];
 
 	let editable: Writable<boolean> = writable(false);
 	setContext('editable', editable);
+
+	$: sortedReleases = $releases.sort(
+		(a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+	);
 </script>
 
 <div class="grow overflow-auto flex flex-col">
 	<Table>
 		<svelte:fragment slot="head">
 			<!-- Product Header -->
-			<FilterableHeader bind:filter={$productFilter} class="rounded-tl-lg">
+			<FilterableHeader
+				bind:filter={$productFilter}
+				sortable={{ Products: products }}
+				class="rounded-tl-lg"
+			>
 				Products
 			</FilterableHeader>
-			<!-- Date Headers -->
-			{#each dates as date}
+			<!-- Release Headers -->
+			{#each sortedReleases as release}
 				<Header centered>
-					{new Date(date).toLocaleDateString(undefined, {
-						month: 'short',
-						year: 'numeric'
-					})}
+					<div
+						class="tooltip tooltip-bottom"
+						data-tip="{release.released ? 'Released' : 'Will be released'} on: {new Date(
+							release.date
+						).toLocaleDateString()}"
+					>
+						{release.name}
+					</div>
 				</Header>
 			{/each}
 		</svelte:fragment>
@@ -40,11 +56,11 @@
 					<!-- Product Titles -->
 					<Product {product} />
 					<!-- Features -->
-					{#each dates as date}
+					{#each sortedReleases as release}
 						<td class="text-center">
 							<div class="flex flex-row justify-center">
-								{#each $productFeatures.filter((pf) => pf.product_id === product.id && pf.implementation_date === date) as productFeature}
-									<RoadMapCell {productFeature} />
+								{#each $productFeatures.filter((pf) => pf.product_id === product.id && pf.release_id === release.id) as productFeature}
+									<RoadMapCell {productFeature} {release} />
 								{/each}
 							</div>
 						</td>
