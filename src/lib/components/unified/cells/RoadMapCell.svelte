@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { features, products } from '$lib/stores';
+	import { features, featuresWithParents, products } from '$lib/stores';
 	import ProductFeatureModal from '$lib/components/ui/ProductFeatureModal.svelte';
 	import type { ProductFeature, Feature, Product, Release } from '@prisma/client';
 
@@ -17,10 +17,16 @@
 		modal = false;
 	};
 
+	$: path = $featuresWithParents.find((c) => c.id === feature.id)?.parents.join(' > ') ?? undefined;
+
 	import ImplementationIcon from '$lib/components/ui/ImplementationIcon.svelte';
 </script>
 
-<div class="tooltip cursor-pointer" data-tip={feature.name} on:click={showInfo}>
+<div
+	class="tooltip cursor-pointer"
+	data-tip={path ? path + ' > ' + feature.name : feature.name}
+	on:click={showInfo}
+>
 	<ImplementationIcon
 		status={productFeature.implementation_status}
 		released={release.released}
