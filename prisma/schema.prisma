@@ -32,6 +32,7 @@ model Product {
   name             String           @unique
   note             String?          @db.VarChar(1024)
   product_features ProductFeature[]
+  product_lifecycles ProductLifecycle[]
 
   @@map("products")
 }
@@ -70,6 +71,29 @@ model Release {
   date             DateTime?
   released         Boolean
   product_features ProductFeature[]
+  product_lifecycles ProductLifecycle[]
 
   @@map("releases")
 }
+
+enum SupportStatus {
+  LONG_TERM_SUPPORT
+  GENERAL_AVAILABILITY
+  DEPRECATED
+  END_OF_LIFE
+}
+
+
+model ProductLifecycle {
+  product_id               Int
+  release_id               Int
+  product_version          String               @db.VarChar(64)
+  image_url                String
+  support_status           SupportStatus
+  product                  Product              @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  release                  Release              @relation(fields: [release_id], references: [id], onDelete: Cascade)
+
+  @@unique([release_id, product_id, product_version, image_url])
+  @@map("product_lifecycles")
+}
+
