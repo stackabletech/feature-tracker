@@ -32,8 +32,7 @@ model Product {
   name               String             @unique
   note               String?            @db.VarChar(1024)
   product_features   ProductFeature[]
-  product_lifecycles ProductLifecycle[]
-  ContainerImage     ContainerImage[]
+  product_versions   ProductVersion[]
 
   @@map("products")
 }
@@ -77,6 +76,28 @@ model Release {
   @@map("releases")
 }
 
+model ReleaseVersion {
+  version    String             @id
+  release_id Int
+  date       DateTime?
+  components ReleaseComponent[]
+
+  @@map("release_versions")
+}
+
+model ProductVersion {
+  id         Int    @id @default(autoincrement())
+  product_id Int
+  version    String
+
+  product          Product            @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  ProductLifecycle ProductLifecycle[]
+  ReleaseComponent ReleaseComponent[]
+
+  @@unique([version, product_id])
+  @@map("product_versions")
+}
+
 enum SupportStatus {
   LONG_TERM_SUPPORT
   GENERAL_AVAILABILITY
@@ -85,25 +106,27 @@ enum SupportStatus {
 }
 
 model ProductLifecycle {
+  product_version_id Int
   release_id         Int
-  container_image_id String
-  support_status     SupportStatus
-  release            Release        @relation(fields: [release_id], references: [id], onDelete: Cascade)
-  container_image    ContainerImage @relation(fields: [container_image_id], references: [purl], onDelete: Cascade)
-  Product            Product?       @relation(fields: [productId], references: [id])
-  productId          Int?
 
-  @@unique([release_id, container_image_id])
+  support_status     SupportStatus
+
+  rel_product_version ProductVersion @relation(fields: [product_version_id], references: [id])
+  rel_release_id      Release        @relation(fields: [release_id], references: [id])
+
+  @@unique([release_id, product_version_id])
   @@map("product_lifecycles")
 }
 
-model ContainerImage {
-  purl            String @id
-  product_version String @db.VarChar(64)
-  product_id      Int
+model ReleaseComponent {
+  product_version_id Int
+  release_version    String
 
-  product          Product            @relation(fields: [product_id], references: [id], onDelete: Cascade)
-  ProductLifecycle ProductLifecycle[]
+  purl String
 
-  @@map("container_images")
+  rel_product_version ProductVersion @relation(fields: [product_version_id], references: [id])
+  rel_release_version ReleaseVersion @relation(fields: [release_version], references: [version])
+
+  @@unique([purl, release_version])
+  @@map("release_components")
 }
