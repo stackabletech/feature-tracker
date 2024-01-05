@@ -14,10 +14,8 @@ insert into product_versions (id, product_id, version) values
 
 
 --
--- Insert data for release 23.11.0
+-- Insert data for release 23.11 (id=7)
 --
-insert into releases (id, name, date, released) values (1, '23.11', '2023-11-29', true);
-
 insert into release_versions (version, release_id, created_at)  values ('23.11.0', 1, '2023-11-29');
 
 insert into release_component (purl, product_version_id, release_version) values
@@ -31,18 +29,17 @@ insert into release_component (purl, product_version_id, release_version) values
 
 insert into product_lifecycles (support_status, product_version_id, release_id)
 values
-('DEPRECATED', 1, 1),
-('LONG_TERM_SUPPORT', 2, 1),
-('GENERAL_AVAILABILITY', 3, 1),
-('GENERAL_AVAILABILITY', 4, 2),
-('GENERAL_AVAILABILITY', 5, 2),
-('DEPRECATED', 6, 3),
-('GENERAL_AVAILABILITY', 7, 3);
+('DEPRECATED', 1, 7),
+('LONG_TERM_SUPPORT', 2, 7),
+('GENERAL_AVAILABILITY', 3, 7),
+('GENERAL_AVAILABILITY', 4, 7),
+('GENERAL_AVAILABILITY', 5, 7),
+('DEPRECATED', 6, 7),
+('GENERAL_AVAILABILITY', 7, 7);
 
 --
--- Insert data for release 23.7.0
+-- Insert data for release 23.7 (id=6)
 --
-insert into releases (id, name, date, released) values (2, '23.7', '2023-07-28', true);
 
 insert into release_versions (version, release_id, created_at)  values ('23.7.0', 1, '2023-07-29');
 
@@ -56,8 +53,8 @@ insert into release_component (purl, product_version_id, release_version) values
 
 insert into product_lifecycles (support_status, product_version_id, release_id)
 values
-('DEPRECATED',8 , 2),
-('GENERAL_AVAILABILITY',9 , 2),
-('GENERAL_AVAILABILITY',10, 2);
+('DEPRECATED',8 , 6),
+('GENERAL_AVAILABILITY',9 , 6),
+('GENERAL_AVAILABILITY',10, 6);
 
 
