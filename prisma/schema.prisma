@@ -77,9 +77,10 @@ model Release {
 }
 
 model ReleaseVersion {
-  version    String             @id
-  release_id Int
-  date       DateTime?
+  version          String             @id
+  release_id       Int
+  created_at       Date?
+
   components ReleaseComponent[]
 
   @@map("release_versions")
