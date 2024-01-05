@@ -28,11 +28,12 @@ model Category {
 }
 
 model Product {
-  id               Int              @id @default(autoincrement())
-  name             String           @unique
-  note             String?          @db.VarChar(1024)
-  product_features ProductFeature[]
+  id                 Int                @id @default(autoincrement())
+  name               String             @unique
+  note               String?            @db.VarChar(1024)
+  product_features   ProductFeature[]
   product_lifecycles ProductLifecycle[]
+  ContainerImage     ContainerImage[]
 
   @@map("products")
 }
@@ -66,11 +67,11 @@ model ProductFeature {
 }
 
 model Release {
-  id               Int              @id @default(autoincrement())
-  name             String
-  date             DateTime?
-  released         Boolean
-  product_features ProductFeature[]
+  id                 Int                @id @default(autoincrement())
+  name               String
+  date               DateTime?
+  released           Boolean
+  product_features   ProductFeature[]
   product_lifecycles ProductLifecycle[]
 
   @@map("releases")
@@ -83,17 +84,26 @@ enum SupportStatus {
   END_OF_LIFE
 }
 
-
 model ProductLifecycle {
-  product_id               Int
-  release_id               Int
-  product_version          String               @db.VarChar(64)
-  image_url                String
-  support_status           SupportStatus
-  product                  Product              @relation(fields: [product_id], references: [id], onDelete: Cascade)
-  release                  Release              @relation(fields: [release_id], references: [id], onDelete: Cascade)
+  release_id         Int
+  container_image_id String
+  support_status     SupportStatus
+  release            Release        @relation(fields: [release_id], references: [id], onDelete: Cascade)
+  container_image    ContainerImage @relation(fields: [container_image_id], references: [purl], onDelete: Cascade)
+  Product            Product?       @relation(fields: [productId], references: [id])
+  productId          Int?
 
-  @@unique([release_id, product_id, product_version, image_url])
+  @@unique([release_id, container_image_id])
   @@map("product_lifecycles")
 }
 
+model ContainerImage {
+  purl            String @id
+  product_version String @db.VarChar(64)
+  product_id      Int
+
+  product          Product            @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  ProductLifecycle ProductLifecycle[]
+
+  @@map("container_images")
+}
