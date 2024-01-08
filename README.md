@@ -41,3 +41,23 @@ Run the app
 ```
 npm run dev -- --open
 ```
+# Migrating the DB
+
+## Create baseline migration
+
+Only needed once
+
+```
+git switch main
+mkdir -p prisma/migrations/0_init
+npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script
+npx prisma migrate resolve --applied 0_init
+```
+
+## Migrate the life cycle DB schema
+
+```
+git switch feat/lifecycle
+npx prisma migrate dev --name lifecycle
+```
+
