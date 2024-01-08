@@ -27,10 +27,26 @@ model Category {
   @@map("categories")
 }
 
+// Unfortunately spark-k8s is not a valid enum value
+//enum ProductImageName {'
+//  airflow
+//  druid
+//  hadoop
+//  hbase
+//  hive
+//  kafka
+//  nifi
+//  spark-k8s
+//  superset
+//  trino
+//  zookeeper
+//}
+
 model Product {
   id                 Int                @id @default(autoincrement())
   name               String             @unique
   note               String?            @db.VarChar(1024)
+  code_name          String?
   product_features   ProductFeature[]
   product_versions   ProductVersion[]
 
