@@ -88,6 +88,7 @@ model Release {
   released           Boolean
   product_features   ProductFeature[]
   product_lifecycles ProductLifecycle[]
+  release_versions   ReleaseVersion[]
 
   @@map("releases")
 }
@@ -98,6 +99,7 @@ model ReleaseVersion {
   created_at       DateTime?
 
   components ReleaseComponent[]
+  release    Release                  @relation(fields: [release_id], references: [id], onDelete: Cascade)
 
   @@map("release_versions")
 }
