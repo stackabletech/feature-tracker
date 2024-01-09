@@ -27,11 +27,28 @@ model Category {
   @@map("categories")
 }
 
+// Unfortunately spark-k8s is not a valid enum value
+//enum ProductImageName {'
+//  airflow
+//  druid
+//  hadoop
+//  hbase
+//  hive
+//  kafka
+//  nifi
+//  spark-k8s
+//  superset
+//  trino
+//  zookeeper
+//}
+
 model Product {
-  id               Int              @id @default(autoincrement())
-  name             String           @unique
-  note             String?          @db.VarChar(1024)
-  product_features ProductFeature[]
+  id                 Int                @id @default(autoincrement())
+  name               String             @unique
+  note               String?            @db.VarChar(1024)
+  code_name          String?
+  product_features   ProductFeature[]
+  product_versions   ProductVersion[]
 
   @@map("products")
 }
@@ -65,11 +82,70 @@ model ProductFeature {
 }
 
 model Release {
-  id               Int              @id @default(autoincrement())
-  name             String
-  date             DateTime?
-  released         Boolean
-  product_features ProductFeature[]
+  id                 Int                @id @default(autoincrement())
+  name               String
+  date               DateTime?
+  released           Boolean
+  product_features   ProductFeature[]
+  product_lifecycles ProductLifecycle[]
+  release_versions   ReleaseVersion[]
 
   @@map("releases")
+}
+
+model ReleaseVersion {
+  version          String             @id
+  release_id       Int
+  created_at       DateTime?
+
+  components ReleaseComponent[]
+  release    Release                  @relation(fields: [release_id], references: [id], onDelete: Cascade)
+
+  @@map("release_versions")
+}
+
+model ProductVersion {
+  id         Int    @id @default(autoincrement())
+  product_id Int
+  version    String
+
+  product          Product            @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  ProductLifecycle ProductLifecycle[]
+  ReleaseComponent ReleaseComponent[]
+
+  @@unique([version, product_id])
+  @@map("product_versions")
+}
+
+enum SupportStatus {
+  LONG_TERM_SUPPORT
+  GENERAL_AVAILABILITY
+  DEPRECATED
+  END_OF_LIFE
+}
+
+model ProductLifecycle {
+  product_version_id Int
+  release_id         Int
+
+  support_status     SupportStatus
+
+  rel_product_version ProductVersion @relation(fields: [product_version_id], references: [id])
+  rel_release_id      Release        @relation(fields: [release_id], references: [id])
+
+  @@unique([release_id, product_version_id])
+  @@map("product_lifecycles")
+}
+
+model ReleaseComponent {
+  product_version_id Int
+  release_version    String
+
+  purl String
+
+  rel_product_version ProductVersion @relation(fields: [product_version_id], references: [id])
+  rel_release_version ReleaseVersion @relation(fields: [release_version], references: [version])
+
+  @@unique([purl, release_version])
+  @@map("release_components")
 }
