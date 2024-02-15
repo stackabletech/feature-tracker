@@ -6,29 +6,29 @@ for [Stackable](https://github.com/stackabletech).
 
 Hosted dev version available [here](https://feature-tracker.vercel.app)
 
-Install dependencies
+## Install dependencies
+
 ```
 npm i
 ```
 
+## Set up the Postgresql server
+
 Export the Postgres password (needed for the container and psql below)
+
 ```
-export PGPASSWORD=...
+export PGPASSWORD=hush1234
+export PGHOST=localhost
+export PGUSER=postgres
+export PGDATABASE=postgres
+export DB_SCHEMA=feature_tracker
+
 ```
 
-Create .env file from .env.example
-```
-cp .env.example .env
-```
-Edit the `.env` file with the Postgres connection string and the app password. The connection string should look like `postgres://postgres:<password>@localhost:5432` where `<password>` should match the `PGPASSWORD` env var from above.
+Start Postgres in a container in the background.
 
-Start Postgres in a container
 ```
-# create a volume to persist data between restarts
-docker volume create feature-tracker
-
-# start Postgres
-docker run --rm --name postgres -e PGDATA=/var/lib/postgresql/data/pgdata -e POSTGRES_PASSWORD=${PGPASSWORD} -d -p 5432:5432 -v feature-tracker:/var/lib/postgresql/data postgres:alpine
+docker run -d --name postgres -e POSTGRES_PASSWORD=${PGPASSWORD} -p 5432:5432 postgres:16.2-alpine3.19
 ```
 
 Create and populate the database
@@ -37,10 +37,13 @@ npx prisma migrate dev --name init
 psql -h localhost -U postgres -f sample/data.sql
 ```
 
-Run the app
+## Run the app
+
 ```
+cp .env.example .env
 npm run dev -- --open
 ```
+
 # Migrating the DB
 
 ## Create baseline migration

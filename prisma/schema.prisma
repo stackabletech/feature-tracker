@@ -27,21 +27,6 @@ model Category {
   @@map("categories")
 }
 
-// Unfortunately spark-k8s is not a valid enum value
-//enum ProductImageName {'
-//  airflow
-//  druid
-//  hadoop
-//  hbase
-//  hive
-//  kafka
-//  nifi
-//  spark-k8s
-//  superset
-//  trino
-//  zookeeper
-//}
-
 model Product {
   id                 Int                @id @default(autoincrement())
   name               String             @unique
@@ -84,8 +69,16 @@ model ProductFeature {
 model Release {
   id                 Int                @id @default(autoincrement())
   name               String
-  date               DateTime?
   released           Boolean
+
+  // Lifecycle fields
+  general_availability DateTime?
+  end_of_sales         DateTime?
+  end_of_life          DateTime?
+  end_of_development   DateTime?
+  end_of_service       DateTime?
+  end_of_support       DateTime?
+
   product_features   ProductFeature[]
   product_lifecycles ProductLifecycle[]
   release_versions   ReleaseVersion[]
