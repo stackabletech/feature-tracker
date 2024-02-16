@@ -64,3 +64,17 @@ git switch feat/lifecycle
 npx prisma migrate dev --name lifecycle
 ```
 
+# Schema description
+
+|          Name           |   Type   | Description                              |
+|-------------------------|----------|------------------------------------------|
+| releases                | table    | SDP releases like `23.11`, etc. |
+| release_versions        | table    | SDP patch releases like `23.11.0`, etc. |
+| categories              | table    | Feature categories like `Certifications`, `Authentication`, etc. |
+| features                | table    | All platform features like `LDAP`, `arm64`, `TLS`. Each feature belongs to a category. |
+| product_features        | table    | Aggregates features per product and release. An `implementation_status` column contains values like `COMPLETED`, `NOT_PLANNED`, etc. |
+| product_lifecycles      | table    | Aggregates the lifecycle state of a `product version` in a `release`. |
+| product_versions        | table    | All product versions for all products. Example: `2.6.1` for Apache Airflow, etc. |
+| products                | table    | All products. Example: `Apache Airflow`, `Druid`, etc. |
+| release_components      | table    | All components included in a release version. A component is identified by a PURL. Currently only contains container images. |
+
