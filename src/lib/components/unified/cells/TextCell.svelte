@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
 	import TextInput from '$lib/components/ui/TextInput.svelte';
 	import { createEventDispatcher } from 'svelte';
 
