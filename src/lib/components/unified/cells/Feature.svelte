@@ -126,7 +126,7 @@
 {:else if feature}
 	<TextCell
 		sticky
-		class="left-48 group"
+		class="group"
 		bind:value={feature.name}
 		bind:showMenu
 		menu={$editable}
@@ -149,7 +149,7 @@
 		</svelte:fragment>
 	</TextCell>
 {:else}
-	<Header sticky centered class="left-48">
+	<Header sticky centered>
 		{#if $editable}
 			<AddButton on:click={startAdding} tip="add feature" />
 		{/if}

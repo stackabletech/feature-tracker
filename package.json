@@ -3,13 +3,12 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
-    "package": "svelte-kit package",
+    "build": "svelte-check && vite build",
     "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
-    "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "lint": "prettier --check . && eslint .",
+    "format": "prettier --write .",
     "postinstall": "prisma generate"
   },
   "devDependencies": {
@@ -43,7 +42,7 @@
   "dependencies": {
     "@prisma/client": "^5.14.0",
     "cookie": "^0.6.0",
-    "daisyui": "^3.9.4",
+    "daisyui": "^4.11.1",
     "dotenv": "^16.4.5",
     "marked": "^12.0.2",
     "npm": "^10.8.0",

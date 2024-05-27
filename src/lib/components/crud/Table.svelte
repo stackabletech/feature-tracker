@@ -37,7 +37,7 @@
 	let newObject = {};
 </script>
 
-<table class="table table-compact table-zebra my-2">
+<table class="table table-sm table-zebra my-2">
 	<thead class="sticky top-0 z-30">
 		<tr>
 			{#each keys as key}

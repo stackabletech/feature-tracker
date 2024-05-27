@@ -35,7 +35,7 @@
 </svelte:head>
 
 <div
-	class="drawer drawer-mobile min-h-screen min-w-screen h-full w-full max-h-[100vh] max-w-full overflow-hidden"
+	class="drawer lg:drawer-open min-h-screen min-w-screen h-full w-full max-h-[100vh] max-w-full overflow-hidden"
 >
 	<input type="checkbox" id="sidebar-drawer" class="drawer-toggle" />
 	<div class="drawer-content flex flex-col max-h-[100vh]">
@@ -118,13 +118,13 @@
 	}
 
 	/* Fix for QuteBrowser not supporting where selector used by DaisyUI's table styling */
-	:global(.table-compact th),
-	:global(.table-compact td) {
+	:global(.table-sm th),
+	:global(.table-sm td) {
 		@apply p-2;
 	}
 	:global(table tbody th),
 	:global(table tbody td) {
 		--tw-bg-opacity: 1;
-		background-color: hsla(var(--b1) / var(--tw-bg-opacity, 1));
+		background-color: oklch(var(--b1) / var(--tw-bg-opacity, 1));
 	}
 </style>
