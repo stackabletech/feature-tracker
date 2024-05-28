@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {clickOutside} from '$lib/actions/clickOutside';
+  import {clickOutsideAction} from '$lib/actions/clickOutside';
   import AddButton from '$lib/components/ui/AddButton.svelte';
   import DeleteButton from '$lib/components/ui/DeleteButton.svelte';
   import InfoButton from '$lib/components/ui/InfoButton.svelte';
@@ -107,7 +107,7 @@
     </div>
   </th>
 {:else if editMode}
-  <th use:clickOutside on:clickoutside={toggleEditMode}>
+  <th use:clickOutsideAction on:clickoutside={toggleEditMode}>
     <div class="w-72">
       <ProductFeatureInput
         on:submit={updateProductFeature}

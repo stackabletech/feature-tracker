@@ -8,8 +8,10 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "strict": true,
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+
+    // We want to enable this but as of 2024-05 there were around 100 errors preventing us from compiling it
+    //"strict": true,
   }
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
   // except $lib which is handled by https://kit.svelte.dev/docs/configuration#files

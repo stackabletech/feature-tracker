@@ -1,6 +1,6 @@
 <script lang="ts">
   import {portal} from '$lib/actions/portal';
-  import {clickOutside} from '$lib/actions/clickOutside';
+  import {clickOutsideAction} from '$lib/actions/clickOutside';
 
   import CloseButton from '$lib/components/ui/CloseButton.svelte';
   import MenuButton from '$lib/components/ui/MenuButton.svelte';
@@ -32,13 +32,13 @@
 
 <div
   class="flex flex-row items-center transition-all w-full min-w-[12rem]
-		{centered ? 'justify-between' : 'justify-start'}
-		"
+    {centered ? 'justify-between' : 'justify-start'}
+    "
   on:pointerover={showNote}
   on:pointerleave={hideNote}
 >
   {#if showMenu}
-    <div class="flex flex-row items-between w-full" use:clickOutside on:clickoutside={toggleMenu}>
+    <div class="flex flex-row items-between w-full" use:clickOutsideAction on:clickoutside={toggleMenu}>
       <slot name="indent"/>
       <div class="w-8">
         <slot name="pre"/>
@@ -51,7 +51,7 @@
       </div>
     </div>
   {:else if editMode}
-    <div class="mx-2 text-center" use:clickOutside on:clickoutside={toggleEditMode}>
+    <div class="mx-2 text-center" use:clickOutsideAction on:clickoutside={toggleEditMode}>
       <slot name="edit"/>
     </div>
   {:else}

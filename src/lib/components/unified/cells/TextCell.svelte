@@ -1,19 +1,17 @@
 <script lang="ts">
   import TextInput from '$lib/components/ui/TextInput.svelte';
-  import {createEventDispatcher} from 'svelte';
-
-  import type {Writable} from 'svelte/store';
-  import {getContext} from 'svelte';
+  import { createEventDispatcher } from 'svelte';
+  import type { Writable } from 'svelte/store';
+  import { getContext } from 'svelte';
 
   let editable: Writable<boolean> = getContext('editable');
-
   let dispatch = createEventDispatcher();
 
   import Header from '../cells/Header.svelte';
   import Data from '../cells/Data.svelte';
 
   let classes: string = '';
-  export {classes as class};
+  export { classes as class };
 
   export let value: string = '';
   export let menu: boolean = false;
@@ -31,7 +29,7 @@
 
   let handleSubmit = (e: CustomEvent) => {
     value = e.detail.value;
-    dispatch('update', {value});
+    dispatch('update', { value });
     toggleEditMode();
   };
 
@@ -40,7 +38,7 @@
   };
 </script>
 
-<svelte:component this={type} {menu} bind:editMode {sticky} bind:showMenu class={classes}>
+<svelte:component this={type} {menu} bind:editMode {sticky} bind:showMenu {...{ class: classes }}>
   <slot name="indent" slot="indent"/>
   <slot name="pre" slot="pre"/>
   <svelte:fragment slot="edit">
