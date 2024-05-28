@@ -8,15 +8,13 @@
   import type {Writable} from 'svelte/store';
   import {setContext} from 'svelte';
 
-  import {
-    products, productFilter, filteredProducts, productFeatures, releases
-  } from '$lib/stores';
+  import {products, productFilter, filteredProducts, productFeatures, releases} from '$lib/stores';
   import RoadMapCell from '$lib/components/unified/cells/RoadMapCell.svelte';
 
   let editable: Writable<boolean> = writable(false);
   setContext('editable', editable);
 
-  $: sortedReleases = $releases.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  $: sortedReleases = $releases.sort((a, b) => new Date(a.date ?? '').getTime() - new Date(b.date ?? '').getTime());
 </script>
 
 <div class="grow overflow-auto flex flex-col">
@@ -35,7 +33,7 @@
         <Header centered>
           <div
             class="tooltip tooltip-bottom"
-            data-tip="{release.released ? 'Released' : 'Will be released'} on: {new Date(release.date).toLocaleDateString()}"
+            data-tip="{release.released ? 'Released' : 'Will be released'} on: {release.date ? new Date(release.date).toLocaleDateString() : 'Unknown date'}"
           >
             {release.name}
           </div>
