@@ -3,7 +3,6 @@ import daisyui from "daisyui";
 import typography from "@tailwindcss/typography";
 
 const config: Config = {
-  mode: 'jit',
   content: ['./src/**/*.{html,js,svelte,ts, css}'],
   theme: {
     extend: {
