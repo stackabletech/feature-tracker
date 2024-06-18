@@ -1,25 +1,25 @@
 <script lang="ts">
-  import {clickOutsideAction} from '$lib/actions/clickOutside';
+  import { clickoutside } from '$lib/actions/clickoutside';
   import AddButton from '$lib/components/ui/AddButton.svelte';
   import DeleteButton from '$lib/components/ui/DeleteButton.svelte';
   import InfoButton from '$lib/components/ui/InfoButton.svelte';
   import HoverNote from '$lib/components/ui/HoverNote.svelte';
 
-  import {productFeatures, products, releases, showUnreleasedProductFeatures} from '$lib/stores';
+  import { productFeatures, products, releases, showUnreleasedProductFeatures } from '$lib/stores';
 
-  import {info, danger} from '$lib/util/alert';
+  import { info, danger } from '$lib/util/alert';
 
   import ProductFeatureModal from '$lib/components/ui/ProductFeatureModal.svelte';
   import ImplementationIcon from '$lib/components/ui/ImplementationIcon.svelte';
   import ProductFeatureInput from '$lib/components/ui/ProductFeatureInput.svelte';
 
-  import type {Feature, Product, ProductFeature} from '$lib/prisma';
-  import {MinusIcon, InfoIcon} from 'svelte-feather-icons';
+  import type { Feature, Product, ProductFeature } from '$lib/prisma';
+  import { MinusIcon, InfoIcon } from 'svelte-feather-icons';
 
   import Data from './Data.svelte';
 
-  import type {Writable} from 'svelte/store';
-  import {getContext} from 'svelte';
+  import type { Writable } from 'svelte/store';
+  import { getContext } from 'svelte';
 
   let editable: Writable<boolean> = getContext('editable');
 
@@ -31,10 +31,15 @@
 
   const addProductFeature = async (e: CustomEvent) => {
     const res = await fetch('/api/product_features.json', {
-      method: 'POST', headers: {
+      method: 'POST',
+      headers: {
         'Content-Type': 'application/json'
-      }, body: JSON.stringify({
-        product_id: product.id, feature_id: feature.id, implementation_status: e.detail.status, release_id: e.detail.release
+      },
+      body: JSON.stringify({
+        product_id: product.id,
+        feature_id: feature.id,
+        implementation_status: e.detail.status,
+        release_id: e.detail.release
       })
     });
 
@@ -45,7 +50,7 @@
       $products = [...$products]; // forces rerendering of the table
       endAdding();
     } else {
-      const {code, message} = await res.json();
+      const { code, message } = await res.json();
       danger(`${code}: ${message}`);
     }
   };
@@ -58,19 +63,24 @@
     if (res.ok) {
       $productFeatures = [...$productFeatures.filter((pf) => pf.id !== productFeature.id)];
       $products = [...$products]; // forces rerendering of the table
-      info(`Deleted product feature #${productFeature.id}: ${productFeature.product_id} ${productFeature.feature_id}`);
+      info(
+        `Deleted product feature #${productFeature.id}: ${productFeature.product_id} ${productFeature.feature_id}`
+      );
     } else {
-      const {code, message} = await res.json();
+      const { code, message } = await res.json();
       danger(`${code}: ${message}`);
     }
   };
 
   const updateProductFeature = async (e: CustomEvent) => {
     const res = await fetch(`/api/product_features/${productFeature.id}.json`, {
-      method: 'PATCH', headers: {
+      method: 'PATCH',
+      headers: {
         'Content-Type': 'application/json'
-      }, body: JSON.stringify({
-        implementation_status: e.detail.status, release_id: e.detail.release
+      },
+      body: JSON.stringify({
+        implementation_status: e.detail.status,
+        release_id: e.detail.release
       })
     });
 
@@ -81,7 +91,7 @@
       const json = await res.json();
       info(`Updated product feature #${json.id}: ${json.product_id} ${json.feature_id}`);
     } else {
-      const {code, message} = await res.json();
+      const { code, message } = await res.json();
       danger(`${code}: ${message}`);
     }
   };
@@ -103,11 +113,11 @@
 {#if adding}
   <th>
     <div class="w-72">
-      <ProductFeatureInput on:submit={addProductFeature} on:cancel={endAdding}/>
+      <ProductFeatureInput on:submit={addProductFeature} on:cancel={endAdding} />
     </div>
   </th>
 {:else if editMode}
-  <th use:clickOutsideAction on:clickoutside={toggleEditMode}>
+  <th use:clickoutside on:clickoutside={toggleEditMode}>
     <div class="w-72">
       <ProductFeatureInput
         on:submit={updateProductFeature}
@@ -120,7 +130,7 @@
 {:else if productFeature && ($showUnreleasedProductFeatures || release?.released)}
   <Data menu={$editable} centered>
     <div
-      class="flex flex-row gap-2 items-center justify-center {$editable
+      class="flex flex-row items-center justify-center gap-2 {$editable
         ? 'cursor-cell'
         : 'cursor-pointer'}"
       on:click={handleClick}
@@ -131,8 +141,8 @@
       />
     </div>
     <div class="flex flex-row justify-center gap-1" slot="menu">
-      <InfoButton on:click={showInfo}/>
-      <DeleteButton on:click={deleteProductFeature}/>
+      <InfoButton on:click={showInfo} />
+      <DeleteButton on:click={deleteProductFeature} />
     </div>
     <svelte:fragment slot="note">
       <HoverNote note={productFeature.note}>
@@ -153,29 +163,29 @@
     </svelte:fragment>
     <svelte:fragment slot="post">
       {#if productFeature.note}
-        <InfoIcon size="16" class="text-base opacity-25 group-hover:opacity-100"/>
+        <InfoIcon size="16" class="text-base opacity-25 group-hover:opacity-100" />
       {/if}
     </svelte:fragment>
   </Data>
 {:else if product && feature && !release}
   <Data centered>
     {#if $editable}
-      <AddButton on:click={startAdding} tip="add product feature"/>
+      <AddButton on:click={startAdding} tip="add product feature" />
     {:else}
       <div
-        class="flex flex-row gap-2 items-center justify-center cursor-pointer"
+        class="flex cursor-pointer flex-row items-center justify-center gap-2"
         on:click={showInfo}
       >
-        <ImplementationIcon status={'NOT_AVAILABLE'} released={false}/>
+        <ImplementationIcon status={'NOT_AVAILABLE'} released={false} />
       </div>
     {/if}
   </Data>
 {:else}
   <Data centered>
-    <MinusIcon size="16" class="mx-auto text-base-300"/>
+    <MinusIcon size="16" class="mx-auto text-base-300" />
   </Data>
 {/if}
 
 {#if modal}
-  <ProductFeatureModal {product} {feature} {productFeature} on:close={hideInfo}/>
+  <ProductFeatureModal {product} {feature} {productFeature} on:close={hideInfo} />
 {/if}

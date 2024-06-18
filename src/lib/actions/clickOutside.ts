@@ -1,26 +1,33 @@
-// Copied from svelte-legos
-import {listen} from "svelte/internal";
-import type {ActionReturn} from "svelte/action";
+// adapted from @nikolai-cc/svu clickoutside action
+
+import type { ActionReturn } from 'svelte/action';
 
 interface Attributes {
-  "on:clickoutside"?: (e: CustomEvent<void>) => void;
+	'on:clickoutside'?: (event: CustomEvent<Event>) => void;
 }
 
-type Callback = () => unknown
+/**
+ * Dispatches a `clickoutside` event on 'node' with the original event as `detail`.
+ *
+ * Example:
+ * ```svelte
+ * <element use:clickoutside on:!clickoutside={handler} />
+ * ```
+ */
+export function clickoutside(
+	node: HTMLElement
+): ActionReturn<undefined, Attributes> {
 
-export function clickOutsideAction(node: HTMLElement, callback?: Callback): ActionReturn<{}, Attributes> {
-  const handleClick = (event: Event) => {
-    if (event.target !== null && !node.contains(event.target as Node)) {
-      node.dispatchEvent(new CustomEvent("clickoutside"));
-      callback?.();
-    }
-  };
+	function handleClick(event: Event) {
+		if (!node.contains(event.target as Node)) {
+			node.dispatchEvent(new CustomEvent('clickoutside', { detail: event }));
+		}
+	}
 
-  const stop = listen(document, "click", handleClick, true);
+	document.addEventListener('click', handleClick, true);
 
-  return {
-    destroy() {
-      stop();
-    },
-  };
+	return {
+		update: () => {},
+		destroy: () => document.removeEventListener('click', handleClick, true)
+	};
 }

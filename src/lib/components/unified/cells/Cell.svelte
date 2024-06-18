@@ -1,6 +1,6 @@
 <script lang="ts">
-  import {portal} from '$lib/actions/portal';
-  import {clickOutsideAction} from '$lib/actions/clickOutside';
+  import { portal } from '$lib/actions/portal';
+  import { clickoutside } from '$lib/actions/clickoutside';
 
   import CloseButton from '$lib/components/ui/CloseButton.svelte';
   import MenuButton from '$lib/components/ui/MenuButton.svelte';
@@ -31,42 +31,42 @@
 </script>
 
 <div
-  class="flex flex-row items-center transition-all w-full min-w-[12rem]
+  class="flex w-full min-w-[12rem] flex-row items-center transition-all
     {centered ? 'justify-between' : 'justify-start'}
     "
   on:pointerover={showNote}
   on:pointerleave={hideNote}
 >
   {#if showMenu}
-    <div class="flex flex-row items-between w-full" use:clickOutsideAction on:clickoutside={toggleMenu}>
-      <slot name="indent"/>
+    <div class="items-between flex w-full flex-row" use:clickoutside on:clickoutside={toggleMenu}>
+      <slot name="indent" />
       <div class="w-8">
-        <slot name="pre"/>
+        <slot name="pre" />
       </div>
       <div class="grow">
-        <slot name="menu"/>
+        <slot name="menu" />
       </div>
       <div class="w-8">
-        <CloseButton on:click={toggleMenu}/>
+        <CloseButton on:click={toggleMenu} />
       </div>
     </div>
   {:else if editMode}
-    <div class="mx-2 text-center" use:clickOutsideAction on:clickoutside={toggleEditMode}>
-      <slot name="edit"/>
+    <div class="mx-2 text-center" use:clickoutside on:clickoutside={toggleEditMode}>
+      <slot name="edit" />
     </div>
   {:else}
-    <slot name="indent"/>
+    <slot name="indent" />
     <div class="w-8">
-      <slot name="pre"/>
+      <slot name="pre" />
     </div>
     <div class="mx-2 grow {centered && 'text-center'}">
-      <slot/>
+      <slot />
     </div>
     <div class="w-8">
       {#if menu}
-        <MenuButton on:click={toggleMenu}/>
+        <MenuButton on:click={toggleMenu} />
       {:else}
-        <slot name="post"/>
+        <slot name="post" />
       {/if}
     </div>
   {/if}
@@ -74,6 +74,6 @@
 
 {#if note}
   <div class="note" use:portal={'#mouse'}>
-    <slot name="note"/>
+    <slot name="note" />
   </div>
 {/if}
