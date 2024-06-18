@@ -1,13 +1,17 @@
 <script lang="ts">
-  import {features, featuresWithParents, products} from '$lib/stores';
+  import { features, featuresWithParents, products } from '$lib/stores';
   import ProductFeatureModal from '$lib/components/ui/ProductFeatureModal.svelte';
-  import type {ProductFeature, Feature, Product, Release} from '@prisma/client';
+  import type { ProductFeature, Feature, Product, Release } from '@prisma/client';
 
   export let productFeature: ProductFeature;
   export let release: Release;
 
-  let feature: Feature | undefined = $features.find((feature) => feature.id === productFeature.feature_id);
-  let product: Product | undefined = $products.find((product) => product.id === productFeature.product_id);
+  let feature: Feature | undefined = $features.find(
+    (feature) => feature.id === productFeature.feature_id
+  );
+  let product: Product | undefined = $products.find(
+    (product) => product.id === productFeature.product_id
+  );
 
   let modal: boolean = false;
   let showInfo = () => {
@@ -17,7 +21,9 @@
     modal = false;
   };
 
-  $: path = feature ? $featuresWithParents.find((c) => c.id === feature.id)?.parents.join(' > ') : undefined;
+  $: path = feature
+    ? $featuresWithParents.find((c) => c.id === feature.id)?.parents.join(' > ')
+    : undefined;
 
   import ImplementationIcon from '$lib/components/ui/ImplementationIcon.svelte';
 </script>
@@ -36,7 +42,6 @@
   </div>
 
   {#if modal}
-    <ProductFeatureModal {product} {feature} {productFeature} on:close={hideInfo}/>
+    <ProductFeatureModal {product} {feature} {productFeature} on:close={hideInfo} />
   {/if}
-
 {/if}

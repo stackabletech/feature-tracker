@@ -1,10 +1,10 @@
 <script lang="ts">
-  import {goto} from '$app/navigation';
+  import { goto } from '$app/navigation';
   import Code from '$lib/components/Code.svelte';
-  import type {PageData} from './$types';
+  import type { PageData } from './$types';
 
   export let data: PageData;
-  $: ({releases} = data);
+  $: ({ releases } = data);
 </script>
 
 <Code filename="/api/releases.json">

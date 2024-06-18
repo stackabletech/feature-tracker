@@ -11,14 +11,14 @@
  * ```
  */
 export function portal(node: HTMLElement, target: HTMLElement | string) {
-	let targetElement = typeof target === 'string' ? document.querySelector(target) : target
-	if (targetElement) targetElement.appendChild(node);
+  let targetElement = typeof target === 'string' ? document.querySelector(target) : target;
+  if (targetElement) targetElement.appendChild(node);
 
-	return {
-		update: (target: HTMLElement | string) => {
-			targetElement =  typeof target === 'string' ? document.querySelector(target) : target
-			if (targetElement) targetElement.appendChild(node);
-		},
-		destroy: () => node.parentElement?.removeChild(node)
-	};
+  return {
+    update: (target: HTMLElement | string) => {
+      targetElement = typeof target === 'string' ? document.querySelector(target) : target;
+      if (targetElement) targetElement.appendChild(node);
+    },
+    destroy: () => node.parentElement?.removeChild(node)
+  };
 }

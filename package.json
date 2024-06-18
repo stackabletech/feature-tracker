@@ -47,6 +47,6 @@
     "dotenv": "^16.4.5",
     "marked": "^13.0.0",
     "theme-change": "^2.5.0"
-    },
+  },
   "type": "module"
 }

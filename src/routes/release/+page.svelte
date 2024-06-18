@@ -4,20 +4,28 @@
   import Product from '$lib/components/unified/cells/Product.svelte';
   import Table from '$lib/components/unified/table/Table.svelte';
 
-  import {writable} from 'svelte/store';
-  import type {Writable} from 'svelte/store';
-  import {setContext} from 'svelte';
+  import { writable } from 'svelte/store';
+  import type { Writable } from 'svelte/store';
+  import { setContext } from 'svelte';
 
-  import {products, productFilter, filteredProducts, productFeatures, releases} from '$lib/stores';
+  import {
+    products,
+    productFilter,
+    filteredProducts,
+    productFeatures,
+    releases
+  } from '$lib/stores';
   import RoadMapCell from '$lib/components/unified/cells/RoadMapCell.svelte';
 
   let editable: Writable<boolean> = writable(false);
   setContext('editable', editable);
 
-  $: sortedReleases = $releases.sort((a, b) => new Date(a.date ?? '').getTime() - new Date(b.date ?? '').getTime());
+  $: sortedReleases = $releases.sort(
+    (a, b) => new Date(a.date ?? '').getTime() - new Date(b.date ?? '').getTime()
+  );
 </script>
 
-<div class="grow overflow-auto flex flex-col">
+<div class="flex grow flex-col overflow-auto">
   <Table>
     <svelte:fragment slot="head">
       <!-- Product Header -->
@@ -33,7 +41,9 @@
         <Header centered>
           <div
             class="tooltip tooltip-bottom"
-            data-tip="{release.released ? 'Released' : 'Will be released'} on: {release.date ? new Date(release.date).toLocaleDateString() : 'Unknown date'}"
+            data-tip="{release.released ? 'Released' : 'Will be released'} on: {release.date
+              ? new Date(release.date).toLocaleDateString()
+              : 'Unknown date'}"
           >
             {release.name}
           </div>
@@ -44,13 +54,13 @@
       {#each $filteredProducts as product}
         <tr>
           <!-- Product Titles -->
-          <Product {product}/>
+          <Product {product} />
           <!-- Features -->
           {#each sortedReleases as release}
             <td class="text-center">
               <div class="flex flex-row justify-center">
                 {#each $productFeatures.filter((pf) => pf.product_id === product.id && pf.release_id === release.id) as productFeature}
-                  <RoadMapCell {productFeature} {release}/>
+                  <RoadMapCell {productFeature} {release} />
                 {/each}
               </div>
             </td>

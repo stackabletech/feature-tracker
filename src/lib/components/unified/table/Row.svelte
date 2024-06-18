@@ -1,9 +1,9 @@
 <script lang="ts">
-  import {GitCommitIcon} from 'svelte-feather-icons';
-  import {filteredProducts, productFeatures} from '$lib/stores';
+  import { GitCommitIcon } from 'svelte-feather-icons';
+  import { filteredProducts, productFeatures } from '$lib/stores';
 
-  import type {HierarchicalCategory} from '$lib/stores';
-  import type {Product, Feature as FeatureType} from '$lib/prisma';
+  import type { HierarchicalCategory } from '$lib/stores';
+  import type { Product, Feature as FeatureType } from '$lib/prisma';
 
   import Category from '../cells/Category.svelte';
   import Feature from '../cells/Feature.svelte';
@@ -26,20 +26,20 @@
 <tr class="hover">
   <!-- First Column: Category Header -->
   {#if showCategory}
-    <Category {category} bind:expanded {level}/>
+    <Category {category} bind:expanded {level} />
   {:else}
     <Header>
       <span slot="indent" class="flex flex-row first:ml-0.5">
         {#each Array(level) as _}
-          <GitCommitIcon size="18" class="text-base-300"/>
+          <GitCommitIcon size="18" class="text-base-300" />
         {/each}
       </span>
     </Header>
   {/if}
   <!-- Second Column: Feature Header -->
-  <Feature {feature} {category}/>
+  <Feature {feature} {category} />
   <!-- Rest Columns: ProductFeature Cells -->
   {#each $filteredProducts as product}
-    <ProductFeature productFeature={getProductFeature(product, feature)} {product} {feature}/>
+    <ProductFeature productFeature={getProductFeature(product, feature)} {product} {feature} />
   {/each}
 </tr>

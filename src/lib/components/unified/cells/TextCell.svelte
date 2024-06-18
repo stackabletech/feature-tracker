@@ -39,13 +39,13 @@
 </script>
 
 <svelte:component this={type} {menu} bind:editMode {sticky} bind:showMenu {...{ class: classes }}>
-  <slot name="indent" slot="indent"/>
-  <slot name="pre" slot="pre"/>
+  <slot name="indent" slot="indent" />
+  <slot name="pre" slot="pre" />
   <svelte:fragment slot="edit">
-    <TextInput {value} on:submit={handleSubmit} on:cancel={handleCancel}/>
+    <TextInput {value} on:submit={handleSubmit} on:cancel={handleCancel} />
   </svelte:fragment>
   <span on:click={toggleEditMode} class={$editable && 'cursor-cell'}>{value}</span>
-  <slot name="menu" slot="menu"/>
-  <slot name="note" slot="note"/>
-  <slot name="post" slot="post"/>
+  <slot name="menu" slot="menu" />
+  <slot name="note" slot="note" />
+  <slot name="post" slot="post" />
 </svelte:component>

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type {HierarchicalCategory} from '$lib/stores';
-  import {filteredFeatures, filteredProducts} from '$lib/stores';
-  import {afterUpdate, getContext, tick} from 'svelte';
-  import type {Writable} from 'svelte/store';
+  import type { HierarchicalCategory } from '$lib/stores';
+  import { filteredFeatures, filteredProducts } from '$lib/stores';
+  import { afterUpdate, getContext, tick } from 'svelte';
+  import type { Writable } from 'svelte/store';
 
   import FeatureRow from './FeatureRow.svelte';
   import Category from '../cells/Category.svelte';
@@ -27,22 +27,22 @@
   let editable: Writable<boolean> = getContext('editable');
 </script>
 
-<tr class="hover category">
+<tr class="category hover">
   <!-- First Column: Category Name -->
-  <Category {category} bind:expanded {level}/>
+  <Category {category} bind:expanded {level} />
   <!-- Rest Columns: ProductFeature Cells -->
-  <td colspan={$filteredProducts.length}/>
+  <td colspan={$filteredProducts.length} />
 </tr>
 
 {#if expanded}
   {#each categoryFeatures as feature, n}
-    <FeatureRow {category} {feature}/>
+    <FeatureRow {category} {feature} />
   {/each}
   {#if $editable}
-    <FeatureRow {category}/>
+    <FeatureRow {category} />
   {/if}
 
   {#each category.children ?? [] as child (child.id)}
-    <svelte:self category={child} level={level + 1} expanded={expandAll} {expandAll}/>
+    <svelte:self category={child} level={level + 1} expanded={expandAll} {expandAll} />
   {/each}
 {/if}

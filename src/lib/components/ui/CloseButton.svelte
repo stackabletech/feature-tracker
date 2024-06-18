@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { XIcon } from 'svelte-feather-icons';
-	import Button from './Button.svelte';
+  import { XIcon } from 'svelte-feather-icons';
+  import Button from './Button.svelte';
 
-	let classes: string = '';
-	export let tipPlacement: string = 'right';
+  let classes: string = '';
+  export let tipPlacement: string = 'right';
 
-	export { classes as class };
+  export { classes as class };
 </script>
 
 <Button on:click class={classes} tip="close" {tipPlacement}>
-	<XIcon size="16" />
+  <XIcon size="16" />
 </Button>

@@ -6,9 +6,9 @@
 
 // ----------------------------------------------------------------------------
 
-import Prisma, * as PrismaAll from '@prisma/client'
-const pc = Prisma?.PrismaClient || PrismaAll?.PrismaClient
-export const prisma = new pc()
+import Prisma, * as PrismaAll from '@prisma/client';
+const pc = Prisma?.PrismaClient || PrismaAll?.PrismaClient;
+export const prisma = new pc();
 
 // ----------------------------------------------------------------------------
 
@@ -27,6 +27,13 @@ export const prisma = new pc()
 //     });
 // }
 
-import type { Category, Feature, Product, ProductFeature, ImplementationStatus, Release } from '@prisma/client';
+import type {
+  Category,
+  Feature,
+  Product,
+  ProductFeature,
+  ImplementationStatus,
+  Release
+} from '@prisma/client';
 
 export type { Category, Feature, Product, ProductFeature, ImplementationStatus, Release };
