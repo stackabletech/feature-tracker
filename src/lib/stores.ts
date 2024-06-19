@@ -2,11 +2,16 @@ import type { Product, Category, Feature, ProductFeature, Release } from '$lib/p
 import { writable, derived } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 
-export interface Sortable<T> extends Writable<T> {
-  sort(sorting: 'id' | 'name', direction: 'asc' | 'desc'): void;
+export interface SortableItem {
+  id: number;
+  name: string;
 }
 
-const sortable = (content: any[]) => {
+export interface Sortable<T extends SortableItem[]> extends Writable<T[]> {
+  sort: (sorting: 'id' | 'name', direction: 'asc' | 'desc') => void;
+}
+
+const sortable = <T extends SortableItem>(content: T[]) => {
   const { subscribe, set, update } = writable(content);
 
   const sort = (sorting: 'id' | 'name', direction: 'asc' | 'desc') => {
