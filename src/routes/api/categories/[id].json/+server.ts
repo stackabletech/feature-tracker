@@ -17,7 +17,7 @@ export const GET = async ({ params }) => {
 // PATCH /categories/:id.json
 export const PATCH = async ({ params, request }) => {
   const id = parseInt(params.id);
-  
+
   const data = await request.json();
   const { name, parent_id, note } = data;
 
@@ -26,7 +26,8 @@ export const PATCH = async ({ params, request }) => {
       {
         code: 'INVALID_PARENT_ID',
         message: 'Cannot set parent_id to the same value as the category id'
-      }, {
+      },
+      {
         status: 400
       }
     );

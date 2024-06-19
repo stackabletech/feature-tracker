@@ -17,7 +17,7 @@ export const GET = async ({ params }) => {
 // PATCH /release/:id.json
 export const PATCH = async ({ params, request }) => {
   const id = parseInt(params.id);
-  
+
   const data = await request.json();
   const { name, date, released } = data;
 

@@ -151,7 +151,7 @@ interface Hierarchical extends SortableItem {
 
 const findParent = <T extends Hierarchical>(array: T[], parentId: number | null) => {
   return array.find((child) => child.id === parentId);
-}
+};
 
 const buildParentList = <T extends Hierarchical>(root: T, array: T[]) => {
   const parents: string[] = [];
@@ -164,8 +164,7 @@ const buildParentList = <T extends Hierarchical>(root: T, array: T[]) => {
 
   parents.reverse();
   return parents;
-}
-
+};
 
 // This store contains a list of all categories with a recursive array of parents.
 export const categoriesWithParents = derived(categories, ($categories: Category[]) => {
