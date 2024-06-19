@@ -51,7 +51,7 @@ export const categories: Sortable<Category> = sortable([]);
 export const products: Sortable<Product> = sortable([]);
 export const features: Sortable<Feature> = sortable([]);
 export const productFeatures: Writable<ProductFeature[]> = writable();
-export const releases: Writable<Release> = writable();
+export const releases: Sortable<Release> = sortable([]);
 
 // Filter Stores
 export const categoryFilter: Writable<string> = writable();
