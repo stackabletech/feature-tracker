@@ -1,38 +1,45 @@
 import { json } from '@sveltejs/kit';
-import { prisma } from '$lib/prisma';
-// import type { ProductFeature } from "@prisma/client";
-
-/*
-    Typing disabled because of this bug: https://github.com/prisma/prisma/issues/10404
-*/
+import { prismaErrorResponse, requiredFieldErrorResponse } from '$lib/api/error.js';
+import { getProductFeatures, createProductFeature } from '$lib/api/productfeature.js';
 
 // GET /product_features.json
-export const GET = async ({}) => {
+export const GET = async () => {
   try {
-    const body = await prisma.productFeature.findMany();
-    return json(body);
-  } catch ({ code, message }) {
-    return json(
-      { code, message },
-      {
-        status: 500
-      }
-    );
+    const product_features = await getProductFeatures();
+    return json(product_features);
+  } catch (e) {
+    return prismaErrorResponse(e);
   }
 };
 
 // POST /product_features.json
 export const POST = async ({ request }) => {
   const data = await request.json();
+
+  const { product_id, feature_id, implementation_status, release_id, note } = data;
+
+  if (!product_id) {
+    return requiredFieldErrorResponse('product_id');
+  }
+
+  if (!feature_id) {
+    return requiredFieldErrorResponse('feature_id');
+  }
+
+  if (!implementation_status) {
+    return requiredFieldErrorResponse('implementation_status');
+  }
+
   try {
-    const body = await prisma.productFeature.create({ data });
-    return json(body);
-  } catch ({ code, message }) {
-    return json(
-      { code, message },
-      {
-        status: 500
-      }
-    );
+    const product_feature = await createProductFeature({
+      product_id,
+      feature_id,
+      implementation_status,
+      release_id,
+      note
+    });
+    return json(product_feature, { status: 201 });
+  } catch (e) {
+    return prismaErrorResponse(e);
   }
 };

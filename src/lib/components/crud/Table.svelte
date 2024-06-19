@@ -8,7 +8,7 @@
   export let data: DBObject[];
   export let endpoint: string;
 
-  const addRow = async (newRow) => {
+  const addRow = async (newRow: Record<string, any>) => {
     const res = await fetch(`${endpoint}.json`, {
       method: 'POST',
       headers: {
@@ -17,7 +17,7 @@
       body: JSON.stringify(newRow)
     });
 
-    if (res.status === 200) {
+    if (res.status === 201) {
       const json = await res.json();
       data = [...data, json];
       newObject = {};
@@ -34,7 +34,7 @@
     (data = [...data.map((obj) => (obj.id == e.detail.data.id ? e.detail.data : obj))]);
 
   const keys = (data[0] && Object.keys(data[0])) || [];
-  let newObject = {};
+  let newObject: Record<string, any> = {};
 </script>
 
 <table class="table table-zebra table-compact my-2">

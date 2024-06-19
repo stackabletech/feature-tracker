@@ -1,43 +1,31 @@
 import { json } from '@sveltejs/kit';
-import { prisma } from '$lib/prisma';
+import { prismaErrorResponse } from '$lib/api/error.js';
+import { getProduct, updateProduct, deleteProduct } from '$lib/api/product.js';
 
 // GET /products/:id.json
 export const GET = async ({ params }) => {
   const id = parseInt(params.id);
 
   try {
-    const body = await prisma.product.findUnique({
-      where: { id }
-    });
-    return json(body);
-  } catch ({ code, message }) {
-    return json(
-      { code, message },
-      {
-        status: 500
-      }
-    );
+    const product = await getProduct(id);
+    return json(product);
+  } catch (e) {
+    return prismaErrorResponse(e);
   }
 };
 
 // PATCH /products/:id.json
 export const PATCH = async ({ params, request }) => {
-  const data = await request.json();
   const id = parseInt(params.id);
+  
+  const data = await request.json();
+  const { name, code_name, note } = data;
 
   try {
-    const body = await prisma.product.update({
-      where: { id },
-      data
-    });
-    return json(body);
-  } catch ({ code, message }) {
-    return json(
-      { code, message },
-      {
-        status: 500
-      }
-    );
+    const product = await updateProduct(id, { name, code_name, note });
+    return json(product);
+  } catch (e) {
+    return prismaErrorResponse(e);
   }
 };
 
@@ -46,16 +34,9 @@ export const DELETE = async ({ params }) => {
   const id = parseInt(params.id);
 
   try {
-    const body = await prisma.product.delete({
-      where: { id }
-    });
-    return json(body);
-  } catch ({ code, message }) {
-    return json(
-      { code, message },
-      {
-        status: 500
-      }
-    );
+    const product = await deleteProduct(id);
+    return json(product);
+  } catch (e) {
+    return prismaErrorResponse(e);
   }
 };

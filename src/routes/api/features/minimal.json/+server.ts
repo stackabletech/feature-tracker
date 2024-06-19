@@ -1,20 +1,13 @@
 import { json } from '@sveltejs/kit';
-import { prisma } from '$lib/prisma';
+import { prismaErrorResponse } from '$lib/api/error';
+import { getMinimalFeatures } from '$lib/api/feature';
 
-// GET /features/ids.json
-export const GET = async ({}) => {
+// GET /features/minimal.json
+export const GET = async () => {
   try {
-    const body = await prisma.feature.findMany({
-      select: { id: true, name: true },
-      orderBy: { name: 'asc' }
-    });
-    return json(body);
-  } catch ({ code, message }) {
-    return json(
-      { code, message },
-      {
-        status: 500
-      }
-    );
+    const features = await getMinimalFeatures();
+    return json(features);
+  } catch (e) {
+    return prismaErrorResponse(e);
   }
 };

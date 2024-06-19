@@ -1,44 +1,31 @@
 import { json } from '@sveltejs/kit';
-import { prisma } from '$lib/prisma';
+import { prismaErrorResponse } from '$lib/api/error';
+import { getFeature, updateFeature, deleteFeature } from '$lib/api/feature';
 
 // GET /features/:id.json
 export const GET = async ({ params }) => {
   const id = parseInt(params.id);
 
   try {
-    const body = await prisma.feature.findUnique({
-      where: { id }
-    });
-    return json(body);
-  } catch ({ code, message }) {
-    return json(
-      { code, message },
-      {
-        status: 500
-      }
-    );
+    const feature = await getFeature(id);
+    return json(feature);
+  } catch (e) {
+    return prismaErrorResponse(e);
   }
 };
 
 // PATCH /features/:id.json
 export const PATCH = async ({ params, request }) => {
-  const data = await request.json();
   const id = parseInt(params.id);
-  data.category_id = data.category_id || null;
+  
+  const data = await request.json();
+  const { name, category_id, note } = data;
 
   try {
-    const body = await prisma.feature.update({
-      where: { id },
-      data
-    });
-    return json(body);
-  } catch ({ code, message }) {
-    return json(
-      { code, message },
-      {
-        status: 500
-      }
-    );
+    const feature = await updateFeature(id, { name, category_id, note });
+    return json(feature);
+  } catch (e) {
+    return prismaErrorResponse(e);
   }
 };
 
@@ -47,16 +34,9 @@ export const DELETE = async ({ params }) => {
   const id = parseInt(params.id);
 
   try {
-    const body = await prisma.feature.delete({
-      where: { id }
-    });
-    return json(body);
-  } catch ({ code, message }) {
-    return json(
-      { code, message },
-      {
-        status: 500
-      }
-    );
+    const feature = await deleteFeature(id);
+    return json(feature);
+  } catch (e) {
+    return prismaErrorResponse(e);
   }
 };
