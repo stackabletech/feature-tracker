@@ -7,11 +7,11 @@ export interface SortableItem {
   name: string;
 }
 
-export interface Sortable<T extends SortableItem[]> extends Writable<T[]> {
+export interface Sortable<T extends SortableItem> extends Writable<T[]> {
   sort: (sorting: 'id' | 'name', direction: 'asc' | 'desc') => void;
 }
 
-const sortable = <T extends SortableItem>(content: T[]) => {
+const sortable = <T extends SortableItem>(content: T[]): Sortable<T> => {
   const { subscribe, set, update } = writable(content);
 
   const sort = (sorting: 'id' | 'name', direction: 'asc' | 'desc') => {
@@ -47,11 +47,11 @@ const sortable = <T extends SortableItem>(content: T[]) => {
 };
 
 // These stores contain the data in a flat array.
-export const categories: Sortable<Category[]> = sortable([]);
-export const products: Sortable<Product[]> = sortable([]);
-export const features: Sortable<Feature[]> = sortable([]);
+export const categories: Sortable<Category> = sortable([]);
+export const products: Sortable<Product> = sortable([]);
+export const features: Sortable<Feature> = sortable([]);
 export const productFeatures: Writable<ProductFeature[]> = writable();
-export const releases: Writable<Release[]> = writable();
+export const releases: Writable<Release> = writable();
 
 // Filter Stores
 export const categoryFilter: Writable<string> = writable();
@@ -64,7 +64,7 @@ export const showUnusedFeatures: Writable<boolean> = writable(true);
 export const showUnreleasedProductFeatures: Writable<boolean> = writable(true);
 
 // Filtered stores
-export const stringFilter = (store: any, filter: string) => {
+export const stringFilter = <T extends SortableItem>(store: T[], filter: string): T[] => {
   if (!store) return [];
   if (!filter) return store;
   return store.filter((item: { name: string }) =>
@@ -131,7 +131,7 @@ export type HierarchicalCategory = Category & { children?: HierarchicalCategory[
 
 // This function recursively builds up a tree of categories.
 const buildTree = (array: HierarchicalCategory[], base: HierarchicalCategory[]) => {
-  return base.reduce((acc, item) => {
+  return base.reduce<HierarchicalCategory[]>((acc, item) => {
     item.children = array.filter((child) => child.parent_id === item.id);
     item.children = buildTree(array, item.children);
     return [...acc, item];
@@ -140,21 +140,37 @@ const buildTree = (array: HierarchicalCategory[], base: HierarchicalCategory[]) 
 
 // This store contains an up-to-date tree of categories.
 export const categoryTree = derived(filteredCategories, ($categories: Category[]) => {
-  let base: HierarchicalCategory[] = $categories.filter((c) => c.parent_id === null);
+  const base: HierarchicalCategory[] = $categories.filter((c) => c.parent_id === null);
   buildTree($categories, base);
   return base;
 });
 
+interface Hierarchical extends SortableItem {
+  parent_id: number | null;
+}
+
+const findParent = <T extends Hierarchical>(array: T[], parentId: number | null) => {
+  return array.find((child) => child.id === parentId);
+}
+
+const buildParentList = <T extends Hierarchical>(root: T, array: T[]) => {
+  const parents: string[] = [];
+  let parent = findParent(array, root.parent_id);
+
+  while (parent) {
+    parents.push(parent.name);
+    parent = findParent(array, parent.parent_id);
+  }
+
+  parents.reverse();
+  return parents;
+}
+
+
 // This store contains a list of all categories with a recursive array of parents.
 export const categoriesWithParents = derived(categories, ($categories: Category[]) => {
   return $categories.map((category) => {
-    const parents = [];
-    let parent = category;
-    while (parent.parent_id) {
-      parent = $categories.find((c) => c.id === parent.parent_id);
-      parents.push(parent.name);
-    }
-    parents.reverse();
+    const parents = category.parent_id ? buildParentList(category, $categories) : [];
     return { id: category.id, name: category.name, parents };
   });
 });
@@ -163,17 +179,8 @@ export const categoriesWithParents = derived(categories, ($categories: Category[
 export const featuresWithParents = derived([categories, features], ([$categories, $features]) => {
   return $features
     .map((feature) => {
-      const parents = [];
-      let parent: Category;
-      if (feature.category_id) {
-        parent = $categories.find((c) => c.id === feature.category_id);
-        parents.push(parent.name);
-        while (parent.parent_id) {
-          parent = $categories.find((c) => c.id === parent.parent_id);
-          parents.push(parent.name);
-        }
-      }
-      parents.reverse();
+      const category = $categories.find((c) => c.id === feature.category_id);
+      const parents = category ? buildParentList(category, $categories) : [];
       return { id: feature.id, name: feature.name, parents };
     })
     .sort((a, b) => a.name.localeCompare(b.name));
