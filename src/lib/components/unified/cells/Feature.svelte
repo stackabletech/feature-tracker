@@ -24,10 +24,15 @@
   let editable: Writable<boolean> = getContext('editable');
   let showMenu: boolean = false;
 
-  export let feature: Feature = undefined;
-  export let category: Category = undefined;
+  export let feature: Feature | undefined = undefined;
+  export let category: Category | undefined = undefined;
 
   const addFeature = async (e: CustomEvent) => {
+    if (!category) {
+      danger('Category is required');
+      return;
+    }
+
     showMenu = false;
 
     const res = await fetch('/api/features.json', {
@@ -73,6 +78,11 @@
   };
 
   const deleteFeature = async () => {
+    if (!feature) {
+      danger('Feature not found');
+      return;
+    }
+
     showMenu = false;
 
     await deleteProductFeatures(feature.id);
@@ -91,6 +101,11 @@
   };
 
   const updateFeature = async (e: CustomEvent) => {
+    if (!feature) {
+      danger('Feature not found');
+      return;
+    }
+
     const res = await fetch(`/api/features/${feature.id}.json`, {
       method: 'PATCH',
       headers: {
@@ -156,6 +171,6 @@
   </Header>
 {/if}
 
-{#if modal}
+{#if feature && modal}
   <FeatureModal {feature} on:close={hideInfo} />
 {/if}

@@ -11,7 +11,7 @@
   import type { ImplementationStatus } from '@prisma/client';
   import { ChevronDownIcon } from 'svelte-feather-icons';
 
-  export let value: ImplementationStatus = undefined;
+  export let value: ImplementationStatus;
   export let colspan: number;
   export let rowspan: number;
   export let optional = false;

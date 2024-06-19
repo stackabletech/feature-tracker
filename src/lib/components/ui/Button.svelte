@@ -4,7 +4,7 @@
 
   export let round: boolean = false;
   export let type: string = 'btn-ghost';
-  export let tip: string = undefined;
+  export let tip: string = '';
   export let disabled: boolean = false;
   export let tipPlacement: string = 'right';
 

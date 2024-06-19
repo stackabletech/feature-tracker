@@ -2,6 +2,7 @@
   import { releases } from '$lib/stores';
   import { CheckIcon, XIcon } from 'svelte-feather-icons';
   import { createEventDispatcher } from 'svelte';
+  import type { ImplementationStatus } from '@prisma/client';
 
   let dispatch = createEventDispatcher();
 
@@ -13,8 +14,8 @@
     dispatch('cancel');
   };
 
-  export let release = undefined;
-  export let status = undefined;
+  export let release: number | null = null;
+  export let status: ImplementationStatus = 'NOT_PLANNED';
 
   let globalShortcuts = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {

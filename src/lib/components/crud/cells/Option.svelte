@@ -2,8 +2,8 @@
   import { createEventDispatcher } from 'svelte';
   export let value: any;
   export let label: string;
-  export let prefix: string = undefined;
-  export let parents: string[] = undefined;
+  export let prefix: string = '';
+  export let parents: string[] = [];
 
   let dispatch = createEventDispatcher();
   const select = () => dispatch('select', { value, label });

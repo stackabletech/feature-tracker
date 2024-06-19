@@ -11,7 +11,7 @@
   $: id = data.id;
   const dispatch = createEventDispatcher();
 
-  const patchRow = async (data) => {
+  const patchRow = async (data: Record<string, any>) => {
     const res = await fetch(`${endpoint}/${id}.json`, {
       method: 'PATCH',
       headers: {

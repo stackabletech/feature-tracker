@@ -18,7 +18,7 @@
 
   export let product: Product;
   export let feature: Feature;
-  export let productFeature: ProductFeature | undefined = undefined;
+  export let productFeature: ProductFeature;
 
   $: release = productFeature && $releases.find((r) => r.id === productFeature.release_id);
 
@@ -105,7 +105,7 @@
                 <ImplementationIcon
                   class="mr-2"
                   status={productFeature.implementation_status}
-                  released={release.released}
+                  released={release?.released ? true : false}
                 />
                 {productFeature.implementation_status}
               </div>
@@ -146,7 +146,7 @@
                 <ImplementationIcon
                   class="mr-2"
                   status={'NOT_AVAILABLE'}
-                  released={release.released}
+                  released={release?.released ? true : false}
                 />
                 {'NOT_AVAILABLE'}
               </div>

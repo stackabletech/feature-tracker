@@ -2,7 +2,7 @@
   import { marked } from 'marked';
   import { fade } from 'svelte/transition';
 
-  export let note: string = undefined;
+  export let note: string | null = null;
 </script>
 
 <div

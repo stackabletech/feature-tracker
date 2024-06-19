@@ -15,7 +15,7 @@
   import { GitCommitIcon } from 'svelte-feather-icons';
   import { InfoIcon } from 'svelte-feather-icons';
 
-  export let category: HierarchicalCategory = undefined;
+  export let category: HierarchicalCategory | undefined = undefined;
   export let expanded: boolean = false;
 
   export let level: number = 0;
@@ -27,6 +27,11 @@
   let showMenu: boolean = false;
 
   const addCategory = async (e: CustomEvent) => {
+    if (!parent) {
+      danger('Parent category is required');
+      return;
+    }
+
     showMenu = false;
 
     const res = await fetch('/api/categories.json', {
@@ -124,6 +129,11 @@
   };
 
   const updateCategory = async (e: CustomEvent) => {
+    if (!category) {
+      danger('Category not found');
+      return;
+    }
+
     const res = await fetch(`/api/categories/${category.id}.json`, {
       method: 'PATCH',
       headers: {
@@ -141,11 +151,11 @@
     }
   };
 
-  $: parent_id = category.parent_id || null;
+  $: parent_id = category?.parent_id || null;
 
   let adding: boolean = false;
-  let parent;
-  const startAdding = (p_id: number) => {
+  let parent: number | null = null;
+  const startAdding = (p_id: number | null) => {
     parent = p_id;
     adding = true;
   };
@@ -158,7 +168,7 @@
       <TextInput on:submit={addCategory} on:cancel={endAdding} placeholder="Enter category name" />
     </div>
   </th>
-{:else}
+{:else if category}
   <TextCell bind:value={category.name} menu={$editable} bind:showMenu on:update={updateCategory}>
     <span slot="indent" class="flex flex-row">
       {#each Array(level) as _}
@@ -182,4 +192,6 @@
       {/if}
     </svelte:fragment>
   </TextCell>
+{:else}
+  <th />
 {/if}

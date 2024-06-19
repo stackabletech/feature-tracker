@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let value;
+  export let value: string;
   export let options;
   export let optional = false;
   export let colspan: number = 1;

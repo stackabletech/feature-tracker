@@ -23,13 +23,18 @@
 
   let editable: Writable<boolean> = getContext('editable');
 
-  export let product: Product | undefined = undefined;
-  export let feature: Feature | undefined = undefined;
-  export let productFeature: ProductFeature | undefined = undefined;
+  export let product: Product | undefined;
+  export let feature: Feature | undefined;
+  export let productFeature: ProductFeature | undefined;
 
   $: release = productFeature && $releases.find((r) => r.id === productFeature.release_id);
 
   const addProductFeature = async (e: CustomEvent) => {
+    if (!product || !feature) {
+      danger('Product or Feature not found');
+      return;
+    }
+
     const res = await fetch('/api/product_features.json', {
       method: 'POST',
       headers: {
@@ -56,6 +61,11 @@
   };
 
   const deleteProductFeature = async () => {
+    if (!productFeature) {
+      danger('Product Feature not found');
+      return;
+    }
+
     const res = await fetch(`/api/product_features/${productFeature.id}.json`, {
       method: 'DELETE'
     });
@@ -73,6 +83,11 @@
   };
 
   const updateProductFeature = async (e: CustomEvent) => {
+    if (!productFeature) {
+      danger('Product Feature not found');
+      return;
+    }
+
     const res = await fetch(`/api/product_features/${productFeature.id}.json`, {
       method: 'PATCH',
       headers: {
@@ -122,8 +137,8 @@
       <ProductFeatureInput
         on:submit={updateProductFeature}
         on:cancel={toggleEditMode}
-        release={productFeature.release_id}
-        status={productFeature.implementation_status}
+        release={productFeature?.release_id}
+        status={productFeature?.implementation_status}
       />
     </div>
   </th>
@@ -137,7 +152,7 @@
     >
       <ImplementationIcon
         status={productFeature.implementation_status}
-        released={release?.released}
+        released={release?.released ? true : false}
       />
     </div>
     <div class="flex flex-row justify-center gap-1" slot="menu">
@@ -186,6 +201,6 @@
   </Data>
 {/if}
 
-{#if modal}
+{#if product && feature && productFeature && modal}
   <ProductFeatureModal {product} {feature} {productFeature} on:close={hideInfo} />
 {/if}
