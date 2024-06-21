@@ -1,6 +1,6 @@
 <script lang="ts">
   import { portal } from '$lib/actions/portal';
-  import { clickoutside } from '$lib/actions/tmp_clickoutside';
+  import { clickoutside } from '$lib/actions/clickoutside';
 
   import CloseButton from '$lib/components/ui/CloseButton.svelte';
   import MenuButton from '$lib/components/ui/MenuButton.svelte';

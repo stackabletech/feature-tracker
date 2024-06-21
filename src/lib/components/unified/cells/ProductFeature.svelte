@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clickoutside } from '$lib/actions/tmp_clickoutside';
+  import { clickoutside } from '$lib/actions/clickoutside';
   import AddButton from '$lib/components/ui/AddButton.svelte';
   import DeleteButton from '$lib/components/ui/DeleteButton.svelte';
   import InfoButton from '$lib/components/ui/InfoButton.svelte';
