@@ -7,5 +7,5 @@
 </script>
 
 <Code>
-  <pre> {JSON.stringify(category, null, 2)} </pre>
+  <pre>{JSON.stringify(category, null, 2)}</pre>
 </Code>

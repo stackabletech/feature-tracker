@@ -11,9 +11,11 @@
 <Code filename="/api/categories.json">
   <pre>[</pre>
   {#each categories as category}
-    <pre class="cursor-pointer" on:click={() => goto(`categories/${category.id}`)}>
-			{JSON.stringify(category, null, 2)},
-		</pre>
+    <pre class="cursor-pointer" on:click={() => goto(`categories/${category.id}`)}>{JSON.stringify(
+        category,
+        null,
+        2
+      )},</pre>
   {/each}
   <pre>]</pre>
 </Code>
