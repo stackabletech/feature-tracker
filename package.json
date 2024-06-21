@@ -43,10 +43,9 @@
   "dependencies": {
     "@prisma/client": "^5.15.0",
     "cookie": "^0.6.0",
-    "daisyui": "^3.9.4",
+    "daisyui": "^4.12.2",
     "dotenv": "^16.4.5",
-    "marked": "^13.0.0",
-    "theme-change": "^2.5.0"
+    "marked": "^13.0.0"
   },
   "type": "module"
 }
