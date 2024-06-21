@@ -35,11 +35,11 @@
 </svelte:head>
 
 <div
-  class="min-w-screen drawer drawer-mobile h-full max-h-[100vh] min-h-screen w-full max-w-full overflow-hidden"
+  class="min-w-screen lg:drawer-open drawer h-full max-h-[100vh] min-h-screen w-full max-w-full overflow-hidden"
 >
   <input type="checkbox" id="sidebar-drawer" class="drawer-toggle" />
   <div class="drawer-content flex max-h-[100vh] flex-col">
-    <nav class="navbar z-30 w-full backdrop-blur">
+    <nav class="navbar z-30 w-full">
       <div class="flex-none lg:hidden">
         <label for="sidebar-drawer" class="btn btn-square btn-ghost">
           <MenuIcon size="24" />
@@ -62,10 +62,10 @@
     </div>
   </div>
 
-  <div class="drawer-side border-r-[--tab-border-color]">
-    <label for="sidebar-drawer" class="drawer-overlay backdrop-blur" />
-    <aside class="bg-base w-48 bg-opacity-50">
-      <div class="navbar sticky top-0 z-30 place-content-center">
+  <div class="drawer-side z-30 border-r-[--tab-border-color]">
+    <label for="sidebar-drawer" class="drawer-overlay" />
+    <aside class="min-h-full w-48 bg-base-100">
+      <div class="navbar sticky top-0 place-content-center">
         <a href="/">
           <div class="flex h-10 w-10 items-center justify-center rounded-md bg-white">
             <img class="h-8 w-8" src="/img/icon-colour.png" alt="" />
