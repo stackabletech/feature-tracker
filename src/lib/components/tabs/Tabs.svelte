@@ -4,9 +4,9 @@
 </script>
 
 <nav class="tabs">
-  <div class="tab tab-bordered w-4 cursor-default" />
+  <div class="tab tab-lifted tab-sm w-4 cursor-default" />
   {#each tabs as { name, url }}
     <Tab {name} {url} />
   {/each}
-  <div class="tab tab-bordered flex-1 cursor-default" />
+  <div class="tab tab-lifted tab-sm flex-1 cursor-default" />
 </nav>
