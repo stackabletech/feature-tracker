@@ -5,7 +5,6 @@
   export let editMode: boolean = false;
   export let showMenu: boolean = false;
 
-  export let sticky: boolean = false;
   export let centered: boolean = false;
 
   export let colspan: number = 1;
@@ -15,7 +14,7 @@
   export { classes as class };
 </script>
 
-<th class="group {sticky && 'sticky'} {classes}" {colspan} {rowspan} on:mouseenter on:mouseleave>
+<th class="group {classes}" {colspan} {rowspan} on:mouseenter on:mouseleave>
   <Cell {menu} bind:editMode {centered} bind:showMenu>
     <slot name="indent" slot="indent" />
     <slot name="pre" slot="pre" />

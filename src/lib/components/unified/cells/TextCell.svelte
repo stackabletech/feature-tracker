@@ -15,7 +15,6 @@
 
   export let value: string = '';
   export let menu: boolean = false;
-  export let sticky: boolean = false;
   export let showMenu: boolean = false;
 
   export let header: boolean = true;
@@ -38,7 +37,7 @@
   };
 </script>
 
-<svelte:component this={type} {menu} bind:editMode {sticky} bind:showMenu {...{ class: classes }}>
+<svelte:component this={type} {menu} bind:editMode bind:showMenu {...{ class: classes }}>
   <slot name="indent" slot="indent" />
   <slot name="pre" slot="pre" />
   <svelte:fragment slot="edit">

@@ -37,8 +37,8 @@
   let newObject: Record<string, any> = {};
 </script>
 
-<table class="table table-zebra table-compact my-2">
-  <thead class="sticky top-0 z-30">
+<table class="table-xs table table-zebra table-compact">
+  <thead class="">
     <tr>
       {#each keys as key}
         <th>{key}</th>

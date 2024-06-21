@@ -25,7 +25,7 @@
   );
 </script>
 
-<div class="flex grow flex-col overflow-auto">
+<div class="flex grow flex-col">
   <Table>
     <svelte:fragment slot="head">
       <!-- Product Header -->

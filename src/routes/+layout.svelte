@@ -55,14 +55,14 @@
         </a>
       </div>
     </nav>
-    <div class="flex max-h-full grow flex-col overflow-auto">
+    <div class="flex h-full flex-col">
       <slot />
     </div>
   </div>
 
   <div class="drawer-side z-30 border-r-[--tab-border-color]">
     <label for="sidebar-drawer" class="drawer-overlay" />
-    <aside class="min-h-full w-48 bg-base-100">
+    <aside class="min-h-full w-36 bg-base-100">
       <div class="navbar sticky top-0 place-content-center">
         <a href="/">
           <div class="flex h-10 w-10 items-center justify-center rounded-md bg-white">
@@ -70,21 +70,21 @@
           </div>
         </a>
       </div>
-      <ul class="menu">
+      <ul class="menu font-bold">
         <li>
-          <a href="/api" class="btn btn-ghost m-2">Browse API</a>
+          <a href="/api" class="">Browse API</a>
         </li>
         <li>
-          <a href="/edit" class="btn btn-ghost m-2">Edit Data</a>
+          <a href="/edit" class="">Edit Data</a>
         </li>
         <li>
-          <a href="/unified" class="btn btn-ghost m-2">Unified View</a>
+          <a href="/unified" class="">Unified View</a>
         </li>
         <li>
-          <a href="/release" class="btn btn-ghost m-2">Release View</a>
+          <a href="/release" class="">Release View</a>
         </li>
         <!-- <li>
-					<a href="/techtree" class="btn btn-ghost m-2">Tech Tree View</a>
+					<a href="/techtree" class="">Tech Tree View</a>
 				</li> -->
       </ul>
     </aside>

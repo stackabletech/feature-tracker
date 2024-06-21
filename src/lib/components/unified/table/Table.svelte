@@ -1,11 +1,14 @@
 <script lang="ts">
 </script>
 
-<table class="table table-compact m-2 mr-12">
-  <thead class="sticky top-0 z-20 bg-base-100">
+<table class="table-xs table-pin-rows table-pin-cols table">
+  <thead class="bg-base-100">
     <slot name="head" />
   </thead>
   <tbody>
     <slot />
   </tbody>
+  <tfoot>
+    <slot name="foot" />
+  </tfoot>
 </table>

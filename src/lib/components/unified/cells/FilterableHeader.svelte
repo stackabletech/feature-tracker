@@ -43,8 +43,7 @@
 </script>
 
 <Header
-  sticky
-  class="{classes} left-48 bg-base-300"
+  class="{classes} bg-base-300"
   bind:editMode
   on:mouseenter={showMenu}
   on:mouseleave={hideMenu}

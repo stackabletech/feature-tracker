@@ -30,6 +30,6 @@
 </script>
 
 <Tabs {tabs} />
-<div class="flex grow flex-col overflow-auto">
+<div class="flex grow flex-col">
   <slot />
 </div>
