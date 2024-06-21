@@ -40,7 +40,7 @@
       type="text"
       name="input"
       id="input"
-      class="input input-bordered input-sm"
+      class="input input-sm input-bordered"
       {placeholder}
       on:focus={() => (active = true)}
       on:blur={() => (active = false)}
@@ -48,7 +48,7 @@
       bind:value
     />
     <button
-      class="btn btn-square btn-success btn-outline btn-sm"
+      class="btn btn-square btn-outline btn-success btn-sm"
       class:btn-success={!disabled}
       {disabled}
       on:click={submit}
@@ -56,7 +56,7 @@
       <CheckIcon size="16" />
     </button>
     <button
-      class="btn btn-square btn-error btn-outline btn-sm text-error-content"
+      class="btn btn-square btn-outline btn-error btn-sm text-error-content"
       on:click={cancel}
     >
       <XIcon size="16" />

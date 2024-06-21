@@ -63,7 +63,7 @@
 
   <div slot="edit" class="input-group input-group-sm">
     <input
-      class="input input-bordered input-sm"
+      class="input input-sm input-bordered"
       type="text"
       placeholder="filter"
       on:keydown={handle}

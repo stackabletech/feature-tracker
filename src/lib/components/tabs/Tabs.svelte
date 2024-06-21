@@ -3,7 +3,7 @@
   export let tabs;
 </script>
 
-<nav class="tabs-lifted tabs-xs sm:tabs-sm tabs flex max-w-full">
+<nav class="tabs tabs-lifted tabs-xs flex max-w-full sm:tabs-sm">
   <div class="tab w-4" />
   {#each tabs as { name, url }}
     <Tab {name} {url} />

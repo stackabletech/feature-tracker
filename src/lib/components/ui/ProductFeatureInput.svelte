@@ -55,7 +55,7 @@
     </div>
     <div class="tooltip" data-tip="Submit">
       <button
-        class="btn btn-square btn-success btn-outline btn-xs m-0 rounded-none"
+        class="btn btn-square btn-outline btn-success btn-xs m-0 rounded-none"
         on:click={submit}
       >
         <CheckIcon size="16" />
@@ -63,7 +63,7 @@
     </div>
     <div class="tooltip" data-tip="Cancel">
       <button
-        class="btn btn-square btn-error btn-outline btn-xs m-0 rounded-l-none rounded-r-md text-error-content"
+        class="btn btn-square btn-outline btn-error btn-xs m-0 rounded-l-none rounded-r-md text-error-content"
         on:click={cancel}
       >
         <XIcon size="16" />

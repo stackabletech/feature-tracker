@@ -58,7 +58,7 @@
     </div>
     <ul
       tabindex="0"
-      class="menu dropdown-content rounded-box w-96 bg-base-100 p-2 shadow"
+      class="menu dropdown-content w-96 rounded-box bg-base-100 p-2 shadow"
       bind:this={menu}
     >
       <span class="text-center text-primary">

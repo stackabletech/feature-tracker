@@ -9,7 +9,7 @@
 </script>
 
 <aside
-  class="fixed inset-0 z-40 flex items-center justify-center bg-neutral-focus bg-opacity-40 backdrop-blur"
+  class="bg-neutral-focus fixed inset-0 z-40 flex items-center justify-center bg-opacity-40 backdrop-blur"
   transition:fade={{ duration: 200 }}
   on:click={close}
   use:portal={'#modal'}
