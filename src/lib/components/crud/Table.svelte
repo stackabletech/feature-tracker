@@ -37,35 +37,37 @@
   let newObject: Record<string, any> = {};
 </script>
 
-<table class="table-compact table table-zebra table-xs">
-  <thead class="">
-    <tr>
-      {#each keys as key}
-        <th>{key}</th>
-      {:else}
-        <th>No Data</th>
-      {/each}
-      <th>Actions:</th>
-    </tr>
-  </thead>
-  <tbody>
-    {#each data as item (item.id)}
-      <Row bind:data={item} {endpoint} on:patch={handlePatch} on:delete={handleDelete} />
-    {:else}
+<div class="max-w-full overflow-auto">
+  <table class="table-xs table table-zebra">
+    <thead class="">
       <tr>
-        <td>No Data</td>
-        <td>No Actions</td>
+        {#each keys as key}
+          <th>{key}</th>
+        {:else}
+          <th>No Data</th>
+        {/each}
+        <th>Actions:</th>
       </tr>
-    {/each}
-    <tr>
-      {#each keys as key}
-        <Cell bind:value={newObject[key]} type={key} />
+    </thead>
+    <tbody>
+      {#each data as item (item.id)}
+        <Row bind:data={item} {endpoint} on:patch={handlePatch} on:delete={handleDelete} />
       {:else}
-        <td>No Data</td>
+        <tr>
+          <td>No Data</td>
+          <td>No Actions</td>
+        </tr>
       {/each}
-      <td>
-        <button class="btn btn-ghost" on:click={() => addRow(newObject)}>Add</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+      <tr>
+        {#each keys as key}
+          <Cell bind:value={newObject[key]} type={key} />
+        {:else}
+          <td>No Data</td>
+        {/each}
+        <td>
+          <button class="btn btn-ghost" on:click={() => addRow(newObject)}>Add</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
