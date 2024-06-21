@@ -13,8 +13,8 @@
 </script>
 
 <td on:click={showModal} {colspan} {rowspan}>
-  <Button tip="open note editor">
-    <EditIcon />
+  <Button class="btn-sm" tip="open note editor">
+    <EditIcon size="16" />
   </Button>
 </td>
 
