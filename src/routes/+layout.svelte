@@ -34,7 +34,7 @@
   <title>Stackable Feature Tracker</title>
 </svelte:head>
 
-<div class="lg:drawer-open drawer min-h-screen">
+<div class="drawer min-h-screen lg:drawer-open">
   <input type="checkbox" id="sidebar-drawer" class="drawer-toggle" />
   <div class="drawer-content flex max-h-[100vh] flex-col">
     <nav class="navbar z-30 w-full">

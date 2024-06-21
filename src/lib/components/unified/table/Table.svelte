@@ -1,7 +1,7 @@
 <script lang="ts">
 </script>
 
-<table class="table-xs table-pin-rows table-pin-cols table">
+<table class="table table-pin-rows table-pin-cols table-xs">
   <thead class="bg-base-100">
     <slot name="head" />
   </thead>
