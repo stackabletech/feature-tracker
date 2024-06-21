@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { DBObject } from '$lib/types';
   import { danger } from '$lib/util/alert';
+  import { FilePlusIcon } from 'svelte-feather-icons';
 
   import Row from './Row.svelte';
   import Cell from './cells/Cell.svelte';
@@ -37,9 +38,9 @@
   let newObject: Record<string, any> = {};
 </script>
 
-<div class="max-w-full overflow-auto">
-  <table class="table-xs table table-zebra">
-    <thead class="">
+<div class="overflow-aut max-w-full">
+  <table class="table-xs table-pin-rows table table-zebra">
+    <thead>
       <tr>
         {#each keys as key}
           <th>{key}</th>
@@ -58,16 +59,23 @@
           <td>No Actions</td>
         </tr>
       {/each}
-      <tr>
+    </tbody>
+    <tfoot>
+      <tr class="border-t-2 bg-base-300">
         {#each keys as key}
           <Cell bind:value={newObject[key]} type={key} />
         {:else}
           <td>No Data</td>
         {/each}
         <td>
-          <button class="btn btn-ghost" on:click={() => addRow(newObject)}>Add</button>
+          <div class="flex justify-center">
+            <button class="btn btn-ghost btn-sm gap-1" on:click={() => addRow(newObject)}>
+              <FilePlusIcon size="16" class="text-primary" />
+              Add
+            </button>
+          </div>
         </td>
       </tr>
-    </tbody>
+    </tfoot>
   </table>
 </div>

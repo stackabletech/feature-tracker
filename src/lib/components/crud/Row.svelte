@@ -4,6 +4,7 @@
 
   import { createEventDispatcher } from 'svelte';
   import Cell from './cells/Cell.svelte';
+  import { Trash2Icon, SaveIcon } from 'svelte-feather-icons';
 
   export let data: DBObject;
   export let endpoint: string;
@@ -60,9 +61,18 @@
   {/each}
 
   <td>
-    <button class="btn btn-ghost focus:btn-outline" on:click={() => patchRow(patchedObject)}>
-      Save
-    </button>
-    <button class="btn btn-ghost focus:btn-outline" on:click={() => deleteRow()}>Delete</button>
+    <div class="flex justify-center">
+      <button
+        class="btn btn-ghost btn-sm gap-1 focus:btn-outline"
+        on:click={() => patchRow(patchedObject)}
+      >
+        <SaveIcon size="16" class="text-success" />
+        Save
+      </button>
+      <button class="btn btn-ghost btn-sm gap-1 focus:btn-outline" on:click={() => deleteRow()}>
+        <Trash2Icon size="16" class="text-error" />
+        Delete
+      </button>
+    </div>
   </td>
 </tr>
