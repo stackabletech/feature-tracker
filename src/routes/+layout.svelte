@@ -2,9 +2,7 @@
   import '/src/app.css';
   import { categories, products, features, productFeatures, releases } from '$lib/stores';
   import { SvelteToast } from '@zerodevx/svelte-toast';
-  import { FeatherIcon, LockIcon, MenuIcon } from 'svelte-feather-icons';
-  import { onMount } from 'svelte';
-  import { themeChange } from 'theme-change';
+  import { SunIcon, MoonIcon, LogInIcon, MenuIcon } from 'svelte-feather-icons';
 
   import type { LayoutData } from './$types';
   export let data: LayoutData;
@@ -19,10 +17,6 @@
     pausable: true
   };
 
-  onMount(() => {
-    themeChange(false);
-  });
-
   let mouse = { x: 0, y: 0 };
   const setMouseCoords = (e: PointerEvent) => {
     mouse.x = e.clientX;
@@ -34,7 +28,7 @@
   <title>Stackable Feature Tracker</title>
 </svelte:head>
 
-<div class="drawer min-h-screen lg:drawer-open">
+<div class="lg:drawer-open drawer min-h-screen">
   <input type="checkbox" id="sidebar-drawer" class="drawer-toggle" />
   <div class="drawer-content flex max-h-[100vh] flex-col">
     <nav class="navbar z-30 w-full">
@@ -47,11 +41,20 @@
         <span class="text-lg font-bold">Stackable Feature Tracker</span>
       </div>
       <div class="flex-0 float-right mx-2">
-        <button class="btn btn-square btn-ghost" data-toggle-theme="dark,light" aria-hidden>
-          <FeatherIcon size="24" />
-        </button>
+        <label class="btn btn-square swap btn-ghost swap-rotate">
+          <input
+            type="checkbox"
+            name="theme"
+            id="theme-toggle"
+            class="theme-controller"
+            value="dark"
+          />
+          <SunIcon class="swap-on" size="24" />
+          <MoonIcon class="swap-off" size="24" />
+        </label>
+
         <a href="/signin" role="button" class="btn btn-square btn-ghost">
-          <LockIcon size="24" />
+          <LogInIcon size="24" />
         </a>
       </div>
     </nav>
