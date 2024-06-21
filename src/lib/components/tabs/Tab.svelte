@@ -4,6 +4,6 @@
   export let url;
 </script>
 
-<a class:tab-active={$page.url.pathname.includes(url)} class="tab tab-lifted tab-sm" href={url}>
+<a class:tab-active={$page.url.pathname.includes(url)} class="tab truncate p-0.5" href={url}>
   {name}
 </a>
