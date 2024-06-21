@@ -2,7 +2,7 @@
 </script>
 
 <div class="max-w-full overflow-auto">
-  <table class="table-xs table">
+  <table class="table table-xs">
     <thead class="bg-base-100">
       <slot name="head" />
     </thead>

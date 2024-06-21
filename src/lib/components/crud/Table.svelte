@@ -39,7 +39,7 @@
 </script>
 
 <div class="overflow-aut max-w-full">
-  <table class="table-xs table-pin-rows table table-zebra">
+  <table class="table table-zebra table-pin-rows table-xs">
     <thead>
       <tr>
         {#each keys as key}
