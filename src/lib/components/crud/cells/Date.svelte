@@ -19,12 +19,12 @@
         class="tooltip mr-2 h-6 w-6"
         data-tip={checked ? 'uncheck to remove date' : 'check to add date'}
       >
-        <input type="checkbox" bind:checked class="checkbox" />
+        <input type="checkbox" bind:checked class="checkbox checkbox-sm" />
       </div>
     {/if}
     <input
       type="date"
-      class="input disabled:text-white disabled:text-opacity-20"
+      class="input input-sm disabled:text-white disabled:text-opacity-20"
       bind:value={date}
       disabled={!checked}
     />
