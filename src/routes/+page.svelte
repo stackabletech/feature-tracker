@@ -3,7 +3,7 @@
 </script>
 
 <main class="grid grow place-items-center bg-launch bg-bottom bg-no-repeat">
-  <div class="stats-vertical shadow md:stats md:stats-horizontal">
+  <div class="stats stats-vertical shadow md:stats-horizontal">
     <div class="stat">
       <div class="stat-title">Features</div>
       <div class="stat-value">{$features.length}</div>
