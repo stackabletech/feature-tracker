@@ -14,7 +14,7 @@
   export { classes as class };
 </script>
 
-<th class="group {classes}" {colspan} {rowspan} on:mouseenter on:mouseleave>
+<th class="group bg-base-100 {classes}" {colspan} {rowspan} on:mouseenter on:mouseleave>
   <Cell {menu} bind:editMode {centered} bind:showMenu>
     <slot name="indent" slot="indent" />
     <slot name="pre" slot="pre" />

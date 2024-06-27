@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 /* This forces Safari to rerender the table when expanded, which it otherwise won't do 😠. Used in e.g. ExpandButton. */
 
 .rerender {

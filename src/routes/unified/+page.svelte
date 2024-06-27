@@ -62,7 +62,7 @@
       <FilterableHeader
         bind:filter={$categoryFilter}
         sortable={{ Categories: categories, Features: features }}
-        class="rounded-tl-lg"
+        class="rounded-tl-lg bg-base-200"
       >
         Features
       </FilterableHeader>

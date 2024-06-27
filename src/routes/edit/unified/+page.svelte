@@ -57,12 +57,12 @@
       </FilterableHeader>
       <th colspan={$filteredProducts.length - 1} class="bg-base-300" />
     </tr>
-    <tr>
+    <tr class="sticky top-0">
       <!-- Feature Header -->
       <FilterableHeader
         bind:filter={$categoryFilter}
         sortable={{ Categories: categories, Features: features }}
-        class="rounded-tl-lg"
+        class="rounded-tl-lg bg-base-200"
       >
         Features
       </FilterableHeader>
