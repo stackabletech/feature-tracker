@@ -51,14 +51,16 @@
   <slot name="pre" slot="pre" />
 
   {#if hover}
+    <!-- svelte-ignore a11y-click-events-have-key-events (since this happens only in combination with hover) -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="w-full text-center" on:click={hideMenu}>
       <SortButton on:click={showModal} />
       <FilterButton on:click={edit} />
     </div>
   {:else}
-    <span on:click={edit}>
+    <button on:click={edit}>
       <slot />
-    </span>
+    </button>
   {/if}
 
   <div slot="edit" class="input-group input-group-sm">

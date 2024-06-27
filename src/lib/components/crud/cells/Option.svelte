@@ -10,6 +10,8 @@
 </script>
 
 <div class="mb-1 border-b border-b-base-300 last:-mb-1 last:border-0">
+  <!-- svelte-ignore a11y-click-events-have-key-events (see daisyUI issue #2590) -->
+  <!-- svelte-ignore a11y-no-static-element-interactions (see daisyUI issue #2590) -->
   <div class="group mb-1 cursor-pointer rounded-lg p-1 hover:bg-base-200" on:click={select}>
     {#if parents}
       <div

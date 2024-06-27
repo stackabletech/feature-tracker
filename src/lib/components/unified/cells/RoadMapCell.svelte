@@ -29,7 +29,7 @@
 </script>
 
 {#if feature && product}
-  <div
+  <button
     class="tooltip cursor-pointer"
     data-tip={path ? path + ' > ' + feature.name : feature.name}
     on:click={showInfo}
@@ -39,7 +39,7 @@
       released={release.released}
       class="mx-1 my-auto"
     />
-  </div>
+  </button>
 
   {#if modal}
     <ProductFeatureModal {product} {feature} {productFeature} on:close={hideInfo} />

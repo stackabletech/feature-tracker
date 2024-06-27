@@ -11,11 +11,10 @@
 <Code filename="/api/features.json">
   <pre>[</pre>
   {#each features as feature}
-    <pre class="cursor-pointer" on:click={() => goto(`features/${feature.id}`)}>{JSON.stringify(
-        feature,
-        null,
-        2
-      )},</pre>
+    <button
+      class="cursor-pointer text-left font-mono"
+      on:click={() => goto(`features/${feature.id}`)}>{JSON.stringify(feature, null, 2)},</button
+    >
   {/each}
   <pre>]</pre>
 </Code>

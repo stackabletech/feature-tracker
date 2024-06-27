@@ -144,7 +144,7 @@
   </th>
 {:else if productFeature && ($showUnreleasedProductFeatures || release?.released)}
   <Data menu={$editable} centered>
-    <div
+    <button
       class="flex flex-row items-center justify-center gap-2 {$editable
         ? 'cursor-cell'
         : 'cursor-pointer'}"
@@ -154,7 +154,7 @@
         status={productFeature.implementation_status}
         released={release?.released ? true : false}
       />
-    </div>
+    </button>
     <div class="flex flex-row justify-center gap-1" slot="menu">
       <InfoButton on:click={showInfo} />
       <DeleteButton on:click={deleteProductFeature} />
@@ -187,12 +187,12 @@
     {#if $editable}
       <AddButton on:click={startAdding} tip="add product feature" />
     {:else}
-      <div
+      <button
         class="flex cursor-pointer flex-row items-center justify-center gap-2"
         on:click={showInfo}
       >
         <ImplementationIcon status={'NOT_AVAILABLE'} released={false} />
-      </div>
+      </button>
     {/if}
   </Data>
 {:else}

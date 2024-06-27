@@ -8,12 +8,16 @@
   const close = () => dispatch('close');
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events accessible action provided by close button -->
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions accessible action provided by close button -->
 <aside
   class="fixed inset-0 z-40 flex items-center justify-center bg-neutral bg-opacity-50"
   transition:fade={{ duration: 150 }}
   on:click={close}
   use:portal={'#modal'}
 >
+  <!-- svelte-ignore a11y-click-events-have-key-events accessible action provided by close button -->
+  <!-- svelte-ignore a11y-no-static-element-interactions accessible action provided by close button -->
   <div
     class="card max-h-[80%] w-[32rem] max-w-[80%] bg-base-200 shadow-xl"
     on:click|stopPropagation

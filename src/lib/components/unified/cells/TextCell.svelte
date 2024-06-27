@@ -43,7 +43,7 @@
   <svelte:fragment slot="edit">
     <TextInput {value} on:submit={handleSubmit} on:cancel={handleCancel} />
   </svelte:fragment>
-  <span on:click={toggleEditMode} class={$editable ? 'cursor-cell' : ''}>{value}</span>
+  <button on:click={toggleEditMode} class={$editable ? 'cursor-cell' : ''}>{value}</button>
   <slot name="menu" slot="menu" />
   <slot name="note" slot="note" />
   <slot name="post" slot="post" />
