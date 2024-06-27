@@ -63,7 +63,7 @@
   </svelte:fragment>
   <main class="flex flex-col gap-2">
     {#if editMode}
-      <table class="no-hover table-compact table">
+      <table class="no-hover table table-xs">
         <tr>
           <td>Product:</td>
           <Cell type="product_id" bind:value={productFeature.product_id} />
@@ -88,7 +88,7 @@
         {/if}
       </table>
     {:else}
-      <table class="no-hover table-compact inline-table">
+      <table class="no-hover table-xs inline-table">
         <tr>
           <td>Product:</td>
           <td>{product.name}</td>

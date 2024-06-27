@@ -27,7 +27,7 @@
   let editable: Writable<boolean> = getContext('editable');
 </script>
 
-<tr class="category hover">
+<tr class="category hover bg-base-200">
   <!-- First Column: Category Name -->
   <Category {category} bind:expanded {level} />
   <!-- Rest Columns: ProductFeature Cells -->
