@@ -23,23 +23,17 @@
     <td class="font-bold">New:</td>
   {/if}
 {:else if type === 'category_id'}
-  <td>TODO: FIX</td>
-  <!-- <SelectCategory bind:value {colspan} {rowspan} /> -->
+  <SelectCategory bind:value {colspan} {rowspan} />
 {:else if type === 'parent_id'}
-  <td>TODO: FIX</td>
-  <!-- <SelectCategory bind:value {colspan} {rowspan} optional /> -->
+  <SelectCategory bind:value {colspan} {rowspan} optional />
 {:else if type === 'product_id'}
-  <td>TODO: FIX</td>
-  <!-- <SelectProduct bind:value {colspan} {rowspan} /> -->
+  <SelectProduct bind:value {colspan} {rowspan} />
 {:else if type === 'feature_id'}
-  <td>TODO: FIX</td>
-  <!-- <SelectFeature bind:value {colspan} {rowspan} /> -->
+  <SelectFeature bind:value {colspan} {rowspan} />
 {:else if type === 'release_id'}
-  <td>TODO: FIX</td>
-  <!-- <SelectRelease bind:value {colspan} {rowspan} optional /> -->
+  <SelectRelease bind:value {colspan} {rowspan} optional />
 {:else if type === 'implementation_status'}
-  <td>TODO: FIX</td>
-  <!-- <SelectImplementationStatus bind:value {colspan} {rowspan} /> -->
+  <SelectImplementationStatus bind:value {colspan} {rowspan} />
 {:else if type === 'implementation_date'}
   <Date bind:value {colspan} {rowspan} />
 {:else if type === 'name' || type === 'implementation_version'}
