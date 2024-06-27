@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  export let value: any;
+  export let value: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   export let label: string;
   export let prefix: string = '';
   export let parents: string[] = [];

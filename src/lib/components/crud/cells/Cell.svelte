@@ -9,7 +9,7 @@
   import SelectFeature from './SelectFeature.svelte';
   import SelectRelease from './SelectRelease.svelte';
 
-  export let value: any;
+  export let value: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   export let type: string;
 
   export let colspan = 1;

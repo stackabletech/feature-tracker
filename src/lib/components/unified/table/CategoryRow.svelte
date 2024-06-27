@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { HierarchicalCategory } from '$lib/stores';
-  import { filteredFeatures, filteredProducts } from '$lib/stores';
-  import { afterUpdate, getContext, tick } from 'svelte';
   import type { Writable } from 'svelte/store';
+  import type { HierarchicalCategory } from '$lib/stores';
+  import { getContext } from 'svelte';
+  import { filteredFeatures, filteredProducts } from '$lib/stores';
 
   import FeatureRow from './FeatureRow.svelte';
   import Category from '../cells/Category.svelte';
@@ -35,7 +35,7 @@
 </tr>
 
 {#if expanded}
-  {#each categoryFeatures as feature, n}
+  {#each categoryFeatures as feature}
     <FeatureRow {category} {feature} />
   {/each}
   {#if $editable}

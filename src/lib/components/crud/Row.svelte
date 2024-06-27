@@ -12,6 +12,7 @@
   $: id = data.id;
   const dispatch = createEventDispatcher();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const patchRow = async (data: Record<string, any>) => {
     const res = await fetch(`${endpoint}/${id}.json`, {
       method: 'PATCH',
@@ -51,7 +52,9 @@
   let values = Object.values(data);
 
   $: patchedObject = Object.fromEntries(
-    keys.map((key, i) => [key, values[i]]).filter(([_, v]) => v != (undefined || null || ''))
+    keys
+      .map((key, i) => [key, values[i]])
+      .filter(([_, v]) => v != undefined || v != null || v != '')
   );
 </script>
 

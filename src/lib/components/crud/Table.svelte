@@ -9,6 +9,7 @@
   export let data: DBObject[];
   export let endpoint: string;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const addRow = async (newRow: Record<string, any>) => {
     const res = await fetch(`${endpoint}.json`, {
       method: 'POST',
@@ -35,7 +36,7 @@
     (data = [...data.map((obj) => (obj.id == e.detail.data.id ? e.detail.data : obj))]);
 
   const keys = (data[0] && Object.keys(data[0])) || [];
-  let newObject: Record<string, any> = {};
+  let newObject: Record<string, any> = {}; // eslint-disable-line @typescript-eslint/no-explicit-any
 </script>
 
 <div class="overflow-aut max-w-full">

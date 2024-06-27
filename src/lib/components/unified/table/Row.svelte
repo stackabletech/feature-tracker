@@ -30,7 +30,7 @@
   {:else}
     <Header>
       <span slot="indent" class="flex flex-row first:ml-0.5">
-        {#each Array(level) as _}
+        {#each Array(level) as _lvl}
           <GitCommitIcon size="18" class="text-base-300" />
         {/each}
       </span>

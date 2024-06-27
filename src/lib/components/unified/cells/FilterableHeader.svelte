@@ -13,6 +13,7 @@
 
   let input: HTMLInputElement;
   export let filter: string = '';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   export let sortable: { [key: string]: Sortable<any> };
   let hover = false;
   let modal = false;

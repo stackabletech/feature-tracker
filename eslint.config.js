@@ -28,6 +28,27 @@ export default [
     }
   },
   {
-    ignores: ['build/', '.svelte-kit/', 'dist/']
+    rules: {
+      'svelte/no-unused-svelte-ignore': 'off', // only false positives
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          varsIgnorePattern: '^_',
+          argsIgnorePattern: '^_'
+        }
+      ],
+      'svelte/no-at-html-tags': 'off', // used for markdown rendering
+      '@typescript-eslint/no-unused-expressions': 'off' // prevents e.key === 'Enter' && action() pattern
+    }
+  },
+  {
+    ignores: [
+      'build/',
+      '.svelte-kit/',
+      'dist/',
+      '.vercel/',
+      '.vercel_build_output/',
+      'node_modules/'
+    ]
   }
 ];

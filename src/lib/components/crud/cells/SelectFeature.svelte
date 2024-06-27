@@ -4,7 +4,7 @@
   import { ChevronDownIcon } from 'svelte-feather-icons';
   import { derived } from 'svelte/store';
 
-  export let value: any = undefined;
+  export let value: any = undefined; // eslint-disable-line @typescript-eslint/no-explicit-any
   export let colspan: number;
   export let rowspan: number;
   export let optional = false;

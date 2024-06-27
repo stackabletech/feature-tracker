@@ -1,15 +1,9 @@
 <script lang="ts">
-  import { GitCommitIcon } from 'svelte-feather-icons';
-  import { filteredProducts, productFeatures } from '$lib/stores';
-
   import type { HierarchicalCategory } from '$lib/stores';
   import type { Product, Feature as FeatureType } from '$lib/prisma';
-
-  import Category from '../cells/Category.svelte';
   import Feature from '../cells/Feature.svelte';
-  import Header from '../cells/Header.svelte';
-
   import ProductFeature from '$lib/components/unified/cells/ProductFeature.svelte';
+  import { filteredProducts, productFeatures } from '$lib/stores';
 
   export let category: HierarchicalCategory;
   export let feature: FeatureType | undefined = undefined;
