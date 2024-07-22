@@ -49,6 +49,10 @@ Run the app
 npm run dev -- --open
 ```
 
+## Committing
+
+Feature-tracker uses husky & lint-staged to format files and lint staged changes before each commit.
+
 # Migrating the DB
 
 ## Create baseline migration
