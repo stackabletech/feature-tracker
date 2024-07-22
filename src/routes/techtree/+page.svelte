@@ -1,1 +1,1 @@
-<main class="w-full h-full flex flex-row justify-center items-center">Under Construction</main>
+<main class="flex h-full w-full flex-row items-center justify-center">Under Construction</main>

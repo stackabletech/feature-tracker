@@ -1,34 +1,34 @@
 import { json } from '@sveltejs/kit';
-import { prisma } from "$lib/prisma";
-// import type { Release } from "@prisma/client";
-
-/*
-    Typing disabled because of this bug: https://github.com/prisma/prisma/issues/10404
-*/
+import { prismaErrorResponse, requiredFieldErrorResponse } from '$lib/api/error.js';
+import { getReleases, createRelease } from '$lib/api/release.js';
 
 // GET /releases.json
 export const GET = async () => {
-    try {
-        const body = await prisma.release.findMany({
-            orderBy: { date: 'desc' }
-        });
-        return json(body);
-    } catch ({ code, message }) {
-        return json({ code, message }, {
-            status: 500
-        })
-    }
+  try {
+    const releases = await getReleases();
+    return json(releases);
+  } catch (e) {
+    return prismaErrorResponse(e);
+  }
 };
 
 // POST /releases.json
 export const POST = async ({ request }) => {
-    const data = await request.json()
-    try {
-        const body = await prisma.release.create({ data });
-        return json(body);
-    } catch ({ code, message }) {
-        return json({ code, message }, {
-            status: 500
-        })
-    }
-}
+  const data = await request.json();
+  const { name, date, released } = data;
+
+  if (!name) {
+    return requiredFieldErrorResponse('name');
+  }
+
+  if (typeof released !== 'boolean') {
+    return requiredFieldErrorResponse('released');
+  }
+
+  try {
+    const release = await createRelease({ name, date, released });
+    return json(release, { status: 201 });
+  } catch (e) {
+    return prismaErrorResponse(e);
+  }
+};
