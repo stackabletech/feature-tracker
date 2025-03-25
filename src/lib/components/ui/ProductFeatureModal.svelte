@@ -64,28 +64,30 @@
   <main class="flex flex-col gap-2">
     {#if editMode}
       <table class="no-hover table table-xs">
-        <tr>
-          <td>Product:</td>
-          <Cell type="product_id" bind:value={productFeature.product_id} />
-        </tr>
-        <tr>
-          <td>Feature:</td>
-          <Cell type="feature_id" bind:value={productFeature.feature_id} />
-        </tr>
-        {#if productFeature}
+        <tbody>
           <tr>
-            <td>Status:</td>
-            <Cell type="implementation_status" bind:value={productFeature.implementation_status} />
+            <td>Product:</td>
+            <Cell type="product_id" bind:value={productFeature.product_id} />
           </tr>
           <tr>
-            <td>Release:</td>
-            <Cell type="release_id" bind:value={productFeature.release_id} />
+            <td>Feature:</td>
+            <Cell type="feature_id" bind:value={productFeature.feature_id} />
           </tr>
-          <tr>
-            <td>Note:</td>
-            <Cell type="note" bind:value={productFeature.note} />
-          </tr>
-        {/if}
+          {#if productFeature}
+            <tr>
+              <td>Status:</td>
+              <Cell type="implementation_status" bind:value={productFeature.implementation_status} />
+            </tr>
+            <tr>
+              <td>Release:</td>
+              <Cell type="release_id" bind:value={productFeature.release_id} />
+            </tr>
+            <tr>
+              <td>Note:</td>
+              <Cell type="note" bind:value={productFeature.note} />
+            </tr>
+          {/if}
+        </tbody>
       </table>
     {:else}
       <table class="no-hover table-xs inline-table">
