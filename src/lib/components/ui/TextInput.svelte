@@ -40,7 +40,7 @@
       type="text"
       name="input"
       id="input"
-      class="input input-sm input-bordered"
+      class="input input-sm"
       {placeholder}
       on:focus={() => (active = true)}
       on:blur={() => (active = false)}

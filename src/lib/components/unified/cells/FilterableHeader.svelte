@@ -66,9 +66,9 @@
 
   <div slot="edit" class="input-group input-group-sm">
     <input
-      class="input input-sm input-bordered"
+      class="input input-sm"
       type="text"
-      placeholder="filter"
+      placeholder="Filter"
       on:keydown={handle}
       bind:value={filter}
       bind:this={input}

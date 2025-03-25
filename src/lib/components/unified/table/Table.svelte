@@ -5,7 +5,7 @@
   <thead class="bg-base-100">
     <slot name="head" />
   </thead>
-  <tbody>
+  <tbody class="text-lg">
     <slot />
   </tbody>
   <tfoot>

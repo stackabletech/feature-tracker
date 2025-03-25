@@ -71,7 +71,7 @@
       <!-- svelte-ignore a11y-no-noninteractive-tabindex (see daisyUI issue #2590) -->
       <ul
         tabindex="0"
-        class="no-scrollbar menu dropdown-content z-20 max-h-96 w-96 overflow-y-auto rounded-box bg-base-100 p-2 shadow"
+        class="no-scrollbar menu dropdown-content z-20 max-h-96 w-96 overflow-y-auto rounded-box bg-base-100 p-2 shadow-sm"
         bind:this={menu}
       >
         <div>
