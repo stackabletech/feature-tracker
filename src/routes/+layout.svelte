@@ -44,7 +44,7 @@
       <div class="flex-1">
         <span class="text-lg font-bold">Stackable Feature Tracker</span>
       </div>
-      <div class="flex-0 float-right mx-2">
+      <div class="flex-none float-right mx-2">
         <label class="btn btn-square btn-ghost swap swap-rotate">
           <input
             type="checkbox"
@@ -77,7 +77,7 @@
           </div>
         </a>
       </div>
-      <ul class="menu font-bold">
+      <ul class="menu w-full font-bold">
         <li>
           <a href="/api" class="">Browse API</a>
         </li>
@@ -90,9 +90,6 @@
         <li>
           <a href="/release" class="">Release View</a>
         </li>
-        <!-- <li>
-					<a href="/techtree" class="">Tech Tree View</a>
-				</li> -->
       </ul>
     </aside>
   </div>

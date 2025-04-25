@@ -35,7 +35,7 @@
   <label class="m-1 flex max-w-full flex-row items-center">
     <div class="tooltip" data-tip="Select Status">
       <select
-        class="select select-bordered select-xs rounded-bl-md rounded-br-none rounded-tl-md rounded-tr-none"
+        class="select select-xs rounded-bl-md rounded-br-none rounded-tl-md rounded-tr-none"
         bind:value={status}
       >
         <option value={'NOT_PLANNED'} selected>Not Planned</option>
@@ -46,7 +46,7 @@
       </select>
     </div>
     <div class="tooltip" data-tip="Select Release">
-      <select class="select select-bordered select-xs m-0 rounded-none" bind:value={release}>
+      <select class="select select-xs m-0 rounded-none" bind:value={release}>
         <option value={null}>No Release</option>
         {#each $releases as release}
           <option value={release.id} selected>{release.name}</option>

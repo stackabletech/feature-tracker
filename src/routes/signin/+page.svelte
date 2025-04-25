@@ -17,16 +17,16 @@
         Type or paste the password.
       </span>
     </label>
-    <div class="input-group">
+    <div class="join">
       <input
         id="pass"
-        class="input input-bordered input-primary"
+        class="input input-primary join-item"
         type="password"
         placeholder="Type or paste password and press Enter."
         bind:value={pwd}
         on:change={setCookie}
       />
-      <button class="btn btn-square btn-primary" disabled={pwd == ''}>Go</button>
+      <button class="btn btn-square btn-primary join-item ml-2" disabled={pwd == ''}>Go</button>
     </div>
     <label for="pass" class="label">
       <span class="label-text-alt" />
