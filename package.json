@@ -3,14 +3,14 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "vite dev",
-    "build": "svelte-check && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
     "postinstall": "prisma generate",
-    "prepare": "husky"
+    "prepare": "svelte-kit sync && husky"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.2.2",
@@ -19,7 +19,6 @@
     "@tailwindcss/postcss": "^4.1.4",
     "@tailwindcss/typography": "^0.5.16",
     "@types/eslint": "^9.6.1",
-    "@types/marked": "^6.0.0",
     "@types/node": "^22.15.2",
     "@zerodevx/svelte-toast": "^0.9.6",
     "daisyui": "^5.0.28",
