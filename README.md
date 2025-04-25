@@ -1,10 +1,10 @@
-# Stackable Feature Tracker.
+# Stackable Feature Tracker
 
 for [Stackable](https://github.com/stackabletech).
 
 # Development
 
-Hosted dev version available [here](https://feature-tracker.vercel.app)
+Hosted dev version available [here](stackablefeaturetracker.netlify.app)
 
 Install dependencies
 
