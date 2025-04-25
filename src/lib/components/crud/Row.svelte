@@ -59,7 +59,7 @@
 </script>
 
 <tr>
-  {#each values as value, i (value.id)}
+  {#each values as value, i (i)}
     <Cell bind:value type={keys[i]} />
   {/each}
 
