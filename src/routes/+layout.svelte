@@ -97,7 +97,7 @@
 
 <SvelteToast options={toastOptions}/>
 
-<div id="mouse" class="fixed w-64" style="left: {mouse.x - 64}px; top: {mouse.y + 16}px;"/>
+<div id="mouse" class="fixed w-64 z-50" style="left: {mouse.x - 64}px; top: {mouse.y + 16}px;"/>
 <svelte:window on:pointermove={setMouseCoords}/>
 
 <div id="modal"/>
@@ -128,9 +128,4 @@
         @apply p-2;
     }
 
-    :global(table tbody th),
-    :global(table tbody td) {
-        --tw-bg-opacity: 1;
-        background-color: hsla(var(--b1) / var(--tw-bg-opacity, 1));
-    }
 </style>
