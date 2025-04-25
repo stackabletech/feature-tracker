@@ -10,7 +10,7 @@
 
 <Code filename="/api/categories.json">
   <pre>[</pre>
-  {#each categories as category}
+  {#each categories as category (category.id)}
     <button
       class="cursor-pointer text-left font-mono"
       on:click={() => goto(`categories/${category.id}`)}

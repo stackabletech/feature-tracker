@@ -9,7 +9,7 @@
 
 <Code filename="/api/products.json">
   <pre>[</pre>
-  {#each products as product}
+  {#each products as product (product.id)}
     <button
       class="cursor-pointer text-left font-mono"
       on:click={() => goto(`products/${product.id}`)}>{JSON.stringify(product, null, 2)},</button

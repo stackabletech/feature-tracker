@@ -1,11 +1,11 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
 @plugin "daisyui";
 
 @theme {
-    --background-image-rocket: url('/img/rocket.png');
-    --background-image-launch: url('/img/launch.png');
+  --background-image-rocket: url('/img/rocket.png');
+  --background-image-launch: url('/img/launch.png');
 }
 
 /*
@@ -17,35 +17,35 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-gray-200, currentColor);
-    }
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
 }
 
 html,
 body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 /* This forces Safari to rerender the table when expanded, which it otherwise won't do 😠. Used in e.g. ExpandButton. */
 
 .rerender {
-    animation: repaint 1ms no-repeat;
+  animation: repaint 1ms no-repeat;
 }
 
 @keyframes repaint {
-    from {
-        scale: 99.999%;
-    }
-    to {
-        scale: 100%;
-    }
+  from {
+    scale: 99.999%;
+  }
+  to {
+    scale: 100%;
+  }
 }
 
 /* Increase DaisyUI table borders */
@@ -53,18 +53,18 @@ body {
 .table:where(:not(.table-zebra)),
 :where(thead, tbody, tfoot),
 :where(tr:not(:last-child) :where(th, td)) {
-    border-color: hsl(var(--color-base-content) / 15%);
+  border-color: hsl(var(--color-base-content) / 15%);
 }
 
 tr.category th,
 tr.category td {
-    background-color: hsl(var(--color-base-200));
+  background-color: hsl(var(--color-base-200));
 }
 
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
-    /* IE and Edge */
-    -ms-overflow-style: none;
-    /* Firefox */
-    scrollbar-width: none;
+  display: none;
+  /* IE and Edge */
+  -ms-overflow-style: none;
+  /* Firefox */
+  scrollbar-width: none;
 }

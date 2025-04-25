@@ -1,10 +1,10 @@
 <script lang="ts">
   import '/src/app.css';
-  import {categories, features, productFeatures, products, releases} from '$lib/stores';
-  import {SvelteToast} from '@zerodevx/svelte-toast';
-  import {LogInIcon, MenuIcon, MoonIcon, SunIcon} from 'svelte-feather-icons';
+  import { categories, features, productFeatures, products, releases } from '$lib/stores';
+  import { SvelteToast } from '@zerodevx/svelte-toast';
+  import { LogInIcon, MenuIcon, MoonIcon, SunIcon } from 'svelte-feather-icons';
 
-  import type {LayoutData} from './$types';
+  import type { LayoutData } from './$types';
 
   export let data: LayoutData;
 
@@ -32,19 +32,19 @@
   <title>Stackable Feature Tracker</title>
 </svelte:head>
 
-<div class="drawer h-screen w-screen lg:drawer-open">
-  <input type="checkbox" id="sidebar-drawer" class="drawer-toggle"/>
+<div class="drawer lg:drawer-open h-screen w-screen">
+  <input type="checkbox" id="sidebar-drawer" class="drawer-toggle" />
   <div class="drawer-content flex max-h-screen flex-col">
     <nav class="navbar z-30 w-full">
       <div class="flex-none lg:hidden">
         <label for="sidebar-drawer" class="btn btn-square btn-ghost">
-          <MenuIcon size="24"/>
+          <MenuIcon size="24" />
         </label>
       </div>
       <div class="flex-1">
         <span class="text-lg font-bold">Stackable Feature Tracker</span>
       </div>
-      <div class="flex-none float-right mx-2">
+      <div class="float-right mx-2 flex-none">
         <label class="btn btn-square btn-ghost swap swap-rotate">
           <input
             type="checkbox"
@@ -53,27 +53,27 @@
             class="theme-controller"
             value="dark"
           />
-          <SunIcon class="swap-on" size="24"/>
-          <MoonIcon class="swap-off" size="24"/>
+          <SunIcon class="swap-on" size="24" />
+          <MoonIcon class="swap-off" size="24" />
         </label>
 
         <a href="/signin" role="button" class="btn btn-square btn-ghost">
-          <LogInIcon size="24"/>
+          <LogInIcon size="24" />
         </a>
       </div>
     </nav>
     <div class="relative flex h-full flex-col overflow-auto">
-      <slot/>
+      <slot />
     </div>
   </div>
 
   <div class="drawer-side z-30 border-r-(--tab-border-color)">
-    <label for="sidebar-drawer" class="drawer-overlay"/>
-    <aside class="min-h-full w-36 bg-base-100">
+    <label for="sidebar-drawer" class="drawer-overlay" />
+    <aside class="bg-base-100 min-h-full w-36">
       <div class="navbar sticky top-0 place-content-center">
         <a href="/">
           <div class="flex h-10 w-10 items-center justify-center rounded-md bg-white">
-            <img class="h-8 w-8" src="/img/icon-colour.png" alt=""/>
+            <img class="h-8 w-8" src="/img/icon-colour.png" alt="" />
           </div>
         </a>
       </div>
@@ -95,37 +95,35 @@
   </div>
 </div>
 
-<SvelteToast options={toastOptions}/>
+<SvelteToast options={toastOptions} />
 
-<div id="mouse" class="fixed w-64 z-50" style="left: {mouse.x - 64}px; top: {mouse.y + 16}px;"/>
-<svelte:window on:pointermove={setMouseCoords}/>
+<div id="mouse" class="fixed z-50 w-64" style="left: {mouse.x - 64}px; top: {mouse.y + 16}px;" />
+<svelte:window on:pointermove={setMouseCoords} />
 
-<div id="modal"/>
+<div id="modal" />
 
 <style lang="postcss">
+  @reference '../app.css';
 
-    @reference '../app.css';
+  :global(.tooltip::before) {
+    z-index: 1000;
+    filter: brightness(1.01);
+    -webkit-filter: brightness(1.01);
+    display: block;
+    position: absolute;
+  }
 
-    :global(.tooltip::before) {
-        z-index: 1000;
-        filter: brightness(1.01);
-        -webkit-filter: brightness(1.01);
-        display: block;
-        position: absolute;
-    }
+  :global(._toastContainer) {
+    @apply z-50;
+  }
 
-    :global(._toastContainer) {
-        @apply z-50;
-    }
+  :global(._toastContainer li) {
+    @apply rounded-box bg-white;
+  }
 
-    :global(._toastContainer li) {
-        @apply rounded-box bg-white;
-    }
-
-    /* Fix for QuteBrowser not supporting where selector used by DaisyUI's table styling */
-    :global(.table-compact th),
-    :global(.table-compact td) {
-        @apply p-2;
-    }
-
+  /* Fix for QuteBrowser not supporting where selector used by DaisyUI's table styling */
+  :global(.table-compact th),
+  :global(.table-compact td) {
+    @apply p-2;
+  }
 </style>

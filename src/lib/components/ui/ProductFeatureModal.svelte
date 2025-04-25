@@ -12,7 +12,7 @@
   import { productFeatures, releases } from '$lib/stores';
   import type { Feature, Product, ProductFeature } from '@prisma/client';
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<Record<string, unknown>>();
   let editable: Writable<boolean> = getContext('editable');
   let editMode: boolean = $editable;
 
@@ -63,7 +63,7 @@
   </svelte:fragment>
   <main class="flex flex-col gap-2">
     {#if editMode}
-      <table class="no-hover table table-xs">
+      <table class="no-hover table-xs table">
         <tbody>
           <tr>
             <td>Product:</td>
@@ -76,7 +76,10 @@
           {#if productFeature}
             <tr>
               <td>Status:</td>
-              <Cell type="implementation_status" bind:value={productFeature.implementation_status} />
+              <Cell
+                type="implementation_status"
+                bind:value={productFeature.implementation_status}
+              />
             </tr>
             <tr>
               <td>Release:</td>
@@ -134,7 +137,7 @@
               <tr>
                 <td colspan="2">
                   <div
-                    class="prose max-h-72 overflow-y-auto whitespace-normal rounded-md bg-base-100 p-2 prose-h1:text-lg prose-h2:text-sm"
+                    class="prose bg-base-100 prose-h1:text-lg prose-h2:text-sm max-h-72 overflow-y-auto rounded-md p-2 whitespace-normal"
                   >
                     {@html marked.parse(productFeature.note)}
                   </div>
@@ -148,10 +151,10 @@
                 <div class="flex flex-row justify-center">
                   <ImplementationIcon
                     class="mr-2"
-                    status={'NOT_AVAILABLE'}
+                    status="NOT_AVAILABLE"
                     released={release?.released ? true : false}
                   />
-                  {'NOT_AVAILABLE'}
+                  NOT_AVAILABLE
                 </div>
               </td>
             </tr>

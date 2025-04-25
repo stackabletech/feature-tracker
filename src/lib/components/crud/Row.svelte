@@ -10,7 +10,7 @@
   export let endpoint: string;
 
   $: id = data.id;
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<Record<string, unknown>>();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const patchRow = async (data: Record<string, any>) => {
@@ -59,20 +59,20 @@
 </script>
 
 <tr>
-  {#each values as value, i}
+  {#each values as value, i (value.id)}
     <Cell bind:value type={keys[i]} />
   {/each}
 
   <td>
     <div class="flex justify-center">
       <button
-        class="btn btn-ghost btn-sm gap-1 focus:btn-outline"
+        class="btn btn-ghost btn-sm focus:btn-outline gap-1"
         on:click={() => patchRow(patchedObject)}
       >
         <SaveIcon size="16" class="text-success" />
         Save
       </button>
-      <button class="btn btn-ghost btn-sm gap-1 focus:btn-outline" on:click={() => deleteRow()}>
+      <button class="btn btn-ghost btn-sm focus:btn-outline gap-1" on:click={() => deleteRow()}>
         <Trash2Icon size="16" class="text-error" />
         Delete
       </button>

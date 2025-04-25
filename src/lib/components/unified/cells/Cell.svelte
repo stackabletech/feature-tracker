@@ -31,7 +31,7 @@
 </script>
 
 <div
-  class="text-sm flex w-full min-w-[12rem] flex-row items-center transition-all
+  class="flex w-full min-w-[12rem] flex-row items-center text-sm transition-all
     {centered ? 'justify-between' : 'justify-start'}
     "
   on:pointerover={showNote}

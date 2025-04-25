@@ -12,14 +12,14 @@
   $: categoryFeatures = $filteredFeatures.filter((f) => f.category_id === category.id);
 </script>
 
-{#each categoryFeatures as feature, n}
+{#each categoryFeatures as feature, n (feature.id)}
   <Row showCategory={n === 0} {level} {category} {feature} bind:expanded />
 {:else}
   <Row {level} {category} bind:expanded />
 {/each}
 
 {#if category.children && (expanded || forcedOpen)}
-  {#each category.children as child}
+  {#each category.children as child (child.id)}
     <svelte:self category={child} level={level + 1} {forcedOpen} />
   {/each}
 {/if}

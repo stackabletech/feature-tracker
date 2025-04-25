@@ -43,9 +43,11 @@
         on:click={() => updateValue(-1)}
         disabled={!checked}>-</button
       >
+
+      <!-- eslint-disable svelte/no-reactive-reassign -->
       <input
         type="text"
-        class="input disabled:text-white disabled:text-opacity-20 join-item"
+        class="input disabled:text-opacity-20 join-item disabled:text-white"
         bind:value={inputValue}
         on:keydown={handleInput}
         disabled={!checked}

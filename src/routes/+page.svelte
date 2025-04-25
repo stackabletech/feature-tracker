@@ -2,8 +2,8 @@
   import { categories, products, features, productFeatures } from '$lib/stores';
 </script>
 
-<main class="grid grow place-items-center bg-launch bg-bottom bg-no-repeat">
-  <div class="stats stats-vertical shadow-sm md:stats-horizontal">
+<main class="bg-launch grid grow place-items-center bg-bottom bg-no-repeat">
+  <div class="stats stats-vertical md:stats-horizontal shadow-sm">
     <div class="stat">
       <div class="stat-title">Features</div>
       <div class="stat-value">{$features.length}</div>

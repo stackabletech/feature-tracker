@@ -4,7 +4,7 @@
 
   export let placeholder = 'Enter feature name';
 
-  let dispatch = createEventDispatcher();
+  let dispatch = createEventDispatcher<Record<string, unknown>>();
   let input: HTMLInputElement;
 
   onMount(() => input.focus());

@@ -11,7 +11,7 @@
     {#if optional}
       <option value={null} />
     {/if}
-    {#each options as { value, label }}
+    {#each options as { value, label } (value)}
       <option {value}>{label}</option>
     {/each}
   </select>

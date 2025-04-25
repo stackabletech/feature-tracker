@@ -1,7 +1,7 @@
 <script lang="ts">
 </script>
 
-<table class="table table-sm">
+<table class="table-sm table">
   <thead class="bg-base-100">
     <slot name="head" />
   </thead>

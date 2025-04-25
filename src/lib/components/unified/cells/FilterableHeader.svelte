@@ -81,7 +81,7 @@
 {#if modal}
   <Modal on:close={hideModal}>
     <h3 class="font-bold" slot="title">Sort</h3>
-    {#each Object.entries(sortable) as [name, store]}
+    {#each Object.entries(sortable) as [name, store] (name)}
       <span class="font-bold">{name}:</span>
       <div class="btn-group">
         <button

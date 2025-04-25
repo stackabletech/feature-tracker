@@ -43,7 +43,7 @@
 <Table>
   <svelte:fragment slot="head">
     <tr>
-      <th class="border-b-0 bg-base-100">
+      <th class="bg-base-100 border-b-0">
         <DisplayButton on:click={showSettings} />
         <ExpandAllButton on:click={expandAll} />
         <ExpandAllButton on:click={collapseAll} collapse />
@@ -62,7 +62,7 @@
       <FilterableHeader
         bind:filter={$categoryFilter}
         sortable={{ Categories: categories, Features: features }}
-        class="rounded-tl-lg bg-base-200"
+        class="bg-base-200 rounded-tl-lg"
       >
         Features
       </FilterableHeader>

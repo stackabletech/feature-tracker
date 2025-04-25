@@ -171,7 +171,8 @@
 {:else if category}
   <TextCell bind:value={category.name} menu={$editable} bind:showMenu on:update={updateCategory}>
     <span slot="indent" class="flex flex-row">
-      {#each Array(level) as _}
+      <!-- This can be fixed in Svelte 5 as that supports iterating without an "as" -->
+      {#each Array(level) as _unused (_unused)}
         <GitCommitIcon size="18" class="text-base-300 first:ml-0.5" />
       {/each}
     </span>
