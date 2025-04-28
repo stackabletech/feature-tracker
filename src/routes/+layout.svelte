@@ -1,10 +1,11 @@
 <script lang="ts">
   import '/src/app.css';
-  import { categories, products, features, productFeatures, releases } from '$lib/stores';
+  import { categories, features, productFeatures, products, releases } from '$lib/stores';
   import { SvelteToast } from '@zerodevx/svelte-toast';
-  import { SunIcon, MoonIcon, LogInIcon, MenuIcon } from 'svelte-feather-icons';
+  import { LogInIcon, MenuIcon, MoonIcon, SunIcon } from 'svelte-feather-icons';
 
   import type { LayoutData } from './$types';
+
   export let data: LayoutData;
 
   $: $products = data.products;
@@ -17,7 +18,10 @@
     pausable: true
   };
 
-  let mouse = { x: 0, y: 0 };
+  let mouse = {
+    x: 0,
+    y: 0
+  };
   const setMouseCoords = (e: PointerEvent) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
@@ -28,7 +32,7 @@
   <title>Stackable Feature Tracker</title>
 </svelte:head>
 
-<div class="drawer h-screen w-screen lg:drawer-open">
+<div class="drawer lg:drawer-open h-screen w-screen">
   <input type="checkbox" id="sidebar-drawer" class="drawer-toggle" />
   <div class="drawer-content flex max-h-screen flex-col">
     <nav class="navbar z-30 w-full">
@@ -40,7 +44,7 @@
       <div class="flex-1">
         <span class="text-lg font-bold">Stackable Feature Tracker</span>
       </div>
-      <div class="flex-0 float-right mx-2">
+      <div class="float-right mx-2 flex-none">
         <label class="btn btn-square btn-ghost swap swap-rotate">
           <input
             type="checkbox"
@@ -63,9 +67,9 @@
     </div>
   </div>
 
-  <div class="drawer-side z-30 border-r-[--tab-border-color]">
+  <div class="drawer-side z-30 border-r-(--tab-border-color)">
     <label for="sidebar-drawer" class="drawer-overlay" />
-    <aside class="min-h-full w-36 bg-base-100">
+    <aside class="bg-base-100 min-h-full w-36">
       <div class="navbar sticky top-0 place-content-center">
         <a href="/">
           <div class="flex h-10 w-10 items-center justify-center rounded-md bg-white">
@@ -73,7 +77,7 @@
           </div>
         </a>
       </div>
-      <ul class="menu font-bold">
+      <ul class="menu w-full font-bold">
         <li>
           <a href="/api" class="">Browse API</a>
         </li>
@@ -86,9 +90,6 @@
         <li>
           <a href="/release" class="">Release View</a>
         </li>
-        <!-- <li>
-					<a href="/techtree" class="">Tech Tree View</a>
-				</li> -->
       </ul>
     </aside>
   </div>
@@ -96,12 +97,14 @@
 
 <SvelteToast options={toastOptions} />
 
-<div id="mouse" class="fixed w-64" style="left: {mouse.x - 64}px; top: {mouse.y + 16}px;" />
+<div id="mouse" class="fixed z-50 w-64" style="left: {mouse.x - 64}px; top: {mouse.y + 16}px;" />
 <svelte:window on:pointermove={setMouseCoords} />
 
 <div id="modal" />
 
 <style lang="postcss">
+  @reference '../app.css';
+
   :global(.tooltip::before) {
     z-index: 1000;
     filter: brightness(1.01);
@@ -122,10 +125,5 @@
   :global(.table-compact th),
   :global(.table-compact td) {
     @apply p-2;
-  }
-  :global(table tbody th),
-  :global(table tbody td) {
-    --tw-bg-opacity: 1;
-    background-color: hsla(var(--b1) / var(--tw-bg-opacity, 1));
   }
 </style>

@@ -24,7 +24,7 @@
     {/if}
     <input
       type="date"
-      class="input input-sm disabled:text-white disabled:text-opacity-20"
+      class="input input-sm disabled:text-opacity-20 disabled:text-white"
       bind:value={date}
       disabled={!checked}
     />

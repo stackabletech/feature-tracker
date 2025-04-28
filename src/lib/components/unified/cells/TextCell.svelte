@@ -5,7 +5,7 @@
   import { getContext } from 'svelte';
 
   let editable: Writable<boolean> = getContext('editable');
-  let dispatch = createEventDispatcher();
+  let dispatch = createEventDispatcher<Record<string, unknown>>();
 
   import Header from '../cells/Header.svelte';
   import Data from '../cells/Data.svelte';

@@ -1,5 +1,5 @@
 -- This is an empty migration.
-UPDATE feature_tracker.products as p set code_name = c.code_name 
+UPDATE products as p set code_name = c.code_name
 FROM (values
   (35, 'hbase'),
   (36, 'kafka'),
@@ -14,4 +14,3 @@ FROM (values
   (46, 'zookeeper')
 ) as c(id, code_name)
 WHERE c.id = p.id;
-

@@ -48,6 +48,7 @@ export default [
       'dist/',
       '.vercel/',
       '.vercel_build_output/',
+      '.netlify',
       'node_modules/'
     ]
   }

@@ -37,21 +37,23 @@
         <input type="checkbox" bind:checked class="checkbox" />
       </div>
     {/if}
-    <div class="input-group">
+    <div class="join">
       <button
-        class="btn btn-ghost focus:btn-outline"
+        class="btn btn-ghost focus:btn-outline join-item"
         on:click={() => updateValue(-1)}
         disabled={!checked}>-</button
       >
+
+      <!-- eslint-disable svelte/no-reactive-reassign -->
       <input
         type="text"
-        class="input disabled:text-white disabled:text-opacity-20"
+        class="input disabled:text-opacity-20 join-item disabled:text-white"
         bind:value={inputValue}
         on:keydown={handleInput}
         disabled={!checked}
       />
       <button
-        class="btn btn-ghost focus:btn-outline"
+        class="btn btn-ghost focus:btn-outline join-item"
         on:click={() => updateValue(1)}
         disabled={!checked}>+</button
       >

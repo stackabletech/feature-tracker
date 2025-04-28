@@ -11,7 +11,7 @@
   import { features } from '$lib/stores';
   import type { Feature } from '@prisma/client';
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<Record<string, unknown>>();
   let editable: Writable<boolean> = getContext('editable');
   let editMode: boolean = $editable;
 
@@ -46,15 +46,17 @@
   </svelte:fragment>
   <main class="flex flex-col gap-2">
     {#if editMode}
-      <table class="no-hover table table-xs">
-        <tr>
-          <td>Name:</td>
-          <Cell type="name" bind:value={feature.name} />
-        </tr>
-        <tr>
-          <td>Note:</td>
-          <Cell type="note" bind:value={feature.note} />
-        </tr>
+      <table class="no-hover table-xs table">
+        <tbody>
+          <tr>
+            <td>Name:</td>
+            <Cell type="name" bind:value={feature.name} />
+          </tr>
+          <tr>
+            <td>Note:</td>
+            <Cell type="note" bind:value={feature.note} />
+          </tr>
+        </tbody>
       </table>
     {:else}
       <div class="flex flex-row justify-between">

@@ -35,7 +35,7 @@
 </tr>
 
 {#if expanded}
-  {#each categoryFeatures as feature}
+  {#each categoryFeatures as feature (feature.id)}
     <FeatureRow {category} {feature} />
   {/each}
   {#if $editable}

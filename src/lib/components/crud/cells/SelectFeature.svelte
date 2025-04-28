@@ -51,7 +51,7 @@
       <!-- svelte-ignore a11y-no-static-element-interactions (see daisyUI issue #2590) -->
       <div
         tabindex="0"
-        class="group btn btn-ghost btn-xs m-1 flex min-w-[16rem] flex-row flex-nowrap justify-between border border-base-300 bg-base-100"
+        class="group btn btn-ghost btn-xs border-base-300 bg-base-100 m-1 flex min-w-[16rem] flex-row flex-nowrap justify-between border"
         on:click={show}
       >
         <span>
@@ -74,11 +74,11 @@
         <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
         <ul
           tabindex="0"
-          class="no-scrollbar menu dropdown-content z-20 max-h-96 w-96 overflow-y-auto rounded-box bg-base-100 p-2 shadow"
+          class="no-scrollbar menu dropdown-content rounded-box bg-base-100 z-20 max-h-96 w-96 overflow-y-auto p-2 shadow-sm"
           bind:this={menu}
         >
           <div>
-            <span class="text-center text-primary">
+            <span class="text-primary text-center">
               {filter === '' ? 'start typing to filter' : filter}
             </span>
             {#if optional}

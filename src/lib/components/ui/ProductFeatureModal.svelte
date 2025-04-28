@@ -12,7 +12,7 @@
   import { productFeatures, releases } from '$lib/stores';
   import type { Feature, Product, ProductFeature } from '@prisma/client';
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<Record<string, unknown>>();
   let editable: Writable<boolean> = getContext('editable');
   let editMode: boolean = $editable;
 
@@ -63,96 +63,103 @@
   </svelte:fragment>
   <main class="flex flex-col gap-2">
     {#if editMode}
-      <table class="no-hover table table-xs">
-        <tr>
-          <td>Product:</td>
-          <Cell type="product_id" bind:value={productFeature.product_id} />
-        </tr>
-        <tr>
-          <td>Feature:</td>
-          <Cell type="feature_id" bind:value={productFeature.feature_id} />
-        </tr>
-        {#if productFeature}
+      <table class="no-hover table-xs table">
+        <tbody>
           <tr>
-            <td>Status:</td>
-            <Cell type="implementation_status" bind:value={productFeature.implementation_status} />
+            <td>Product:</td>
+            <Cell type="product_id" bind:value={productFeature.product_id} />
           </tr>
           <tr>
-            <td>Release:</td>
-            <Cell type="release_id" bind:value={productFeature.release_id} />
+            <td>Feature:</td>
+            <Cell type="feature_id" bind:value={productFeature.feature_id} />
           </tr>
-          <tr>
-            <td>Note:</td>
-            <Cell type="note" bind:value={productFeature.note} />
-          </tr>
-        {/if}
+          {#if productFeature}
+            <tr>
+              <td>Status:</td>
+              <Cell
+                type="implementation_status"
+                bind:value={productFeature.implementation_status}
+              />
+            </tr>
+            <tr>
+              <td>Release:</td>
+              <Cell type="release_id" bind:value={productFeature.release_id} />
+            </tr>
+            <tr>
+              <td>Note:</td>
+              <Cell type="note" bind:value={productFeature.note} />
+            </tr>
+          {/if}
+        </tbody>
       </table>
     {:else}
       <table class="no-hover table-xs inline-table">
-        <tr>
-          <td>Product:</td>
-          <td>{product.name}</td>
-        </tr>
-        <tr>
-          <td>Feature:</td>
-          <td>{feature.name}</td>
-        </tr>
-        {#if productFeature}
+        <tbody>
           <tr>
-            <td> Status:</td>
-            <td>
-              <div class="flex flex-row">
-                <ImplementationIcon
-                  class="mr-2"
-                  status={productFeature.implementation_status}
-                  released={release?.released ? true : false}
-                />
-                {productFeature.implementation_status}
-              </div>
-            </td>
+            <td>Product:</td>
+            <td>{product.name}</td>
           </tr>
           <tr>
-            <td>Release:</td>
-            <td
-              >{release?.name || 'No release'} ({release?.released ? 'released' : 'unreleased'})
-            </td>
+            <td>Feature:</td>
+            <td>{feature.name}</td>
           </tr>
-          {#if release?.date}
+          {#if productFeature}
             <tr>
-              <td>{release.released ? 'Released on:' : 'Expected release date:'}</td>
-              <td>{new Date(release.date).toLocaleDateString()}</td>
+              <td> Status:</td>
+              <td>
+                <div class="flex flex-row">
+                  <ImplementationIcon
+                    class="mr-2"
+                    status={productFeature.implementation_status}
+                    released={release?.released ? true : false}
+                  />
+                  {productFeature.implementation_status}
+                </div>
+              </td>
             </tr>
-          {/if}
-          {#if productFeature.note}
             <tr>
-              <td>Note:</td>
-              <td />
+              <td>Release:</td>
+              <td
+                >{release?.name || 'No release'} ({release?.released ? 'released' : 'unreleased'})
+              </td>
             </tr>
+            {#if release?.date}
+              <tr>
+                <td>{release.released ? 'Released on:' : 'Expected release date:'}</td>
+                <td>{new Date(release.date).toLocaleDateString()}</td>
+              </tr>
+            {/if}
+            {#if productFeature.note}
+              <tr>
+                <td>Note:</td>
+                <td />
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <div
+                    class="prose bg-base-100 prose-h1:text-lg prose-h2:text-sm max-h-72 overflow-y-auto rounded-md p-2 whitespace-normal"
+                  >
+                    {@html marked.parse(productFeature.note)}
+                  </div>
+                </td>
+              </tr>
+            {/if}
+          {:else}
             <tr>
-              <td colspan="2">
-                <div
-                  class="prose max-h-72 overflow-y-auto whitespace-normal rounded-md bg-base-100 p-2 prose-h1:text-lg prose-h2:text-sm"
-                >
-                  {@html marked.parse(productFeature.note)}
+              <td> Status:</td>
+              <td>
+                <div class="flex flex-row justify-center">
+                  <ImplementationIcon
+                    class="mr-2"
+                    status="NOT_AVAILABLE"
+                    released={release?.released ? true : false}
+                  />
+                  NOT_AVAILABLE
                 </div>
               </td>
             </tr>
           {/if}
-        {:else}
-          <tr>
-            <td> Status:</td>
-            <td>
-              <div class="flex flex-row justify-center">
-                <ImplementationIcon
-                  class="mr-2"
-                  status={'NOT_AVAILABLE'}
-                  released={release?.released ? true : false}
-                />
-                {'NOT_AVAILABLE'}
-              </div>
-            </td>
-          </tr>
-        {/if}
+        </tbody>
       </table>
     {/if}
     {#if $editable}

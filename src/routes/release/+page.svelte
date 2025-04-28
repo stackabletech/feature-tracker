@@ -37,7 +37,7 @@
         Products
       </FilterableHeader>
       <!-- Release Headers -->
-      {#each sortedReleases as release}
+      {#each sortedReleases as release (release.id)}
         <Header centered>
           <div
             class="tooltip tooltip-bottom"
@@ -51,15 +51,15 @@
       {/each}
     </svelte:fragment>
     <svelte:fragment>
-      {#each $filteredProducts as product}
+      {#each $filteredProducts as product (product.id)}
         <tr>
           <!-- Product Titles -->
           <Product {product} />
           <!-- Features -->
-          {#each sortedReleases as release}
+          {#each sortedReleases as release (release.id)}
             <td class="text-center">
               <div class="flex flex-row justify-center">
-                {#each $productFeatures.filter((pf) => pf.product_id === product.id && pf.release_id === release.id) as productFeature}
+                {#each $productFeatures.filter((pf) => pf.product_id === product.id && pf.release_id === release.id) as productFeature (productFeature.id)}
                   <RoadMapCell {productFeature} {release} />
                 {/each}
               </div>

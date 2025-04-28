@@ -40,10 +40,10 @@
 </script>
 
 <div class="overflow-aut max-w-full">
-  <table class="table table-zebra table-pin-rows table-sm">
+  <table class="table-zebra table-pin-rows table-sm table">
     <thead>
       <tr>
-        {#each keys as key}
+        {#each keys as key (key)}
           <th>{key}</th>
         {:else}
           <th>No Data</th>
@@ -62,8 +62,8 @@
       {/each}
     </tbody>
     <tfoot>
-      <tr class="border-t-2 bg-base-300">
-        {#each keys as key}
+      <tr class="bg-base-300 border-t-2">
+        {#each keys as key (key)}
           <Cell bind:value={newObject[key]} type={key} />
         {:else}
           <td>No Data</td>

@@ -191,13 +191,13 @@
         class="flex cursor-pointer flex-row items-center justify-center gap-2"
         on:click={showInfo}
       >
-        <ImplementationIcon status={'NOT_AVAILABLE'} released={false} />
+        <ImplementationIcon status="NOT_AVAILABLE" released={false} />
       </button>
     {/if}
   </Data>
 {:else}
   <Data centered>
-    <MinusIcon size="16" class="mx-auto text-base-300" />
+    <MinusIcon size="16" class="text-base-300 mx-auto" />
   </Data>
 {/if}
 

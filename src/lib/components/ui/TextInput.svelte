@@ -4,7 +4,7 @@
 
   export let placeholder = 'Enter feature name';
 
-  let dispatch = createEventDispatcher();
+  let dispatch = createEventDispatcher<Record<string, unknown>>();
   let input: HTMLInputElement;
 
   onMount(() => input.focus());
@@ -40,7 +40,7 @@
       type="text"
       name="input"
       id="input"
-      class="input input-sm input-bordered"
+      class="input input-sm"
       {placeholder}
       on:focus={() => (active = true)}
       on:blur={() => (active = false)}

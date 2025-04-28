@@ -30,7 +30,8 @@
   {:else}
     <Header>
       <span slot="indent" class="flex flex-row first:ml-0.5">
-        {#each Array(level) as _lvl}
+        <!-- This can be fixed in Svelte 5 as that supports iterating without an "as" -->
+        {#each Array(level) as _unused (_unused)}
           <GitCommitIcon size="18" class="text-base-300" />
         {/each}
       </span>
@@ -39,7 +40,7 @@
   <!-- Second Column: Feature Header -->
   <Feature {feature} {category} />
   <!-- Rest Columns: ProductFeature Cells -->
-  {#each $filteredProducts as product}
+  {#each $filteredProducts as product (product.id)}
     <ProductFeature productFeature={getProductFeature(product, feature)} {product} {feature} />
   {/each}
 </tr>

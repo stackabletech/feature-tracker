@@ -17,7 +17,7 @@
   <!-- First Column: Feature Header -->
   <Feature {feature} {category} />
   <!-- Rest Columns: ProductFeature Cells -->
-  {#each $filteredProducts as product}
+  {#each $filteredProducts as product (product.id)}
     <ProductFeature productFeature={getProductFeature(product, feature)} {product} {feature} />
   {/each}
 </tr>

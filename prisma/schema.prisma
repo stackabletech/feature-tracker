@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -43,12 +44,12 @@ model Category {
 //}
 
 model Product {
-  id                 Int                @id @default(autoincrement())
-  name               String             @unique
-  note               String?            @db.VarChar(1024)
-  code_name          String?
-  product_features   ProductFeature[]
-  product_versions   ProductVersion[]
+  id               Int              @id @default(autoincrement())
+  name             String           @unique
+  note             String?          @db.VarChar(1024)
+  code_name        String?
+  product_features ProductFeature[]
+  product_versions ProductVersion[]
 
   @@map("products")
 }
@@ -94,12 +95,12 @@ model Release {
 }
 
 model ReleaseVersion {
-  version          String             @id
-  release_id       Int
-  created_at       DateTime?
+  version    String    @id
+  release_id Int
+  created_at DateTime?
 
   components ReleaseComponent[]
-  release    Release                  @relation(fields: [release_id], references: [id], onDelete: Cascade)
+  release    Release            @relation(fields: [release_id], references: [id], onDelete: Cascade)
 
   @@map("release_versions")
 }
@@ -128,7 +129,7 @@ model ProductLifecycle {
   product_version_id Int
   release_id         Int
 
-  support_status     SupportStatus
+  support_status SupportStatus
 
   rel_product_version ProductVersion @relation(fields: [product_version_id], references: [id])
   rel_release_id      Release        @relation(fields: [release_id], references: [id])

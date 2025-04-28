@@ -15,6 +15,6 @@
   </Button>
 {:else}
   <Button on:click={handleFirstClick} type="btn-outline" tip="delete">
-    <DeleteIcon size="14" class="-ml-[1px] mr-[1px]" />
+    <DeleteIcon size="14" class="mr-[1px] -ml-[1px]" />
   </Button>
 {/if}

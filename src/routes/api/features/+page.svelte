@@ -10,7 +10,7 @@
 
 <Code filename="/api/features.json">
   <pre>[</pre>
-  {#each features as feature}
+  {#each features as feature (feature.id)}
     <button
       class="cursor-pointer text-left font-mono"
       on:click={() => goto(`features/${feature.id}`)}>{JSON.stringify(feature, null, 2)},</button
