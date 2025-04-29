@@ -1,10 +1,19 @@
 <script lang="ts">
-  export let rowspan: number = 1;
-  export let colspan: number = 1;
+  interface Props {
+    rowspan?: number;
+    colspan?: number;
+    value?: boolean;
+    labelFalse?: string;
+    labelTrue?: string;
+  }
 
-  export let value = false;
-  export let labelFalse = 'False';
-  export let labelTrue = 'True';
+  let {
+    rowspan = 1,
+    colspan = 1,
+    value = $bindable(false),
+    labelFalse = 'False',
+    labelTrue = 'True'
+  }: Props = $props();
 </script>
 
 <td {colspan} {rowspan}>
