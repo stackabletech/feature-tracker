@@ -14,6 +14,7 @@ RUN npm ci
 
 COPY . .
 
+ENV USE_NODE_ADAPTER=true
 RUN npm run build
 RUN npm prune --production
 
@@ -30,4 +31,5 @@ COPY --from=builder /app/node_modules node_modules/
 COPY package.json .
 EXPOSE 3000
 ENV NODE_ENV=production
+ENV USE_NODE_ADAPTER=true
 CMD [ "node", "build" ]
