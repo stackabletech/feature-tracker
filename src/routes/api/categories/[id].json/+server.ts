@@ -1,10 +1,11 @@
+import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 import { prismaErrorResponse } from '$lib/api/error';
 import { getCategory, updateCategory, deleteCategory } from '$lib/api/category';
 
 // GET /categories/:id.json
-export const GET = async ({ params }) => {
-  const id = parseInt(params.id);
+export const GET: RequestHandler = async ({ params }) => {
+  const id = parseInt(params.id, 10);
 
   try {
     const category = await getCategory(id);
@@ -15,7 +16,7 @@ export const GET = async ({ params }) => {
 };
 
 // PATCH /categories/:id.json
-export const PATCH = async ({ params, request }) => {
+export const PATCH: RequestHandler = async ({ params, request }) => {
   const id = parseInt(params.id);
 
   const data = await request.json();
@@ -42,8 +43,8 @@ export const PATCH = async ({ params, request }) => {
 };
 
 // DELETE /categories/:id.json
-export const DELETE = async ({ params }) => {
-  const id = parseInt(params.id);
+export const DELETE: RequestHandler = async ({ params }) => {
+  const id = parseInt(params.id, 10);
 
   try {
     const category = await deleteCategory(id);
