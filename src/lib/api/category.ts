@@ -1,14 +1,17 @@
 import { prisma } from '$lib/prisma';
 
 export const getCategories = async () => {
-  return await prisma.category.findMany({
+  return prisma.category.findMany({
     orderBy: { name: 'asc' }
   });
 };
 
 export const getMinimalCategories = async () => {
-  return await prisma.category.findMany({
-    select: { id: true, name: true },
+  return prisma.category.findMany({
+    select: {
+      id: true,
+      name: true
+    },
     orderBy: { name: 'asc' }
   });
 };

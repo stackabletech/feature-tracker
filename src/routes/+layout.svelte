@@ -68,7 +68,7 @@
   </div>
 
   <div class="drawer-side z-30 border-r-(--tab-border-color)">
-    <label for="sidebar-drawer" class="drawer-overlay" />
+    <label for="sidebar-drawer" class="drawer-overlay"></label>
     <aside class="bg-base-100 min-h-full w-36">
       <div class="navbar sticky top-0 place-content-center">
         <a href="/">
