@@ -3,8 +3,9 @@ name: Build image and deploy to Kubernetes
 on:
   push:
     branches: [main]
-  workflow_dispatch:
 
+permissions:
+  id-token: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
