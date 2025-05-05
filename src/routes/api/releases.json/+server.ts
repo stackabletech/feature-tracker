@@ -1,9 +1,10 @@
+import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 import { prismaErrorResponse, requiredFieldErrorResponse } from '$lib/api/error.js';
 import { getReleases, createRelease } from '$lib/api/release.js';
 
 // GET /releases.json
-export const GET = async () => {
+export const GET: RequestHandler = async () => {
   try {
     const releases = await getReleases();
     return json(releases);
@@ -13,7 +14,7 @@ export const GET = async () => {
 };
 
 // POST /releases.json
-export const POST = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
   const data = await request.json();
   const { name, date, released } = data;
 
