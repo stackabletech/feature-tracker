@@ -5,7 +5,7 @@ import { getCategory, updateCategory, deleteCategory } from '$lib/api/category';
 
 // GET /categories/:id.json
 export const GET: RequestHandler = async ({ params }) => {
-  const id = parseInt(params.id, 10);
+  const id = parseInt(params.id);
 
   try {
     const category = await getCategory(id);
@@ -44,7 +44,7 @@ export const PATCH: RequestHandler = async ({ params, request }) => {
 
 // DELETE /categories/:id.json
 export const DELETE: RequestHandler = async ({ params }) => {
-  const id = parseInt(params.id, 10);
+  const id = parseInt(params.id);
 
   try {
     const category = await deleteCategory(id);
