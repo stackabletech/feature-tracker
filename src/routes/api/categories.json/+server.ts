@@ -1,9 +1,10 @@
+import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 import { prismaErrorResponse, requiredFieldErrorResponse } from '$lib/api/error.js';
 import { getCategories, createCategory } from '$lib/api/category.js';
 
 // GET /categories.json
-export const GET = async () => {
+export const GET: RequestHandler = async () => {
   try {
     const categories = await getCategories();
     return json(categories);
@@ -13,7 +14,7 @@ export const GET = async () => {
 };
 
 // POST /categories.json
-export const POST = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
   const data = await request.json();
   const { name, parent_id, note } = data;
 

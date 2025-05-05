@@ -1,19 +1,20 @@
 <script lang="ts">
+  import type { PageProps } from './$types';
   import { goto } from '$app/navigation';
   import Code from '$lib/components/Code.svelte';
-  import type { PageData } from './$types';
 
-  export let data: PageData;
-  $: ({ products } = data);
+  let { data }: PageProps = $props();
 </script>
 
 <Code filename="/api/products.json">
   <pre>[</pre>
-  {#each products as product (product.id)}
+  {#each data.products as product (product.id)}
     <button
       class="cursor-pointer text-left font-mono"
-      on:click={() => goto(`products/${product.id}`)}>{JSON.stringify(product, null, 2)},</button
+      onclick={() => goto(`products/${product.id}`)}
     >
+      {JSON.stringify(product, null, 2)},
+    </button>
   {/each}
   <pre>]</pre>
 </Code>

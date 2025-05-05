@@ -1,9 +1,10 @@
+import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 import { prismaErrorResponse } from '$lib/api/error.js';
 import { getProduct, updateProduct, deleteProduct } from '$lib/api/product.js';
 
 // GET /products/:id.json
-export const GET = async ({ params }) => {
+export const GET: RequestHandler = async ({ params }) => {
   const id = parseInt(params.id);
 
   try {
@@ -15,7 +16,7 @@ export const GET = async ({ params }) => {
 };
 
 // PATCH /products/:id.json
-export const PATCH = async ({ params, request }) => {
+export const PATCH: RequestHandler = async ({ params, request }) => {
   const id = parseInt(params.id);
 
   const data = await request.json();
@@ -30,7 +31,7 @@ export const PATCH = async ({ params, request }) => {
 };
 
 // DELETE /products/:id.json
-export const DELETE = async ({ params }) => {
+export const DELETE: RequestHandler = async ({ params }) => {
   const id = parseInt(params.id);
 
   try {
