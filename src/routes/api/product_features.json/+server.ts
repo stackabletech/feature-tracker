@@ -1,9 +1,10 @@
+import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 import { prismaErrorResponse, requiredFieldErrorResponse } from '$lib/api/error.js';
 import { getProductFeatures, createProductFeature } from '$lib/api/productfeature.js';
 
 // GET /product_features.json
-export const GET = async () => {
+export const GET: RequestHandler = async () => {
   try {
     const product_features = await getProductFeatures();
     return json(product_features);
@@ -13,7 +14,7 @@ export const GET = async () => {
 };
 
 // POST /product_features.json
-export const POST = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
   const data = await request.json();
 
   const { product_id, feature_id, implementation_status, release_id, note } = data;

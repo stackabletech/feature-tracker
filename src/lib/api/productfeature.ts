@@ -1,11 +1,11 @@
 import { prisma, type ImplementationStatus } from '$lib/prisma';
 
 export const getProductFeatures = async () => {
-  return await prisma.productFeature.findMany();
+  return prisma.productFeature.findMany();
 };
 
 export const getProductFeature = async (id: number) => {
-  return await prisma.productFeature.findUnique({
+  return prisma.productFeature.findUnique({
     where: { id }
   });
 };
@@ -17,7 +17,7 @@ export const createProductFeature = async (data: {
   release_id?: number;
   note?: string;
 }) => {
-  return await prisma.productFeature.create({ data });
+  return prisma.productFeature.create({ data });
 };
 
 export const updateProductFeature = async (
@@ -30,14 +30,14 @@ export const updateProductFeature = async (
     note?: string;
   }
 ) => {
-  return await prisma.productFeature.update({
+  return prisma.productFeature.update({
     where: { id },
     data
   });
 };
 
 export const deleteProductFeature = async (id: number) => {
-  return await prisma.productFeature.delete({
+  return prisma.productFeature.delete({
     where: { id }
   });
 };

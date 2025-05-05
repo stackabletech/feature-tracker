@@ -11,8 +11,10 @@
   {#each data.features as feature (feature.id)}
     <button
       class="cursor-pointer text-left font-mono"
-      onclick={() => goto(`features/${feature.id}`)}>{JSON.stringify(feature, null, 2)},</button
+      onclick={() => goto(`features/${feature.id}`)}
     >
+      {JSON.stringify(feature, null, 2)},
+    </button>
   {/each}
   <pre>]</pre>
 </Code>

@@ -1,13 +1,10 @@
+import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 import { getFeatures, createFeature } from '$lib/api/feature';
 import { prismaErrorResponse, requiredFieldErrorResponse } from '$lib/api/error';
 
-/*
-    Typing disabled because of this bug: https://github.com/prisma/prisma/issues/10404
-*/
-
 // GET /features.json
-export const GET = async () => {
+export const GET: RequestHandler = async () => {
   try {
     const features = await getFeatures();
     return json(features);
@@ -17,7 +14,7 @@ export const GET = async () => {
 };
 
 // POST /features.json
-export const POST = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
   const data = await request.json();
   const { name, category_id, note } = data;
 
