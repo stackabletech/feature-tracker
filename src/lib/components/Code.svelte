@@ -1,5 +1,12 @@
 <script lang="ts">
-  export let filename: string = '';
+  import type { Snippet } from 'svelte';
+
+  interface Props {
+    filename?: string;
+    children: Snippet;
+  }
+
+  let { filename, children }: Props = $props();
 </script>
 
 <main class="p-8">
@@ -7,6 +14,6 @@
     <pre>{filename}</pre>
   {/if}
   <div class="bg-base-300 rounded-xl p-8 text-sm">
-    <slot />
+    {@render children()}
   </div>
 </main>

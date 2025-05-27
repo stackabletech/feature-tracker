@@ -1,5 +1,12 @@
 <script lang="ts">
   import Tabs from '$lib/components/tabs/Tabs.svelte';
+  import type { Snippet } from 'svelte';
+
+  interface Props {
+    children: Snippet;
+  }
+
+  let { children }: Props = $props();
 
   const tabs = [
     {
@@ -25,8 +32,8 @@
   ];
 </script>
 
-<div class="flex grow flex-col">
+<div>
   <Tabs {tabs} />
 
-  <slot />
+  {@render children()}
 </div>

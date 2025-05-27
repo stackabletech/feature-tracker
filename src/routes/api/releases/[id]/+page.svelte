@@ -1,11 +1,10 @@
 <script lang="ts">
-  import type { PageData } from './$types';
+  import type { PageProps } from './$types';
   import Code from '$lib/components/Code.svelte';
 
-  export let data: PageData;
-  $: ({ release } = data);
+  let { data }: PageProps = $props();
 </script>
 
-<Code>
-  <pre>{JSON.stringify(release, null, 2)}</pre>
+<Code filename="/api/releases/{data.release.id}.json">
+  <pre>{JSON.stringify(data.release, null, 2)}</pre>
 </Code>
