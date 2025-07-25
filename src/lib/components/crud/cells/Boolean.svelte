@@ -10,7 +10,7 @@
   let {
     rowspan = 1,
     colspan = 1,
-    value = $bindable(false),
+    value = $bindable(),
     labelFalse = 'False',
     labelTrue = 'True'
   }: Props = $props();
