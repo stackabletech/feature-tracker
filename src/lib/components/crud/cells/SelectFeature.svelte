@@ -11,8 +11,8 @@
 
   let input: HTMLInputElement;
   let filter = '';
-  $: filteredFeaturesWithParents = derived(featuresWithParents, ($) => {
-    return $.filter((feature) => {
+  $: filteredFeaturesWithParents = derived(featuresWithParents, (features) => {
+    return features.filter((feature) => {
       return feature.name.toLowerCase().includes(filter.toLowerCase());
     });
   });
