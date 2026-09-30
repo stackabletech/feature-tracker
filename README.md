@@ -6,6 +6,20 @@ for [Stackable](https://github.com/stackabletech).
 
 Hosted dev version available [here](stackablefeaturetracker.netlify.app)
 
+## Run with Docker Compose
+
+Starts Postgres, applies the Prisma migrations and runs the app built from the `Dockerfile`:
+
+```
+docker compose up --build
+```
+
+Open http://localhost:3000 and sign in with the `PASSWORD` from `.env` (default `changeme`). The database starts empty. Reset it with `docker compose down -v`.
+
+To use `npm run dev` against the Compose database instead, start only Postgres and the migrations (`docker compose up postgres migrate`) and set `DATABASE_URL=postgres://postgres:postgres@localhost:5432/feature_tracker` in `.env`.
+
+## Manual setup
+
 Install dependencies
 
 ```

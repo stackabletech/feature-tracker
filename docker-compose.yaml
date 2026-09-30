@@ -1,0 +1,47 @@
+# Local test setup: PostgreSQL, Prisma migrations and the app.
+# Usage: docker compose up --build   ->   http://localhost:3000
+# Credentials are for local use only.
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: feature_tracker
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 127.0.0.1:5432:5432
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'postgres', '-d', 'feature_tracker']
+      interval: 2s
+      timeout: 5s
+      retries: 15
+
+  migrate:
+    build:
+      context: .
+      target: builder
+    command: ['npx', 'prisma', 'migrate', 'deploy']
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/feature_tracker
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: 'no'
+
+  app:
+    build: .
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/feature_tracker
+      PASSWORD: ${PASSWORD:-changeme}
+      ORIGIN: http://localhost:3000
+    ports:
+      - 127.0.0.1:3000:3000
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  pgdata:
