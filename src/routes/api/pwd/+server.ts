@@ -1,11 +1,9 @@
 import type { RequestHandler } from './$types';
-import { parse } from 'cookie';
-import { PASSWORD } from '$lib/env';
+import { isAuthenticated } from '$lib/server/auth';
 
 // POST /pwd
-export const POST: RequestHandler = async ({ request }) => {
-  const cookies = parse(request.headers.get('cookie') || '');
-  if (cookies.pwd === PASSWORD) {
+export const POST: RequestHandler = async ({ cookies }) => {
+  if (isAuthenticated(cookies)) {
     return new Response('OK', { status: 200 });
   }
   return new Response('Unauthorized', { status: 401 });
