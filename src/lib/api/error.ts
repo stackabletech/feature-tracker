@@ -20,6 +20,18 @@ export const prismaErrorResponse = (e: unknown) => {
   return json({ code, message }, { status: 500 });
 };
 
+export const unauthorizedErrorResponse = () => {
+  return json(
+    {
+      code: 'UNAUTHORIZED',
+      message: 'Please log in to edit data.'
+    },
+    {
+      status: 401
+    }
+  );
+};
+
 export const requiredFieldErrorResponse = (field: string) => {
   return json(
     {

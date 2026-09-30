@@ -1,8 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { serialize } from 'cookie';
 
-  const setCookie = () => (document.cookie = serialize('pwd', pwd, { path: '/' }));
+  const setCookie = () => (document.cookie = `pwd=${encodeURIComponent(pwd)}; Path=/`);
   const submit = (e: KeyboardEvent) => e.key === 'Enter' && goto('/edit');
 
   let pwd = '';
